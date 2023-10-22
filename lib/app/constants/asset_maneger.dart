@@ -2,3 +2,4 @@
 
 // Animations
 const String MAINTAINANCE_MOOD_ANIM = 'assets/anim/maintainance-mood-anim.json';
+const String NO_CART_ANIM = 'assets/anim/empty-cart-anim.json';

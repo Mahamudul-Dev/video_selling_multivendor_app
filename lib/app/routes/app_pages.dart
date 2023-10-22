@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 
-import '../buyer/module/buyer_dashboard/bindings/buyer_dashboard_binding.dart';
-import '../buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart';
+import '../buyer/module/buyer_message/bindings/buyer_message_binding.dart';
+import '../buyer/module/buyer_message/views/buyer_message_view.dart';
 import '../buyer/module/buyer_cart/bindings/buyer_cart_binding.dart';
 import '../buyer/module/buyer_cart/views/buyer_cart_view.dart';
 import '../buyer/module/buyer_chat/bindings/buyer_chat_binding.dart';
 import '../buyer/module/buyer_chat/views/buyer_chat_view.dart';
-import '../buyer/module/home/bindings/buyer_home_binding.dart';
-import '../buyer/module/home/views/buyer_home_view.dart';
+import '../buyer/module/buyer_dashboard/bindings/buyer_dashboard_binding.dart';
+import '../buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart';
 import '../buyer/module/buyer_profile/bindings/buyer_profile_binding.dart';
 import '../buyer/module/buyer_profile/views/buyer_profile_view.dart';
+import '../buyer/module/home/bindings/buyer_home_binding.dart';
+import '../buyer/module/home/views/buyer_home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -73,6 +75,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const BuyerProfileView(),
       binding: BuyerProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BUYER_MESSAGE,
+      page: () => BuyerMessageView(),
+      binding: BuyerMessageBinding(),
     ),
   ];
 }

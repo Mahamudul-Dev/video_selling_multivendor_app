@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "649925576432",
+    "project_id": "mycellvids-app",
+    "storage_bucket": "mycellvids-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649925576432:android:6a0de0fa3fc14a92686435",
+        "android_client_info": {
+          "package_name": "com.mycellvids.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlEyCdXZueGpJsQCg_feAVoX5C9kQOJS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

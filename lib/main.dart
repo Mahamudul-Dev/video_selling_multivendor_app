@@ -6,16 +6,16 @@ import 'package:get_storage/get_storage.dart';
 
 import 'app/constants/utils.dart';
 import 'app/routes/app_pages.dart';
+import 'themes/app_colors.dart';
 import 'themes/app_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
-      overlays: [SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor:
-        Colors.transparent, // Sets the navigation bar color to transparent
+    systemNavigationBarColor: SECONDARY_APP_COLOR,
   ));
 
   await GetStorage.init();

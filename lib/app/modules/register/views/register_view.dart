@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../themes/app_colors.dart';
-import '../../../components/loading_animation.dart';
+import '../../../buyer/components/loading_animation.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/register_controller.dart';
 

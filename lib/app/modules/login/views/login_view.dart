@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../themes/app_colors.dart';
 import '../../../routes/app_pages.dart';
@@ -163,7 +164,7 @@ class LoginView extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => controller.signInWithGoogle(),
                         icon: const SizedBox(
                           height: 25,
                           width: 25,

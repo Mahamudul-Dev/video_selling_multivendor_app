@@ -1,19 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:video_selling_multivendor_app/themes/app_colors.dart';
+
+import '../../../themes/app_colors.dart';
 
 class VideoCardFull extends StatelessWidget {
   const VideoCardFull(
       {super.key,
+      required this.thumbnail,
       required this.title,
       required this.authorName,
       required this.authorPhoto,
-      required this.price});
+      required this.price,
+      this.onCartPressed,
+      this.onItemPressed,
+      this.onAuthorPressed});
 
+  final String thumbnail;
   final String title;
   final String authorName;
   final String authorPhoto;
   final String price;
+  final void Function()? onCartPressed;
+  final void Function()? onItemPressed;
+  final void Function()? onAuthorPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +31,16 @@ class VideoCardFull extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(color: Colors.grey.shade600),
+          InkWell(
+            onTap: onItemPressed,
+            child: Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade600,
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(thumbnail))),
+            ),
           ),
           Container(
             height: 80,
@@ -36,10 +51,13 @@ class VideoCardFull extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: CachedNetworkImageProvider(authorPhoto),
+                  child: InkWell(
+                    onTap: onAuthorPressed,
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: CachedNetworkImageProvider(authorPhoto),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -50,10 +68,13 @@ class VideoCardFull extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              title,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleSmall,
+                            InkWell(
+                              onTap: onItemPressed,
+                              child: Text(
+                                title,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
                             ),
                             Text(authorName,
                                 overflow: TextOverflow.ellipsis,
@@ -81,7 +102,7 @@ class VideoCardFull extends StatelessWidget {
                                           backgroundColor:
                                               MaterialStatePropertyAll(
                                                   SECONDARY_APP_COLOR)),
-                                      onPressed: () {},
+                                      onPressed: onCartPressed,
                                       child: Text(
                                         'Add to cart',
                                         style: Theme.of(context)
