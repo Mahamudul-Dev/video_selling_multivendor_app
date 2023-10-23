@@ -10,6 +10,7 @@ abstract class Routes {
   static const CART = _Paths.CART;
   static const CHAT = _Paths.CHAT_BUYER;
   static const PROFILE = _Paths.PROFILE;
+  static const BUYER_MESSAGE = _Paths.BUYER_MESSAGE;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const CART = '/cart';
   static const CHAT_BUYER = '/chat-buyer';
   static const PROFILE = '/profile';
+  static const BUYER_MESSAGE = '/buyer-message';
 }

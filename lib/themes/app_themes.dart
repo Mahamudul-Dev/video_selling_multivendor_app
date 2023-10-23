@@ -17,7 +17,7 @@ final text_theme = TextTheme(
     titleLarge: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 20),
     titleMedium: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 40),
     titleSmall: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
-    labelLarge: TextStyle(),
+    labelLarge: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 16),
     labelMedium: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 16),
     labelSmall: TextStyle(),
     bodyLarge: TextStyle(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:video_selling_multivendor_app/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart';
 
 import '../../../../../themes/app_colors.dart';
 import '../../../../constants/utils.dart';
@@ -14,7 +15,7 @@ class HomeViewBuyer extends GetView<HomeControllerBuyer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(APP_NAME),
+        title: const Text(APP_NAME),
         actions: [
           IconButton(
               style: ButtonStyle(
@@ -46,14 +47,25 @@ class HomeViewBuyer extends GetView<HomeControllerBuyer> {
                     color: Colors.black,
                   ),
                   child: Center(
-                    child: Text(
-                      '9+',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: Colors.white),
-                    ),
-                  ),
+                      child: Obx(() =>
+                          Get.find<BuyerCartController>().cartItems.isNotEmpty
+                              ? Text(
+                                  Get.find<BuyerCartController>()
+                                      .cartItems
+                                      .length
+                                      .toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                )
+                              : Text(
+                                  '0',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                ))),
                 ),
               )
             ],
