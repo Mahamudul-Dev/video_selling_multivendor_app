@@ -9,6 +9,7 @@ import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   const RegisterView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,72 +59,129 @@ class RegisterView extends GetView<RegisterController> {
                         ),
                         Container(
                           padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    label: Text('Name',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey)),
-                                    hintText: 'Type your first name',
-                                    hintStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(color: Colors.grey)),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    label: Text('Email',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey)),
-                                    hintText: 'Type your email',
-                                    hintStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(color: Colors.grey)),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                    label: Text('Password',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey)),
-                                    hintText: 'Type your password',
-                                    hintStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(color: Colors.grey)),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                    label: Text('Confirm',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey)),
-                                    hintText: 'Retype your password',
-                                    hintStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(color: Colors.grey)),
-                              ),
-                            ],
+                          child: Form(
+                            key: controller.formKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: controller.nameController,
+                                  decoration: InputDecoration(
+                                      label: Text('Name',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium
+                                              ?.copyWith(color: Colors.grey)),
+                                      hintText: 'Type your first name',
+                                      hintStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(color: Colors.grey)),
+                                  validator: (value) {
+                                    if (value == null || value == '') {
+                                      return 'Name is required';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                  controller: controller.emailController,
+                                  decoration: InputDecoration(
+                                      label: Text('Email',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium
+                                              ?.copyWith(color: Colors.grey)),
+                                      hintText: 'Type your email',
+                                      hintStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(color: Colors.grey)),
+                                  validator: (value) {
+                                    if (value == null || value == '') {
+                                      return 'Email is required';
+                                    } else if (!controller
+                                        .isEmailValid(value)) {
+                                      return 'Please write correct email address';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Obx(() => TextFormField(
+                                      obscureText: controller.obsecure.value,
+                                      controller: controller.passwordController,
+                                      validator: (value) {
+                                        if (value == null || value == '') {
+                                          return 'Password is required';
+                                        } else if (value.length < 6) {
+                                          return 'Password must be at least 6 charecter';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                          label: Text('Password',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.grey)),
+                                          hintText: 'Type your password',
+                                          hintStyle: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.copyWith(color: Colors.grey),
+                                          suffixIcon: IconButton(
+                                              onPressed: () {
+                                                controller.obsecure.value =
+                                                    !controller.obsecure.value;
+                                              },
+                                              icon: Obx(() => controller
+                                                      .obsecure.value
+                                                  ? const Icon(
+                                                      Icons.password_rounded)
+                                                  : const Icon(Icons
+                                                      .remove_red_eye_rounded))),
+                                          suffixIconColor: SECONDARY_APP_COLOR),
+                                    )),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Obx(() => TextFormField(
+                                      obscureText: controller.obsecure.value,
+                                      validator: (value) {
+                                        if (value == null || value == '') {
+                                          return 'Confirm password is required';
+                                        } else if (value !=
+                                            controller
+                                                .passwordController.text) {
+                                          return 'Password is not correct';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                          label: Text('Confirm',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.grey)),
+                                          hintText: 'Retype your password',
+                                          hintStyle: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.copyWith(color: Colors.grey)),
+                                    ))
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -182,7 +240,12 @@ class RegisterView extends GetView<RegisterController> {
                               style: const ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
                                       SECONDARY_APP_COLOR)),
-                              onPressed: () => controller.registerNewAccount(),
+                              onPressed: () {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.registerNewAccount();
+                                }
+                              },
                               child: const Text(
                                 'Sign up',
                                 style: TextStyle(

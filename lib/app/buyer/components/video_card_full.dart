@@ -39,7 +39,8 @@ class VideoCardFull extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.grey.shade600,
                   image: DecorationImage(
-                      image: CachedNetworkImageProvider(thumbnail))),
+                      image: CachedNetworkImageProvider(thumbnail),
+                      fit: BoxFit.cover)),
             ),
           ),
           Container(

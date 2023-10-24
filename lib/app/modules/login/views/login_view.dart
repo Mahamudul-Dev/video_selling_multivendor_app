@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:video_selling_multivendor_app/app/buyer/components/loading_animation.dart';
 
 import '../../../../themes/app_colors.dart';
 import '../../../routes/app_pages.dart';
@@ -17,167 +17,211 @@ class LoginView extends GetView<LoginController> {
           foregroundColor: SECONDARY_APP_COLOR,
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sign In',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: SECONDARY_APP_COLOR),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Enter your email & password',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.copyWith(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                            label: Text('Email',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(color: Colors.grey)),
-                            hintText: 'Type your email',
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: Colors.grey)),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            label: Text('Password',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(color: Colors.grey)),
-                            hintText: 'Type your password',
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: Colors.grey)),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(SECONDARY_APP_COLOR)),
-                      onPressed: () {},
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Don't have a account?",
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.copyWith(color: SECONDARY_APP_COLOR),
-                    ),
-                    TextButton(
-                      onPressed: () => Get.toNamed(Routes.REGISTER),
-                      child: Text(
-                        "Sign up",
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelMedium
-                            ?.copyWith(color: Colors.blueGrey),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: 1,
-                      width: 50,
-                      color: SECONDARY_APP_COLOR,
-                    ),
-                    Text(
-                      "Sign In with",
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.copyWith(color: SECONDARY_APP_COLOR),
-                    ),
-                    Container(
-                      height: 1,
-                      width: 50,
-                      color: SECONDARY_APP_COLOR,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton.icon(
-                        onPressed: () => controller.signInWithGoogle(),
-                        icon: const SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: Image(
-                              image:
-                                  AssetImage('assets/images/google-icon.png')),
+            child: Obx(() => controller.isLoading.value
+                ? LoadingAnimation()
+                : SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(
+                          height: 30,
                         ),
-                        label: const Text('Login with Google'))
-                  ],
-                )
-              ],
-            ),
-          ),
-        ));
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Sign In',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: SECONDARY_APP_COLOR),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Enter your email & password',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Form(
+                            key: controller.formKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: controller.emailController,
+                                  validator: (value) {
+                                    if (value == null || value == '') {
+                                      return 'Email is required';
+                                    } else if (!controller
+                                        .isEmailValid(value)) {
+                                      return 'Please write correct email address';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text('Email',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium
+                                              ?.copyWith(color: Colors.grey)),
+                                      hintText: 'Type your email',
+                                      hintStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(color: Colors.grey)),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Obx(() => TextFormField(
+                                      controller: controller.passwordController,
+                                      obscureText: controller.obsecure.value,
+                                      validator: (value) {
+                                        if (value == null || value == '') {
+                                          return 'Password is required';
+                                        } else if (value.length < 6) {
+                                          return 'Password must be at least 6 charecter';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        label: Text('Password',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium
+                                                ?.copyWith(color: Colors.grey)),
+                                        hintText: 'Type your password',
+                                        hintStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(color: Colors.grey),
+                                        suffixIconColor: SECONDARY_APP_COLOR,
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              controller.obsecure.value =
+                                                  !controller.obsecure.value;
+                                            },
+                                            icon: Obx(() => controller
+                                                    .obsecure.value
+                                                ? const Icon(
+                                                    Icons.password_rounded)
+                                                : const Icon(Icons
+                                                    .remove_red_eye_rounded))),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: ElevatedButton(
+                              style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      SECONDARY_APP_COLOR)),
+                              onPressed: () {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.signInWithEmail();
+                                }
+                              },
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Don't have a account?",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: SECONDARY_APP_COLOR),
+                            ),
+                            TextButton(
+                              onPressed: () => Get.toNamed(Routes.REGISTER),
+                              child: Text(
+                                "Sign up",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(color: Colors.blueGrey),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 1,
+                              width: 50,
+                              color: SECONDARY_APP_COLOR,
+                            ),
+                            Text(
+                              "Sign In with",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: SECONDARY_APP_COLOR),
+                            ),
+                            Container(
+                              height: 1,
+                              width: 50,
+                              color: SECONDARY_APP_COLOR,
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton.icon(
+                                onPressed: () => controller.signInWithGoogle(),
+                                icon: const SizedBox(
+                                  height: 25,
+                                  width: 25,
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/google-icon.png')),
+                                ),
+                                label: const Text('Login with Google'))
+                          ],
+                        )
+                      ],
+                    ),
+                  ))));
   }
 }

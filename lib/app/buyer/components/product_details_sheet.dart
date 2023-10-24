@@ -40,11 +40,24 @@ class ProductDetailsSheet extends StatelessWidget {
         children: [
           // product image & preveiw
           thumbnail != null
-              ? CachedNetworkImage(
-                  imageUrl: thumbnail!,
-                  height: 200.00,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
+              ? Stack(
+                  fit: StackFit.loose,
+                  alignment: Alignment.center,
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: thumbnail!,
+                      height: 200.00,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.cover,
+                    ),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.play_circle_outline_rounded,
+                          size: 100,
+                          color: Color.fromARGB(165, 158, 158, 158),
+                        )),
+                  ],
                 )
               : SvgPicture.network(
                   PLACEHOLDER_THUMBNAIL,

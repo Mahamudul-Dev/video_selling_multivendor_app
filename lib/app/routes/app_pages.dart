@@ -27,7 +27,7 @@ class AppPages {
     if (LocalPreferences.box.read('token') != null &&
         LocalPreferences.box.read('token') != '') {
       final data = LocalPreferences.getCurrentLoginInfo();
-      if (data.accountType == 'buyer') {
+      if (data.acountType == 'buyer') {
         // return buyer home screen route
         return Routes.HOME_BUYER;
       } else {
