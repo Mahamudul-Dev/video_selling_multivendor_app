@@ -12,9 +12,11 @@ class BuyerProfileView extends GetView<BuyerProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: ListView(
         children: [
           Container(
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.4,
               decoration: const BoxDecoration(
                   color: SECONDARY_APP_COLOR,
@@ -56,39 +58,84 @@ class BuyerProfileView extends GetView<BuyerProfileController> {
           const SizedBox(
             height: 20,
           ),
-          _menuBar()
+          _menuBar(context),
+          const SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: ElevatedButton(
+                onPressed: () {},
+                style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                child: Text(
+                  'Switch to Seller',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: SECONDARY_APP_COLOR),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: ElevatedButton(
+                onPressed: () {},
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll(SECONDARY_APP_COLOR)),
+                child: Text(
+                  'Logout',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: Colors.white),
+                )),
+          )
         ],
       ),
     );
   }
 
 // menu item
-  Widget _menuBar() {
+  Widget _menuBar(BuildContext context) {
     return Row(
-      children: [_menuButton('Favorite', CupertinoIcons.heart, () {})],
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _menuButton('Favorite', CupertinoIcons.heart, () {}, context),
+        _menuButton('Wishlist', CupertinoIcons.shopping_cart, () {}, context),
+        _menuButton('Interest', CupertinoIcons.bookmark, () {}, context)
+      ],
     );
   }
 
-  Widget _menuButton(
-      String buttonTitle, IconData icon, void Function()? onTap) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-          color: Colors.grey, borderRadius: BorderRadius.circular(15)),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: SECONDARY_APP_COLOR,
+  Widget _menuButton(String buttonTitle, IconData icon, void Function()? onTap,
+      BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Material(
+        elevation: 3,
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  color: SECONDARY_APP_COLOR,
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  buttonTitle,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                )
+              ],
             ),
-            const SizedBox(
-              height: 6,
-            ),
-            const Text('Favorite')
-          ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import '../../../../data/videos.dart';
@@ -5,6 +6,7 @@ import '../../../../models/video_item.model.dart';
 
 class BuyerDashboardController extends GetxController {
   RxList<VideoItemModel> trendingVideos = <VideoItemModel>[].obs;
+  ScrollController scrollController = ScrollController();
   Future<void> refrashPage() async {
     return await Future.delayed(const Duration(seconds: 1));
   }

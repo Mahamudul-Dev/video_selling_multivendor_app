@@ -14,67 +14,67 @@ class HomeViewBuyer extends GetView<HomeControllerBuyer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(APP_NAME),
-        actions: [
-          IconButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll(Colors.grey.shade800)),
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search_rounded,
-                color: Colors.white,
-              )),
-          Stack(
-            children: [
-              IconButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll(Colors.grey.shade800)),
-                  onPressed: () => Get.toNamed(Routes.CART),
-                  icon: const Icon(
-                    Icons.shopping_bag_outlined,
-                    color: Colors.white,
-                  )),
-              Positioned(
-                bottom: 2,
-                right: 2,
-                child: Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: Center(
-                      child: Obx(() =>
-                          Get.find<BuyerCartController>().cartItems.isNotEmpty
-                              ? Text(
-                                  Get.find<BuyerCartController>()
-                                      .cartItems
-                                      .length
-                                      .toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.white),
-                                )
-                              : Text(
-                                  '0',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.white),
-                                ))),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            width: 10,
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text(APP_NAME),
+      //   actions: [
+      //     IconButton(
+      //         style: ButtonStyle(
+      //             backgroundColor:
+      //                 MaterialStatePropertyAll(Colors.grey.shade800)),
+      //         onPressed: () {},
+      //         icon: const Icon(
+      //           Icons.search_rounded,
+      //           color: Colors.white,
+      //         )),
+      //     Stack(
+      //       children: [
+      //         IconButton(
+      //             style: ButtonStyle(
+      //                 backgroundColor:
+      //                     MaterialStatePropertyAll(Colors.grey.shade800)),
+      //             onPressed: () => Get.toNamed(Routes.CART),
+      //             icon: const Icon(
+      //               Icons.shopping_bag_outlined,
+      //               color: Colors.white,
+      //             )),
+      //         Positioned(
+      //           bottom: 2,
+      //           right: 2,
+      //           child: Container(
+      //             padding: const EdgeInsets.all(3),
+      //             decoration: const BoxDecoration(
+      //               shape: BoxShape.circle,
+      //               color: Colors.black,
+      //             ),
+      //             child: Center(
+      //                 child: Obx(() =>
+      //                     Get.find<BuyerCartController>().cartItems.isNotEmpty
+      //                         ? Text(
+      //                             Get.find<BuyerCartController>()
+      //                                 .cartItems
+      //                                 .length
+      //                                 .toString(),
+      //                             style: Theme.of(context)
+      //                                 .textTheme
+      //                                 .bodySmall
+      //                                 ?.copyWith(color: Colors.white),
+      //                           )
+      //                         : Text(
+      //                             '0',
+      //                             style: Theme.of(context)
+      //                                 .textTheme
+      //                                 .bodySmall
+      //                                 ?.copyWith(color: Colors.white),
+      //                           ))),
+      //           ),
+      //         )
+      //       ],
+      //     ),
+      //     const SizedBox(
+      //       width: 10,
+      //     )
+      //   ],
+      // ),
       body: Obx(() => controller.pages[controller.currentPage.value]),
       bottomNavigationBar: Container(
         color: SECONDARY_APP_COLOR,
