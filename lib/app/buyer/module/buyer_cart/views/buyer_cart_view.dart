@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../constants/asset_maneger.dart';
+import '../../../../utils/asset_maneger.dart';
 import '../../../components/cart_item_card.dart';
 import '../controllers/buyer_cart_controller.dart';
 
@@ -23,9 +23,13 @@ class CartView extends GetView<BuyerCartController> {
               itemBuilder: (context, index) {
                 return CartItemCard(
                   productName: controller.cartItems[index].title ?? '',
-                  authorName: controller.cartItems[index].author?.name ?? '',
                   productImage: controller.cartItems[index].thumbnail ?? '',
                   price: controller.cartItems[index].price ?? '',
+                  author: () async {
+                    final profile = controller.getProfile(
+                        id: controller.cartItems[index].author!);
+                    return profile;
+                  },
                   onRemovePress: () {
                     showDialog(
                         context: context,

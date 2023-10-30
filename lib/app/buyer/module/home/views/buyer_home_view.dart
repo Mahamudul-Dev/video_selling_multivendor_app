@@ -5,7 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:video_selling_multivendor_app/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../constants/utils.dart';
+import '../../../../utils/constants.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/buyer_home_controller.dart';
 

@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../constants/utils.dart';
-import '../../models/video_item.model.dart';
+import '../../models/profile.model.dart';
+import '../../utils/constants.dart';
+import 'shimmer_effect.dart';
 
 class ProductDetailsSheet extends StatelessWidget {
   const ProductDetailsSheet({
@@ -25,7 +27,7 @@ class ProductDetailsSheet extends StatelessWidget {
   final String? trailerUrl;
   final String title;
   final String price;
-  final Author author;
+  final Future<Profile?> Function() author;
   final String productDescription;
   final void Function()? onAuthorPressed;
   final void Function()? onCartPressed;
@@ -88,54 +90,69 @@ class ProductDetailsSheet extends StatelessWidget {
                   ),
                 ),
                 // author details
-                ListTile(
-                  onTap: onAuthorPressed,
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    backgroundImage: CachedNetworkImageProvider(
-                        author.profilePhoto ?? PLACEHOLDER_PHOTO),
-                  ),
-                  title: Text(
-                    author.name ?? '',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        '${author.city}, ${author.country}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: Colors.grey.shade800),
-                      ),
-                      Text(
-                        'Total videos: ${author.totalVideos}',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: SECONDARY_APP_COLOR,
-                              fontWeight: FontWeight.w900,
-                            ),
-                      )
-                    ],
-                  ),
-                  trailing: ElevatedButton.icon(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(SECONDARY_APP_COLOR)),
-                      onPressed: onContactPressed,
-                      icon: const Icon(
-                        CupertinoIcons.mail,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      label: Text(
-                        'Contact Me',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall
-                            ?.copyWith(color: Colors.white),
-                      )),
-                ),
+                FutureBuilder(
+                    future: author(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListTile(
+                          onTap: onAuthorPressed,
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            backgroundImage: CachedNetworkImageProvider(
+                                snapshot.data?.profilePic == 'N/A'
+                                    ? PLACEHOLDER_PHOTO
+                                    : snapshot.data?.profilePic ??
+                                        PLACEHOLDER_PHOTO),
+                          ),
+                          title: Text(
+                            snapshot.data?.name ?? '',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'USA',
+                                //'${author.}, ${author.country}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: Colors.grey.shade800),
+                              ),
+                              Text(
+                                'Total videos: ${snapshot.data?.totalVideos}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: SECONDARY_APP_COLOR,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                              )
+                            ],
+                          ),
+                          trailing: ElevatedButton.icon(
+                              style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      SECONDARY_APP_COLOR)),
+                              onPressed: onContactPressed,
+                              icon: const Icon(
+                                CupertinoIcons.mail,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              label: Text(
+                                'Contact Me',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.copyWith(color: Colors.white),
+                              )),
+                        );
+                      }
+
+                      return const ShimmerEffect.rectangular(height: 50);
+                    }),
                 // product description
                 Padding(
                   padding:

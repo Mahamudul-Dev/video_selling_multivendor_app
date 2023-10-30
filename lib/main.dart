@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'app/constants/utils.dart';
+import 'app/utils/constants.dart';
 import 'app/routes/app_pages.dart';
 import 'themes/app_colors.dart';
 import 'themes/app_themes.dart';

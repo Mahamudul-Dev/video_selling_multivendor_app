@@ -2,20 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../constants/utils.dart';
+import '../../models/profile.model.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
     Key? key,
     required this.productName,
-    required this.authorName,
+    required this.author,
     required this.productImage,
     required this.price,
     this.onRemovePress,
   }) : super(key: key);
 
   final String productName;
-  final String authorName;
+  final Future<Profile?> Function() author;
   final String productImage;
   final String price;
   final void Function()? onRemovePress;
@@ -69,15 +69,30 @@ class CartItemCard extends StatelessWidget {
                     Row(
                       children: [
                         Flexible(
-                            child: Text(
-                          authorName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.grey),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        )),
+                            child: FutureBuilder(
+                                future: author(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data?.name ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(color: Colors.grey),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    );
+                                  }
+                                  return Text(
+                                    'Unknown',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(color: Colors.grey),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  );
+                                })),
                       ],
                     ),
                     Row(

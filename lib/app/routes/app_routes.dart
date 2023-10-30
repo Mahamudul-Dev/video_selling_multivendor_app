@@ -11,6 +11,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT_BUYER;
   static const PROFILE = _Paths.PROFILE;
   static const BUYER_MESSAGE = _Paths.BUYER_MESSAGE;
+  static const BUYER_PRODUCTS = _Paths.BUYER_PRODUCTS;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const CHAT_BUYER = '/chat-buyer';
   static const PROFILE = '/profile';
   static const BUYER_MESSAGE = '/buyer-message';
+  static const BUYER_PRODUCTS = '/buyer-products';
 }

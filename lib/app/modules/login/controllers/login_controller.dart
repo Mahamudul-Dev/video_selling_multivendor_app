@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -33,19 +35,24 @@ class LoginController extends GetxController {
         email: emailController.text, password: passwordController.text);
 
     if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
       // account created go to next routes
-      final token = response.data['token'];
-      final email = response.data['email'];
-      final acountType = response.data['acountType'];
-      LocalPreferences.saveCurrentLogin(email, token, acountType);
+      final id = data['_id'];
+      final token = data['token'];
+      final email = data['email'];
+      final accountType = data['accountType'];
+      LocalPreferences.saveCurrentLogin(id, email, token, accountType);
 
       isLoading.value = false;
-      Get.snackbar('Congrats!', 'You successfully created your account');
-      if (acountType == 'buyer') {
+      Get.snackbar('Success!', 'Welcome back!');
+      if (accountType == 'buyer') {
         Get.offAllNamed(Routes.HOME_BUYER);
       } else {
         Get.snackbar('Opps', 'Seller side is not ready yet');
       }
+    } else if (response.statusCode == 400) {
+      isLoading.value = false;
+      Get.snackbar('Opps', response.body);
     } else {
       isLoading.value = false;
       Get.snackbar('Opps', 'check your credentials');

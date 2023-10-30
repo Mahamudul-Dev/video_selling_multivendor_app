@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_selling_multivendor_app/app/routes/app_pages.dart';
 
 import '../../../../connections/authentication.dart';
-import '../../../models/profile.model.dart';
 import '../../../preferences/local_preferences.dart';
 
 class RegisterController extends GetxController {
@@ -70,10 +71,11 @@ class RegisterController extends GetxController {
             accountType: isSeller.value ? 'Seller' : 'Buyer');
 
         if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
           // account created go to next routes
-          final profileModel = ProfileModel.fromJson(response.data);
-          LocalPreferences.saveCurrentLogin(profileModel.profile!.email!,
-              profileModel.token!, profileModel.profile!.acountType!);
+
+          LocalPreferences.saveCurrentLogin(
+              data['_id'], data['email'], data['token'], data['accountType']);
           isLoading.value = false;
           Get.snackbar('Congrats!', 'You successfully created your account');
           Get.offAllNamed(Routes.HOME_BUYER);

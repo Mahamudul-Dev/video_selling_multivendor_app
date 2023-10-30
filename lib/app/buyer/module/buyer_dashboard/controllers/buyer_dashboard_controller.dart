@@ -1,32 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import '../../../../data/videos.dart';
-import '../../../../models/video_item.model.dart';
+import '../../../../../connections/connections.dart';
+import '../../../../models/product.model.dart';
+import '../../../../models/profile.model.dart';
 
 class BuyerDashboardController extends GetxController {
-  RxList<VideoItemModel> trendingVideos = <VideoItemModel>[].obs;
+  RxList<ProductModel> trendingVideos = <ProductModel>[].obs;
   ScrollController scrollController = ScrollController();
   Future<void> refrashPage() async {
     return await Future.delayed(const Duration(seconds: 1));
   }
 
-  Future<RxList<VideoItemModel>> initializeTrendingVideos() async {
+  Future<RxList<ProductModel>> initializeTrendingVideos() async {
     trendingVideos.clear();
-    for (var i = 0; i < demoVideos.length; i++) {
-      try {
-        Logger().i(demoVideos[i]);
-        trendingVideos.add(VideoItemModel.fromJson(demoVideos[i]));
-      } catch (e) {
-        Logger().e(e);
+    final response = await ProductsConnection.getAllProducts();
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      for (var i = 0; i < data.length; i++) {
+        Logger().i(i);
+        trendingVideos.add(ProductModel.fromJson(data[i]));
       }
     }
-
-    Logger().i(trendingVideos.length);
-
     return trendingVideos;
   }
 
+  Future<Profile?> getProfile({required String id}) async {
+    ProfileModel? profile;
+    final response = await Authentication.userProfileConnection(id: id);
+    Logger().i({'Profile Response': response.statusCode});
+
+    if (response.statusCode == 200) {
+      profile = ProfileModel.fromJson(jsonDecode(response.body));
+    }
+
+    Logger().i({'Profile': profile?.toJson()});
+
+    return profile?.data?.first;
+  }
+
+  Future<void> onRefrash() async {}
   @override
   void onClose() {
     trendingVideos.close();

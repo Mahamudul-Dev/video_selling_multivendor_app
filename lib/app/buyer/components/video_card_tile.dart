@@ -1,18 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:video_selling_multivendor_app/app/utils/constants.dart';
 import 'package:video_selling_multivendor_app/themes/app_colors.dart';
 
-import '../../constants/asset_maneger.dart';
+import '../../models/profile.model.dart';
+import 'shimmer_effect.dart';
 
 class VideoCardTile extends StatelessWidget {
   const VideoCardTile({
     Key? key,
     required this.thumbnail,
     required this.title,
-    required this.authorName,
-    required this.authorPhoto,
+    required this.author,
     required this.price,
     this.onItemPressed,
     this.onAuthorPressed,
@@ -20,8 +19,7 @@ class VideoCardTile extends StatelessWidget {
 
   final String thumbnail;
   final String title;
-  final String authorName;
-  final String authorPhoto;
+  final Future<Profile?> Function() author;
   final String price;
   final void Function()? onItemPressed;
   final void Function()? onAuthorPressed;
@@ -32,23 +30,50 @@ class VideoCardTile extends StatelessWidget {
       onTap: onItemPressed,
       leading: InkWell(
           onTap: onAuthorPressed,
-          child: CachedNetworkImage(imageUrl: thumbnail, fit: BoxFit.cover)),
+          child: CachedNetworkImage(
+            imageUrl: thumbnail,
+            fit: BoxFit.fitWidth,
+            width: 80,
+            height: 60,
+          )),
       title: Text(
         title,
         style: Theme.of(context).textTheme.titleSmall,
+        maxLines: 2,
       ),
       subtitle: Row(
         children: [
-          CircleAvatar(
-            radius: 10,
-            backgroundColor: Colors.grey,
-            backgroundImage: CachedNetworkImageProvider(authorPhoto),
-          ),
-          Text(
-            authorName,
-            style: Theme.of(context).textTheme.bodySmall,
-            overflow: TextOverflow.ellipsis,
-          )
+          FutureBuilder(
+              future: author(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: CachedNetworkImageProvider(
+                        snapshot.data?.profilePic == 'N/A'
+                            ? PLACEHOLDER_PHOTO
+                            : snapshot.data?.profilePic ?? PLACEHOLDER_PHOTO),
+                  );
+                }
+                return const ShimmerEffect.circuller(
+                  width: 25,
+                  height: 25,
+                );
+              }),
+          FutureBuilder(
+              future: author(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data?.name ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall);
+                }
+                return const ShimmerEffect.rectangular(
+                  height: 20,
+                  width: 50,
+                );
+              }),
         ],
       ),
       trailing: Container(

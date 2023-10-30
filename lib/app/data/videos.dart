@@ -1,4 +1,4 @@
-import 'package:video_selling_multivendor_app/app/constants/utils.dart';
+import 'package:video_selling_multivendor_app/app/utils/constants.dart';
 
 final demoVideos = [
   {

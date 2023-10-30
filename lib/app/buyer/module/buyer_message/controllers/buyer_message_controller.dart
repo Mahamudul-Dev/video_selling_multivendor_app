@@ -16,7 +16,8 @@ class BuyerMessageController extends GetxController {
         MessageModel(
             message: messageTextController.text,
             senderId: '1234',
-            receiverId: sellerId));
+            receiverId: sellerId,
+            timestamp: DateTime.now().toString()));
     messageTextController.clear();
   }
 

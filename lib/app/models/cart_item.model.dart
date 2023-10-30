@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'video_item.model.dart';
-
 class CartItemModel {
   final String? id;
   final String? title;
@@ -12,7 +10,7 @@ class CartItemModel {
   final String? thumbnail;
   final String? downloadUrl;
   final String? previewUrl;
-  final Author? author;
+  final String? author;
 
   CartItemModel({
     this.id,
@@ -33,17 +31,16 @@ class CartItemModel {
   String toRawJson() => json.encode(toJson());
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) => CartItemModel(
-        id: json["_id"],
-        title: json["title"],
-        description: json["description"],
-        category: json["category"],
-        price: json["price"],
-        duration: json["duration"],
-        thumbnail: json["thumbnail"],
-        downloadUrl: json["downloadUrl"],
-        previewUrl: json["previewUrl"],
-        author: json["author"] == null ? null : Author.fromJson(json["author"]),
-      );
+      id: json["_id"],
+      title: json["title"],
+      description: json["description"],
+      category: json["category"],
+      price: json["price"],
+      duration: json["duration"],
+      thumbnail: json["thumbnail"],
+      downloadUrl: json["downloadUrl"],
+      previewUrl: json["previewUrl"],
+      author: json["author"]);
 
   Map<String, dynamic> toJson() => {
         "_id": id,
@@ -55,6 +52,6 @@ class CartItemModel {
         "thumbnail": thumbnail,
         "downloadUrl": downloadUrl,
         "previewUrl": previewUrl,
-        "author": author?.toJson(),
+        "author": author
       };
 }

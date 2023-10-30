@@ -1,14 +1,13 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:video_selling_multivendor_app/app/constants/utils.dart';
+import 'package:http/http.dart' as http;
+
+import '../app/preferences/local_preferences.dart';
+import '../app/utils/constants.dart';
 
 class Authentication {
-  static final _dio = Dio();
-
   // call register api
-  static Future<Response> regsterConnection(
+  static Future<http.Response> regsterConnection(
       {required String name,
       required String userName,
       required String email,
@@ -22,7 +21,8 @@ class Authentication {
         "password": password,
         "accountType": accountType
       };
-      final response = await _dio.post(BASE_URL + REGISTER_API, data: bodyData);
+      final response =
+          await http.post(Uri.parse(BASE_URL + REGISTER_API), body: bodyData);
       return response;
     } catch (e) {
       if (e is DioError) {
@@ -41,11 +41,12 @@ class Authentication {
   }
 
   // call login api
-  static Future<Response> loginConnection(
+  static Future<http.Response> loginConnection(
       {required String email, required String password}) async {
     try {
       final bodyData = {"email": email, "password": password};
-      final response = await _dio.post(BASE_URL + LOGIN_API, data: bodyData);
+      final response =
+          await http.post(Uri.parse(BASE_URL + LOGIN_API), body: bodyData);
       return response;
     } catch (e) {
       if (e is DioError) {
@@ -63,23 +64,17 @@ class Authentication {
     }
   }
 
-  static Future<Response> userProfileConnection({required String id}) async {
+  static Future<http.Response> userProfileConnection(
+      {required String id}) async {
     try {
-      final response =
-          await _dio.get(BASE_URL + USER_API, queryParameters: {'id': id});
+      final response = await http.get(Uri.parse('$BASE_URL$USER_API$id'),
+          headers: {
+            'Authorization':
+                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+          });
+      Logger().i(response.body);
       return response;
     } catch (e) {
-      if (e is DioError) {
-        if (e.response != null) {
-          Logger()
-              .e('Request failed with status code ${e.response!.statusCode}');
-          Logger().e('Response data: ${e.response!.data}');
-        } else {
-          Logger().e('Request failed with an error: $e');
-        }
-      } else {
-        Logger().e('An unexpected error occurred: $e');
-      }
       throw e;
     }
   }

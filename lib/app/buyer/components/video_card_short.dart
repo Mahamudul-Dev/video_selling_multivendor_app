@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:video_selling_multivendor_app/app/buyer/components/shimmer_effect.dart';
+import 'package:video_selling_multivendor_app/app/utils/constants.dart';
 
 import '../../../themes/app_colors.dart';
+import '../../models/profile.model.dart';
 
 class VideoCardShort extends StatelessWidget {
   const VideoCardShort({
     Key? key,
     required this.thumbnail,
     required this.title,
-    required this.authorName,
-    required this.authorPhoto,
+    required this.author,
     required this.price,
     this.onItemPressed,
     this.onAuthorPressed,
@@ -17,8 +19,7 @@ class VideoCardShort extends StatelessWidget {
 
   final String thumbnail;
   final String title;
-  final String authorName;
-  final String authorPhoto;
+  final Future<Profile?> Function() author;
   final String price;
   final void Function()? onItemPressed;
   final void Function()? onAuthorPressed;
@@ -65,7 +66,7 @@ class VideoCardShort extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 4,
+                      height: 8,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,20 +77,48 @@ class VideoCardShort extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CircleAvatar(
-                                radius: 13,
-                                backgroundColor: Colors.grey,
-                                backgroundImage:
-                                    CachedNetworkImageProvider(authorPhoto),
-                              ),
+                              FutureBuilder(
+                                  future: author(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return CircleAvatar(
+                                        radius: 13,
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage:
+                                            CachedNetworkImageProvider(snapshot
+                                                        .data?.profilePic ==
+                                                    'N/A'
+                                                ? PLACEHOLDER_PHOTO
+                                                : snapshot.data?.profilePic ??
+                                                    PLACEHOLDER_PHOTO),
+                                      );
+                                    }
+                                    return const ShimmerEffect.circuller(
+                                        width: 10, height: 10);
+                                  }),
                               const SizedBox(
                                 width: 4,
                               ),
-                              Text(
-                                authorName,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              )
+                              FutureBuilder(
+                                  future: author(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return SizedBox(
+                                        width: 50,
+                                        child: Text(
+                                          snapshot.data?.name ?? '',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
+                                        ),
+                                      );
+                                    }
+                                    return const ShimmerEffect.rectangular(
+                                      height: 10,
+                                      width: 40,
+                                    );
+                                  })
                             ],
                           ),
                         ),

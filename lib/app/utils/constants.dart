@@ -8,6 +8,12 @@ const PLACEHOLDER_THUMBNAIL =
     'https://spendmatters.com/wp/wp-content/themes/spend-matters/assets/images/placeholder.svg';
 
 const String BASE_URL = 'http://203.161.62.117:5656';
-const String USER_API = '/api/v1/user';
+
+// Authentication endpoints
+const String USER_API = '/api/v1/user/';
 const String REGISTER_API = '/api/v1/user/register';
 const String LOGIN_API = '/api/v1/user/login';
+
+// Products endpoints
+const String PRODUCTS = '/api/v1/product';
+const String FILTER_PRODUCT = '/api/v1/product/allProducts?filter=';

@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 
+import '../../../../../connections/connections.dart';
 import '../../../../models/cart_item.model.dart';
-import '../../../../models/video_item.model.dart';
+import '../../../../models/product.model.dart';
+import '../../../../models/profile.model.dart';
 
 class BuyerCartController extends GetxController {
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
   RxDouble totalCartItemPrice = 00.00.obs;
 
-  void addToCart(VideoItemModel item) {
+  void addToCart(ProductModel item) {
     cartItems.add(CartItemModel(
         id: item.id,
         title: item.title,
@@ -34,6 +38,17 @@ class BuyerCartController extends GetxController {
     // TO:DO: add payment processing functionality
 
     Get.snackbar('Opps', 'Checkout is not added yet');
+  }
+
+  Future<Profile?> getProfile({required id}) async {
+    ProfileModel? profile;
+    final response = await Authentication.userProfileConnection(id: id);
+
+    if (response.statusCode == 200) {
+      profile = ProfileModel.fromJson(jsonDecode(response.body));
+    }
+
+    return profile?.data?.first;
   }
 
   @override

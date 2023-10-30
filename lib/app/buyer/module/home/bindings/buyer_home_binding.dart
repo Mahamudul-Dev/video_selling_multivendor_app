@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import '../../buyer_cart/controllers/buyer_cart_controller.dart';
 import '../../buyer_chat/controllers/buyer_chat_controller.dart';
 import '../../buyer_dashboard/controllers/buyer_dashboard_controller.dart';
+import '../../buyer_profile/controllers/buyer_profile_controller.dart';
 import '../controllers/buyer_home_controller.dart';
 
 class HomeBindingBuyer extends Bindings {
@@ -17,6 +18,10 @@ class HomeBindingBuyer extends Bindings {
 
     Get.lazyPut<BuyerChatController>(
       () => BuyerChatController(),
+    );
+
+    Get.lazyPut<BuyerProfileController>(
+      () => BuyerProfileController(),
     );
 
     Get.lazyPut<BuyerCartController>(

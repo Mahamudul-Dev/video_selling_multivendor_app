@@ -1,4 +1,4 @@
-import '../constants/utils.dart';
+import '../utils/constants.dart';
 
 final cartItems = [
   {

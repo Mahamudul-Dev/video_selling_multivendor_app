@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:get/get.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../constants/utils.dart';
+import '../../../../utils/constants.dart';
 import '../controllers/buyer_message_controller.dart';
 
 class BuyerMessageView extends GetView<BuyerMessageController> {
@@ -14,7 +15,7 @@ class BuyerMessageView extends GetView<BuyerMessageController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('BuyerMessageView'),
+          title: const Text('Buyer'),
           centerTitle: true,
         ),
         body: Column(
@@ -33,9 +34,23 @@ class BuyerMessageView extends GetView<BuyerMessageController> {
                             backgroundImage:
                                 CachedNetworkImageProvider(PLACEHOLDER_PHOTO),
                           ),
-                          title: Text(
-                            'Demo1',
-                            style: Theme.of(context).textTheme.titleSmall,
+                          title: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Demo1',
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                              ),
+                              Text(
+                                timeago.format(DateTime.parse(
+                                    controller.messages[index].timestamp)),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              )
+                            ],
                           ),
                           subtitle: Text(controller.messages[index].message,
                               style: Theme.of(context).textTheme.bodyMedium),
