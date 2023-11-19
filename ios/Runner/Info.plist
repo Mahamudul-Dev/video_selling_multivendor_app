@@ -61,5 +61,31 @@
 		</dict>
 	</array>
 	<!-- End of the Google Sign-in Section -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+	</dict>
+
+	<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb300818426154864</string>
+    </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>300818426154864</string>
+<key>FacebookClientToken</key>
+<string>51f825d8ec719b40f44e1648ddb96d2c</string>
+<key>FacebookDisplayName</key>
+<string>My Cell Vids</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-share-api</string>
+</array>
 </dict>
 </plist>

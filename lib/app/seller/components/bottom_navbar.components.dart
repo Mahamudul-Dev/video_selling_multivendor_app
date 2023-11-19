@@ -2,10 +2,11 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../themes/app_colors.dart';
 import '../modules/seller_home/controllers/seller_home_controller.dart';
 
-class BottomNavigationBar extends GetView<SellerHomeController> {
-  const BottomNavigationBar({super.key});
+class BottomNavbar extends GetView<SellerHomeController> {
+  const BottomNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,10 @@ class BottomNavigationBar extends GetView<SellerHomeController> {
           ],
           activeIndex: controller.currentPage.value,
           gapLocation: GapLocation.center,
+          activeColor: Colors.white,
+          inactiveColor: Colors.grey,
+          backgroundColor: SECONDARY_APP_COLOR,
+          height: 50,
           notchSmoothness: NotchSmoothness.softEdge,
           onTap: (index) {
             controller.currentPage.value = index;

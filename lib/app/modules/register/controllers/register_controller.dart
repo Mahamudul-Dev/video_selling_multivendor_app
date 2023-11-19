@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_selling_multivendor_app/app/routes/app_pages.dart';
 
@@ -56,28 +57,34 @@ class RegisterController extends GetxController {
   Future<void> registerNewAccount() async {
     isLoading.value = true;
     if (isSeller.value || isBuyer.value) {
-      if (isSeller.value) {
-        // go seller home page
+      isLoading.value = true;
+      final response = await Authentication.regsterConnection(
+          name: nameController.text,
+          userName:
+          '@${splitUserName(sentence: nameController.text.trim())}${uuid.v1()}',
+          email: emailController.text,
+          password: passwordController.text,
+          accountType: isSeller.value ? 'Seller' : 'Buyer');
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        // account created go to next routes
+        Logger().i(data);
+
+        Logger().i({
+          'id': data['profile']['_id'],
+          'email': data['profile']['email'],
+          'accountType': data['profile']['accountType']
+        });
+
+        LocalPreferences.saveCurrentLogin(
+            data['profile']['_id'], data['profile']['email'], data['token'], data['profile']['accountType']);
         isLoading.value = false;
-        Get.snackbar('Opps', 'Seller account cant accepted right now!');
-      } else {
-        isLoading.value = true;
-        final response = await Authentication.regsterConnection(
-            name: nameController.text,
-            userName:
-                '@${splitUserName(sentence: nameController.text.trim())}${uuid.v1()}',
-            email: emailController.text,
-            password: passwordController.text,
-            accountType: isSeller.value ? 'Seller' : 'Buyer');
-
-        if (response.statusCode == 200) {
-          final data = jsonDecode(response.body);
-          // account created go to next routes
-
-          LocalPreferences.saveCurrentLogin(
-              data['_id'], data['email'], data['token'], data['accountType']);
-          isLoading.value = false;
-          Get.snackbar('Congrats!', 'You successfully created your account');
+        Get.snackbar('Congrats!', 'You successfully created your account');
+        if(isSeller.value){
+          Get.offAllNamed(Routes.SELLER_HOME);
+        }
+        if(isBuyer.value){
           Get.offAllNamed(Routes.HOME_BUYER);
         }
       }

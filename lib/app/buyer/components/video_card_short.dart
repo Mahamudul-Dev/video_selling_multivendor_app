@@ -32,10 +32,9 @@ class VideoCardShort extends StatelessWidget {
         elevation: 3,
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.4,
-          height: MediaQuery.of(context).size.width * 0.4,
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.width * 0.5,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.only(
@@ -45,12 +44,13 @@ class VideoCardShort extends StatelessWidget {
                   onTap: onItemPressed,
                   child: CachedNetworkImage(
                     imageUrl: thumbnail,
-                    height: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.3,
                     width: MediaQuery.of(context).size.width * 0.5,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(6),
                 child: Column(

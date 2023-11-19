@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pod_player/pod_player.dart';
 
 import '../../../../models/product.model.dart';
 import '../../../../models/product_filter.enum.dart';
 import '../../../../utils/constants.dart';
+import '../../../components/loading_animation.dart';
 import '../../../components/product_details_sheet.dart';
 import '../../../components/shimmer_effect.dart';
 import '../../../components/video_card_tile.dart';
@@ -44,21 +46,45 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
                           showBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
-                                return ProductDetailsSheet(
-                                  thumbnail: snapshot.data![index].thumbnail,
-                                  trailerUrl: snapshot.data![index].previewUrl,
-                                  title: snapshot.data![index].title ?? '',
-                                  price: snapshot.data![index].price ?? '00.00',
-                                  author: () => controller.getProfile(
-                                      id: snapshot.data![index].author!),
-                                  productDescription:
-                                      snapshot.data![index].description ?? '',
-                                  onAuthorPressed: () {},
-                                  onCartPressed: () =>
-                                      Get.find<BuyerCartController>()
-                                          .addToCart(snapshot.data![index]),
-                                  onContactPressed: () {},
-                                );
+                                return FutureBuilder<PodPlayerController>(
+                                    future: controller.getPlayerController(
+                                        snapshot.data![index].previewUrl!),
+                                    builder: (context, playerSnapshot) {
+                                      if (playerSnapshot.hasData) {
+                                        return ProductDetailsSheet(
+                                          thumbnail:
+                                              snapshot.data![index].thumbnail,
+                                          trailerUrl:
+                                              snapshot.data![index].previewUrl,
+                                          title:
+                                              snapshot.data![index].title ?? '',
+                                          price: snapshot.data![index].price ??
+                                              '00.00',
+                                          author: () => controller.getProfile(
+                                              id: snapshot
+                                                  .data![index].author!),
+                                          initialReting: double.parse(snapshot
+                                              .data![index].ratings
+                                              .toString()),
+                                          productDescription: snapshot
+                                                  .data![index].description ??
+                                              '',
+                                          playerController:
+                                              playerSnapshot.data!,
+                                          reviews:
+                                              snapshot.data![index].reviews ??
+                                                  [],
+                                          onAuthorPressed: () {},
+                                          onCartPressed: () =>
+                                              Get.find<BuyerCartController>()
+                                                  .addToCart(
+                                                      snapshot.data![index]),
+                                          onContactPressed: () {},
+                                        );
+                                      }
+
+                                      return const LoadingAnimation();
+                                    });
                               });
                         },
                         onAuthorPressed: () {},

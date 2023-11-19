@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:pod_player/pod_player.dart';
 
 import '../../../../../connections/connections.dart';
 import '../../../../models/product.model.dart';
@@ -9,9 +10,19 @@ import '../../../../models/product_filter.enum.dart';
 import '../../../../models/profile.model.dart';
 
 class BuyerProductsController extends GetxController {
+  Future<PodPlayerController> getPlayerController(String trailerVideo) async {
+    PodPlayerController playerController = PodPlayerController(
+        playVideoFrom: PlayVideoFrom.youtube(trailerVideo),
+        podPlayerConfig: const PodPlayerConfig(
+            autoPlay: true, isLooping: false, videoQualityPriority: [720, 360]))
+      ..initialise();
+
+    return playerController;
+  }
+
   Future<Profile?> getProfile({required String id}) async {
     ProfileModel? profile;
-    final response = await Authentication.userProfileConnection(id: id);
+    final response = await ProfileConnection.userProfileConnection(id: id);
     Logger().i({'Profile Response': response.statusCode});
 
     if (response.statusCode == 200) {

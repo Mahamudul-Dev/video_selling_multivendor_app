@@ -38,8 +38,12 @@ class VideoCardTile extends StatelessWidget {
           )),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.titleSmall,
+        style: Theme.of(context)
+            .textTheme
+            .titleSmall
+            ?.copyWith(color: SECONDARY_APP_COLOR),
         maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: Row(
         children: [
@@ -67,7 +71,10 @@ class VideoCardTile extends StatelessWidget {
                 if (snapshot.hasData) {
                   return Text(snapshot.data?.name ?? '',
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall);
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: SECONDARY_APP_COLOR));
                 }
                 return const ShimmerEffect.rectangular(
                   height: 20,

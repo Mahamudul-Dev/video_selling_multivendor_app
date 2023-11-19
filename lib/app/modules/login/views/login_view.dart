@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:video_selling_multivendor_app/app/buyer/components/loading_animation.dart';
 
 import '../../../../themes/app_colors.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utils/asset_maneger.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -18,7 +20,7 @@ class LoginView extends GetView<LoginController> {
         ),
         body: SafeArea(
             child: Obx(() => controller.isLoading.value
-                ? LoadingAnimation()
+                ? const LoadingAnimation()
                 : SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -208,20 +210,75 @@ class LoginView extends GetView<LoginController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ElevatedButton.icon(
-                                onPressed: () => controller.signInWithGoogle(),
-                                icon: const SizedBox(
-                                  height: 25,
-                                  width: 25,
-                                  child: Image(
-                                      image: AssetImage(
-                                          'assets/images/google-icon.png')),
-                                ),
-                                label: const Text('Login with Google'))
+                            _socialLoginButton('google'),
+                            const SizedBox(width: 8),
+                            _socialLoginButton('facebook'),
+                            const SizedBox(width: 8),
+                            _socialLoginButton('twitter')
                           ],
                         )
                       ],
                     ),
                   ))));
+  }
+
+  Widget _socialLoginButton(String provider) {
+    switch (provider) {
+      case 'google':
+        return InkWell(
+          onTap: () => controller.signInWithGoogle(),
+          child: const Card(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(
+                  image: AssetImage(GOOGLE_LOGO),
+                  height: 30,
+                  width: 30,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        );
+
+      case 'facebook':
+        return InkWell(
+          onTap: () => controller.signInWithFacebook(),
+          child: Card(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FaIcon(
+                  FontAwesomeIcons.facebook,
+                  size: 30,
+                  color: Colors.blue.shade800,
+                ),
+              ),
+            ),
+          ),
+        );
+
+      case 'twitter':
+        return InkWell(
+          onTap: () {},
+          child: Card(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FaIcon(
+                  FontAwesomeIcons.twitter,
+                  size: 30,
+                  color: Colors.blue.shade600,
+                ),
+              ),
+            ),
+          ),
+        );
+      default:
+        return const InkWell(
+          child: Card(),
+        );
+    }
   }
 }

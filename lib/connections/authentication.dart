@@ -63,19 +63,4 @@ class Authentication {
       throw e;
     }
   }
-
-  static Future<http.Response> userProfileConnection(
-      {required String id}) async {
-    try {
-      final response = await http.get(Uri.parse('$BASE_URL$USER_API$id'),
-          headers: {
-            'Authorization':
-                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
-          });
-      Logger().i(response.body);
-      return response;
-    } catch (e) {
-      throw e;
-    }
-  }
 }

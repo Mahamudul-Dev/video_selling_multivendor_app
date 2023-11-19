@@ -267,7 +267,7 @@ class RegisterView extends GetView<RegisterController> {
                                   ?.copyWith(color: SECONDARY_APP_COLOR),
                             ),
                             TextButton(
-                              onPressed: () => Get.offAll(Routes.LOGIN),
+                              onPressed: () => Get.offAllNamed(Routes.LOGIN),
                               child: Text(
                                 "Sign in",
                                 style: Theme.of(context)

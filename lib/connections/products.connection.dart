@@ -112,4 +112,29 @@ class ProductsConnection {
         }
     }
   }
+
+  static Future<http.Response> searchProduct(String query) async {
+    try {
+      final response = await http
+          .get(Uri.parse('$BASE_URL$SEARCH_PRODUCTS$query'), headers: {
+        'Authorization':
+            'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+      });
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<http.Response> getSingleProduct (String productId) async {
+    try {
+      final response = await http.get(Uri.parse('$BASE_URL$PRODUCTS$productId'), headers: {
+        'Authorization':
+        'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+      });
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
 }

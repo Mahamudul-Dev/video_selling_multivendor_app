@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:pod_player/pod_player.dart';
 
 import '../../../themes/app_colors.dart';
+import '../../models/product.model.dart';
 import '../../models/profile.model.dart';
 import '../../utils/constants.dart';
 import 'shimmer_effect.dart';
@@ -16,8 +18,11 @@ class ProductDetailsSheet extends StatelessWidget {
     this.trailerUrl,
     required this.title,
     required this.price,
+    required this.initialReting,
+    required this.reviews,
     required this.author,
     required this.productDescription,
+    required this.playerController,
     this.onAuthorPressed,
     this.onCartPressed,
     this.onContactPressed,
@@ -27,8 +32,11 @@ class ProductDetailsSheet extends StatelessWidget {
   final String? trailerUrl;
   final String title;
   final String price;
+  final double initialReting;
+  final List<Review?> reviews;
   final Future<Profile?> Function() author;
   final String productDescription;
+  final PodPlayerController playerController;
   final void Function()? onAuthorPressed;
   final void Function()? onCartPressed;
   final void Function()? onContactPressed;
@@ -41,31 +49,25 @@ class ProductDetailsSheet extends StatelessWidget {
       child: Column(
         children: [
           // product image & preveiw
+
           thumbnail != null
-              ? Stack(
-                  fit: StackFit.loose,
-                  alignment: Alignment.center,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: thumbnail!,
-                      height: 200.00,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
+              ? PodVideoPlayer(
+                  controller: playerController,
+                  videoThumbnail: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      thumbnail!,
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.play_circle_outline_rounded,
-                          size: 100,
-                          color: Color.fromARGB(165, 158, 158, 158),
-                        )),
-                  ],
+                    fit: BoxFit.cover,
+                  ),
                 )
-              : SvgPicture.network(
-                  PLACEHOLDER_THUMBNAIL,
-                  height: 200.00,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
+              : PodVideoPlayer(
+                  controller: playerController,
+                  videoThumbnail: const DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      PLACEHOLDER_THUMBNAIL,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
 
           Expanded(
@@ -187,6 +189,56 @@ class ProductDetailsSheet extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+
+                const SizedBox(
+                  height: 15,
+                ),
+
+                // rating bar section
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          'Ratings & Reviews',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    RatingBar.builder(
+                        initialRating: initialReting,
+                        unratedColor: Colors.grey,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemSize: 30,
+                        ignoreGestures: true,
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                        itemBuilder: (context, index) {
+                          return const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          );
+                        },
+                        onRatingUpdate: (value) {}),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '${initialReting / reviews.length}',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    )
+                  ],
                 ),
               ],
             ),

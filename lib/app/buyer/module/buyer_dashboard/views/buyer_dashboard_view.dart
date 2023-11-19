@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:pod_player/pod_player.dart';
 import 'package:video_selling_multivendor_app/app/buyer/components/shimmer_effect.dart';
 import 'package:video_selling_multivendor_app/themes/app_colors.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/constants.dart';
+import '../../../components/loading_animation.dart';
 import '../../../components/product_details_sheet.dart';
 import '../../../components/video_card_full.dart';
 import '../../../components/video_card_short.dart';
 import '../../buyer_cart/controllers/buyer_cart_controller.dart';
 import '../controllers/buyer_dashboard_controller.dart';
+import 'buyer_search_delegate.dart';
 
 class BuyerDashboardView extends GetView<BuyerDashboardController> {
   const BuyerDashboardView({Key? key}) : super(key: key);
@@ -114,7 +117,8 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStatePropertyAll(Colors.grey.shade800)),
-            onPressed: () {},
+            onPressed: () =>
+                showSearch(context: context, delegate: BuyerSearchDelegate()),
             icon: const Icon(
               Icons.search_rounded,
               color: Colors.white,
@@ -172,65 +176,77 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
 
   Widget _buildTopSaleList() {
     return FutureBuilder(
-        future: controller.initializeTrendingVideos(),
+        future: controller.initializeTopSaleProducts(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Obx(() => SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return VideoCardShort(
-                          thumbnail:
-                              controller.trendingVideos[index].thumbnail ??
-                                  PLACEHOLDER_PHOTO,
-                          title: controller.trendingVideos[index].title ?? '',
-                          author: () => controller.getProfile(
-                              id: controller.trendingVideos[index].author!),
-                          price: controller.trendingVideos[index].price ?? '00',
-                          // onCartPressed: () {
-                          //   Get.find<BuyerCartController>()
-                          //       .addToCart(controller.trendingVideos[index]);
-                          // },
-                          onItemPressed: () {
-                            showBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return ProductDetailsSheet(
-                                    thumbnail: controller
-                                        .trendingVideos[index].thumbnail,
-                                    trailerUrl: controller
-                                        .trendingVideos[index].previewUrl,
-                                    title: controller
-                                            .trendingVideos[index].title ??
-                                        '',
-                                    price: controller
-                                            .trendingVideos[index].price ??
-                                        '00.00',
-                                    author: () => controller.getProfile(
-                                        id: controller
-                                            .trendingVideos[index].author!),
-                                    productDescription: controller
-                                            .trendingVideos[index]
-                                            .description ??
-                                        '',
-                                    onAuthorPressed: () {},
-                                    onCartPressed: () =>
-                                        Get.find<BuyerCartController>()
-                                            .addToCart(controller
-                                                .trendingVideos[index]),
-                                    onContactPressed: () {},
-                                  );
-                                });
-                          },
-                          onAuthorPressed: () {},
-                        );
+            return SizedBox(
+              height: MediaQuery.of(context).size.width * 0.6,
+              child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return VideoCardShort(
+                      thumbnail:
+                          snapshot.data![index].thumbnail ?? PLACEHOLDER_PHOTO,
+                      title: snapshot.data![index].title ?? '',
+                      author: () => controller.getProfile(
+                          id: snapshot.data![index].author!),
+                      price: snapshot.data![index].price ?? '00',
+                      // onCartPressed: () {
+                      //   Get.find<BuyerCartController>()
+                      //       .addToCart(controller.trendingVideos[index]);
+                      // },
+                      onItemPressed: () {
+                        showBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return FutureBuilder<PodPlayerController>(
+                                  future: controller.getPlayerController(
+                                      snapshot.data![index].previewUrl!),
+                                  builder: (context, playerSnapshot) {
+                                    if (snapshot.hasData) {
+                                      return ProductDetailsSheet(
+                                        thumbnail:
+                                            snapshot.data![index].thumbnail,
+                                        trailerUrl:
+                                            snapshot.data![index].previewUrl,
+                                        title:
+                                            snapshot.data![index].title ?? '',
+                                        price: snapshot.data![index].price ??
+                                            '00.00',
+                                        initialReting: double.parse(snapshot
+                                            .data![index].ratings
+                                            .toString()),
+                                        author: () => controller.getProfile(
+                                            id: snapshot.data![index].author!),
+                                        productDescription:
+                                            snapshot.data![index].description ??
+                                                '',
+                                        reviews:
+                                            snapshot.data![index].reviews ?? [],
+                                        playerController: playerSnapshot.data!,
+                                        onAuthorPressed: () {},
+                                        onCartPressed: () =>
+                                            Get.find<BuyerCartController>()
+                                                .addToCart(
+                                                    snapshot.data![index]),
+                                        onContactPressed: () {},
+                                      );
+                                    }
+
+                                    return Container(
+                                      child: const LoadingAnimation(),
+                                    );
+                                  });
+                            });
                       },
-                      separatorBuilder: (context, index) => const SizedBox(
-                            width: 15.0,
-                          ),
-                      itemCount: controller.trendingVideos.length),
-                )); //controller.trendingVideos.length));
+                      onAuthorPressed: () {},
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                        width: 15.0,
+                      ),
+                  itemCount: snapshot.data!.length),
+            ); //controller.trendingVideos.length));
           }
 
           return SizedBox(
@@ -255,65 +271,77 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
 
   Widget _buildTopRatedList() {
     return FutureBuilder(
-        future: controller.initializeTrendingVideos(),
+        future: controller.initializeTopRatedProducts(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Obx(() => SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return VideoCardShort(
-                          thumbnail:
-                              controller.trendingVideos[index].thumbnail ??
-                                  PLACEHOLDER_PHOTO,
-                          title: controller.trendingVideos[index].title ?? '',
-                          author: () => controller.getProfile(
-                              id: controller.trendingVideos[index].author!),
-                          price: controller.trendingVideos[index].price ?? '00',
-                          // onCartPressed: () {
-                          //   Get.find<BuyerCartController>()
-                          //       .addToCart(controller.trendingVideos[index]);
-                          // },
-                          onItemPressed: () {
-                            showBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return ProductDetailsSheet(
-                                    thumbnail: controller
-                                        .trendingVideos[index].thumbnail,
-                                    trailerUrl: controller
-                                        .trendingVideos[index].previewUrl,
-                                    title: controller
-                                            .trendingVideos[index].title ??
-                                        '',
-                                    price: controller
-                                            .trendingVideos[index].price ??
-                                        '00.00',
-                                    author: () => controller.getProfile(
-                                        id: controller
-                                            .trendingVideos[index].author!),
-                                    productDescription: controller
-                                            .trendingVideos[index]
-                                            .description ??
-                                        '',
-                                    onAuthorPressed: () {},
-                                    onCartPressed: () =>
-                                        Get.find<BuyerCartController>()
-                                            .addToCart(controller
-                                                .trendingVideos[index]),
-                                    onContactPressed: () {},
-                                  );
-                                });
-                          },
-                          onAuthorPressed: () {},
-                        );
+            return SizedBox(
+              height: MediaQuery.of(context).size.width * 0.6,
+              child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return VideoCardShort(
+                      thumbnail:
+                          snapshot.data![index].thumbnail ?? PLACEHOLDER_PHOTO,
+                      title: snapshot.data![index].title ?? '',
+                      author: () => controller.getProfile(
+                          id: snapshot.data![index].author!),
+                      price: snapshot.data![index].price ?? '00',
+                      // onCartPressed: () {
+                      //   Get.find<BuyerCartController>()
+                      //       .addToCart(controller.trendingVideos[index]);
+                      // },
+                      onItemPressed: () {
+                        showBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return FutureBuilder<PodPlayerController>(
+                                  future: controller.getPlayerController(
+                                      snapshot.data![index].previewUrl!),
+                                  builder: (context, playerSnapshot) {
+                                    if (snapshot.hasData) {
+                                      return ProductDetailsSheet(
+                                        thumbnail:
+                                            snapshot.data![index].thumbnail,
+                                        trailerUrl:
+                                            snapshot.data![index].previewUrl,
+                                        title:
+                                            snapshot.data![index].title ?? '',
+                                        price: snapshot.data![index].price ??
+                                            '00.00',
+                                        initialReting: double.parse(snapshot
+                                            .data![index].ratings
+                                            .toString()),
+                                        author: () => controller.getProfile(
+                                            id: snapshot.data![index].author!),
+                                        productDescription:
+                                            snapshot.data![index].description ??
+                                                '',
+                                        reviews:
+                                            snapshot.data![index].reviews ?? [],
+                                        playerController: playerSnapshot.data!,
+                                        onAuthorPressed: () {},
+                                        onCartPressed: () =>
+                                            Get.find<BuyerCartController>()
+                                                .addToCart(
+                                                    snapshot.data![index]),
+                                        onContactPressed: () {},
+                                      );
+                                    }
+
+                                    return Container(
+                                      child: const LoadingAnimation(),
+                                    );
+                                  });
+                            });
                       },
-                      separatorBuilder: (context, index) => const SizedBox(
-                            width: 15.0,
-                          ),
-                      itemCount: controller.trendingVideos.length),
-                )); //controller.trendingVideos.length));
+                      onAuthorPressed: () {},
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                        width: 15.0,
+                      ),
+                  itemCount: snapshot.data!.length),
+            ); //controller.trendingVideos.length));
           }
 
           return SizedBox(
@@ -338,57 +366,70 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
 
   Widget _buildYouMayLikeList() {
     return FutureBuilder(
-        future: controller.initializeTrendingVideos(),
+        future: controller.initializeYouMayLikeProducts(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Obx(() => SliverList.separated(
-                  itemCount: controller.trendingVideos.length,
-                  itemBuilder: (context, index) {
-                    return VideoCardFull(
-                      thumbnail: controller.trendingVideos[index].thumbnail ??
-                          PLACEHOLDER_PHOTO,
-                      title: controller.trendingVideos[index].title ?? '',
-                      author: () => controller.getProfile(
-                          id: controller.trendingVideos[index].author!),
-                      price: controller.trendingVideos[index].price ?? '00',
-                      onCartPressed: () {
-                        Get.find<BuyerCartController>()
-                            .addToCart(controller.trendingVideos[index]);
-                      },
-                      onItemPressed: () {
-                        showBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return ProductDetailsSheet(
-                                thumbnail:
-                                    controller.trendingVideos[index].thumbnail,
-                                trailerUrl:
-                                    controller.trendingVideos[index].previewUrl,
-                                title: controller.trendingVideos[index].title ??
-                                    '',
-                                price: controller.trendingVideos[index].price ??
-                                    '00.00',
-                                author: () => controller.getProfile(
-                                    id: controller
-                                        .trendingVideos[index].author!),
-                                productDescription: controller
-                                        .trendingVideos[index].description ??
-                                    '',
-                                onAuthorPressed: () {},
-                                onCartPressed: () =>
-                                    Get.find<BuyerCartController>().addToCart(
-                                        controller.trendingVideos[index]),
-                                onContactPressed: () {},
-                              );
-                            });
-                      },
-                      onAuthorPressed: () {},
-                    );
+            return SliverList.separated(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return VideoCardFull(
+                  thumbnail: controller.youMayLikeProducts[index].thumbnail ??
+                      PLACEHOLDER_PHOTO,
+                  title: controller.youMayLikeProducts[index].title ?? '',
+                  author: () => controller.getProfile(
+                      id: controller.youMayLikeProducts[index].author!),
+                  price: controller.youMayLikeProducts[index].price ?? '00',
+                  onCartPressed: () {
+                    Get.find<BuyerCartController>()
+                        .addToCart(controller.youMayLikeProducts[index]);
                   },
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 20.0,
-                  ),
-                )); //controller.trendingVideos.length));
+                  onItemPressed: () {
+                    showBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return FutureBuilder<PodPlayerController>(
+                              future: controller.getPlayerController(
+                                  snapshot.data![index].previewUrl!),
+                              builder: (context, playerSnapshot) {
+                                if (snapshot.hasData) {
+                                  return ProductDetailsSheet(
+                                    thumbnail: snapshot.data![index].thumbnail,
+                                    trailerUrl:
+                                        snapshot.data![index].previewUrl,
+                                    title: snapshot.data![index].title ?? '',
+                                    price:
+                                        snapshot.data![index].price ?? '00.00',
+                                    initialReting: double.parse(snapshot
+                                        .data![index].ratings
+                                        .toString()),
+                                    author: () => controller.getProfile(
+                                        id: snapshot.data![index].author!),
+                                    productDescription:
+                                        snapshot.data![index].description ?? '',
+                                    reviews:
+                                        snapshot.data![index].reviews ?? [],
+                                    playerController: playerSnapshot.data!,
+                                    onAuthorPressed: () {},
+                                    onCartPressed: () =>
+                                        Get.find<BuyerCartController>()
+                                            .addToCart(snapshot.data![index]),
+                                    onContactPressed: () {},
+                                  );
+                                }
+
+                                return Container(
+                                  child: const LoadingAnimation(),
+                                );
+                              });
+                        });
+                  },
+                  onAuthorPressed: () {},
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 20.0,
+              ),
+            ); //controller.trendingVideos.length));
           }
 
           return SliverList.separated(

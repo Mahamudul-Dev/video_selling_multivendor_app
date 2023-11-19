@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../../themes/app_colors.dart';
+import '../../../components/bottom_navbar.components.dart';
 import '../controllers/seller_home_controller.dart';
 
 class SellerHomeView extends GetView<SellerHomeController> {
@@ -9,16 +11,11 @@ class SellerHomeView extends GetView<SellerHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SellerHomeView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'SellerHomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      backgroundColor: DARK_ASH,
+      body: Obx(() => controller.pages[controller.currentPage.value]),
+      floatingActionButton: FloatingActionButton(backgroundColor: SECONDARY_APP_COLOR, shape: const CircleBorder(), onPressed: (){}, child: const Icon(Icons.add, color: Colors.white,),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: const BottomNavbar(),
     );
   }
 }

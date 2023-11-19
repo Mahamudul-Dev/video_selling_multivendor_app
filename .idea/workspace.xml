@@ -5,18 +5,110 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a027c25-da57-45b8-8515-150a95de9f90" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/android/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/anim/no_search_result_anim.lottie" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/buyer/components/search_filter_dialog.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/bindings/buyer_product_details_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/controllers/buyer_product_details_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/views/buyer_product_details_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/components/bottom_navbar.components.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/create_product/bindings/create_product_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/create_product/controllers/create_product_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/create_product/views/create_product_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/product_details/bindings/product_details_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/product_details/controllers/product_details_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/product_details/views/product_details_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/bindings/seller_dashboard_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/controllers/seller_dashboard_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/views/seller_dashboard_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_home/bindings/seller_home_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_home/controllers/seller_home_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_home/views/seller_home_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_inbox/bindings/seller_inbox_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_inbox/controllers/seller_inbox_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_inbox/views/seller_inbox_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_notification/bindings/seller_notification_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_notification/controllers/seller_notification_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_notification/views/seller_notification_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_profile/bindings/seller_profile_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_profile/controllers/seller_profile_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_profile/views/seller_profile_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/wallet/bindings/wallet_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/wallet/controllers/wallet_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/wallet/views/wallet_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/components/product_details_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/components/product_details_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/components/video_card_short.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/components/video_card_short.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/components/video_card_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/components/video_card_tile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/views/buyer_cart_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/views/buyer_cart_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/bindings/buyer_dashboard_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/bindings/buyer_dashboard_binding.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_dashboard_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/controllers/buyer_products_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/controllers/buyer_products_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/views/buyer_products_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/views/buyer_products_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/controllers/buyer_profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/controllers/buyer_profile_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/views/buyer_profile_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/views/buyer_profile_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/home/controllers/buyer_home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/home/controllers/buyer_home_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/data/cartItems.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/data/videos.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/models/cart_item.model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/models/profile.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/models/profile.model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/modules/login/controllers/login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/login/controllers/login_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/modules/login/views/login_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/login/views/login_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/modules/register/controllers/register_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/register/controllers/register_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/modules/register/views/register_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/register/views/register_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/preferences/local_preferences.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/preferences/local_preferences.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/utils/asset_maneger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/utils/asset_maneger.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/utils/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/utils/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/connections/authentication.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/authentication.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/connections/connections.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/connections.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/connections/products.connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/products.connection.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_selling_multivendor_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/video_selling_multivendor_app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2XAy8htvLe2FTTpszhD0oOBbDuS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" />
     <panes>
@@ -29,19 +121,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "/home/mahamudul-dev/Workspace/Flutter Project/video_selling_multivendor_app",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
-  <component name="RunManager" selected="Gradle./home/mahamudul-dev/Workspace/Flutter Project/video_selling_multivendor_app/android [signinReport]">
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="$PROJECT_DIR$/../../Flutter P…g_multivendor_app/android [signinReport]" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="/home/mahamudul-dev/Workspace/Flutter Project/video_selling_multivendor_app/android [signinReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -85,5 +186,8 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

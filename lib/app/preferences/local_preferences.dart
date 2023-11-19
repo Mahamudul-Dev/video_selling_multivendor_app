@@ -21,14 +21,11 @@ class LocalPreferences {
 }
 
 class LocalLoginInformationModel {
-  String id;
-  String email;
-  String token;
-  String accountType;
+  String? id;
+  String? email;
+  String? token;
+  String? accountType;
 
   LocalLoginInformationModel(
-      {required this.id,
-      required this.email,
-      required this.token,
-      required this.accountType});
+      {this.id, this.email, this.token, this.accountType});
 }

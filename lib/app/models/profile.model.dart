@@ -1,4 +1,13 @@
+// To parse this JSON data, do
+//
+//     final profileModel = profileModelFromJson(jsonString);
+
 import 'dart:convert';
+
+ProfileModel profileModelFromJson(String str) =>
+    ProfileModel.fromJson(json.decode(str));
+
+String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
   final String? status;
@@ -10,11 +19,6 @@ class ProfileModel {
     this.message,
     this.data,
   });
-
-  factory ProfileModel.fromRawJson(String str) =>
-      ProfileModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         status: json["status"],
@@ -34,16 +38,20 @@ class ProfileModel {
 }
 
 class Profile {
+  final String? about;
+  final String? country;
+  final String? city;
   final String? id;
   final String? name;
   final String? userName;
   final String? email;
+  final bool? emailIsVerified;
   final String? password;
   final String? accountType;
   final String? accountStatus;
   final String? profilePic;
   final int? totalVideos;
-  final List<dynamic>? interest;
+  final List<String>? interest;
   final List<dynamic>? purchaseList;
   final List<dynamic>? creatorSubscriptionList;
   final int? favouriteItemCount;
@@ -54,10 +62,14 @@ class Profile {
   final int? v;
 
   Profile({
+    this.about,
+    this.country,
+    this.city,
     this.id,
     this.name,
     this.userName,
     this.email,
+    this.emailIsVerified,
     this.password,
     this.accountType,
     this.accountStatus,
@@ -74,15 +86,15 @@ class Profile {
     this.v,
   });
 
-  factory Profile.fromRawJson(String str) => Profile.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+        about: json["about"],
+        country: json["country"],
+        city: json["city"],
         id: json["_id"],
         name: json["name"],
         userName: json["userName"],
         email: json["email"],
+        emailIsVerified: json["emailIsVerified"],
         password: json["password"],
         accountType: json["accountType"],
         accountStatus: json["accountStatus"],
@@ -90,7 +102,7 @@ class Profile {
         totalVideos: json["totalVideos"],
         interest: json["interest"] == null
             ? []
-            : List<dynamic>.from(json["interest"]!.map((x) => x)),
+            : List<String>.from(json["interest"]!.map((x) => x)),
         purchaseList: json["purchaseList"] == null
             ? []
             : List<dynamic>.from(json["purchaseList"]!.map((x) => x)),
@@ -111,10 +123,14 @@ class Profile {
       );
 
   Map<String, dynamic> toJson() => {
+        "about": about,
+        "country": country,
+        "city": city,
         "_id": id,
         "name": name,
         "userName": userName,
         "email": email,
+        "emailIsVerified": emailIsVerified,
         "password": password,
         "accountType": accountType,
         "accountStatus": accountStatus,
