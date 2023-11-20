@@ -6,7 +6,7 @@ import 'package:video_selling_multivendor_app/app/buyer/components/loading_anima
 
 import '../../../../themes/app_colors.dart';
 import '../../../routes/app_pages.dart';
-import '../../../utils/asset_maneger.dart';
+import '../../../data/utils/asset_maneger.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

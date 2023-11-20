@@ -6,8 +6,8 @@ import 'package:logger/logger.dart';
 import 'package:pod_player/pod_player.dart';
 
 import '../../../../../connections/connections.dart';
-import '../../../../models/product.model.dart';
-import '../../../../models/profile.model.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/models/profile.model.dart';
 
 class BuyerSearchController extends GetxController {
   List<ProductModel> searchResult = <ProductModel>[];

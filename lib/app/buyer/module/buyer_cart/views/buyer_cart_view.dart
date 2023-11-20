@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../utils/asset_maneger.dart';
+import '../../../../data/utils/asset_maneger.dart';
 import '../../../components/cart_item_card.dart';
 import '../../../components/loading_animation.dart';
 import '../controllers/buyer_cart_controller.dart';

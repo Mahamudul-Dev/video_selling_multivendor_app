@@ -9,9 +9,9 @@ import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../connections/connections.dart';
-import '../../../../models/profile.model.dart';
+import '../../../../data/models/profile.model.dart';
 import '../../../../preferences/local_preferences.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/utils/constants.dart';
 
 class BuyerProfileController extends GetxController {
   RxList<String> interestTags = <String>[].obs;

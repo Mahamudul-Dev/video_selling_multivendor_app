@@ -7,11 +7,7 @@ const FACEBOOK_APP_ID = "300818426154864";
 const FACEBOOK_APP_CLIENT_ID = "fb300818426154864";
 const FACEBOOK_CLIENT_TOKEN = "51f825d8ec719b40f44e1648ddb96d2c";
 
-const PLACEHOLDER_PHOTO =
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
-const PLACEHOLDER_THUMBNAIL =
-    'https://spendmatters.com/wp/wp-content/themes/spend-matters/assets/images/placeholder.svg';
 
 const String BASE_URL = 'http://203.161.62.117:5656';
 

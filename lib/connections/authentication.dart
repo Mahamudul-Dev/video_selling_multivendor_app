@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 import '../app/preferences/local_preferences.dart';
-import '../app/utils/constants.dart';
+import '../app/data/utils/constants.dart';
 
 class Authentication {
   // call register api

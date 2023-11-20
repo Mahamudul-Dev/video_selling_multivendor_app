@@ -46,17 +46,18 @@ class AppPages {
   AppPages._();
 
   static String getInitialRoute() {
-    final data = LocalPreferences.getCurrentLoginInfo();
-    if (data.token != null && data.accountType != null) {
-      if (data.accountType == 'buyer') {
-        return Routes.HOME_BUYER;
-      } else {
-        Logger().i({'Account Type': data.accountType});
-        return Routes.SELLER_HOME;
-      }
-    } else {
-      return Routes.LOGIN;
-    }
+    return Routes.SELLER_HOME;
+    // final data = LocalPreferences.getCurrentLoginInfo();
+    // if (data.token != null && data.accountType != null) {
+    //   if (data.accountType == 'buyer') {
+    //     return Routes.HOME_BUYER;
+    //   } else {
+    //     Logger().i({'Account Type': data.accountType});
+    //     return Routes.SELLER_HOME;
+    //   }
+    // } else {
+    //   return Routes.LOGIN;
+    // }
   }
 
   static final routes = [

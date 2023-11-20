@@ -6,9 +6,9 @@ import 'package:pod_player/pod_player.dart';
 import 'package:video_selling_multivendor_app/app/buyer/components/search_filter_dialog.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../models/product.model.dart';
-import '../../../../utils/asset_maneger.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/utils/asset_maneger.dart';
+import '../../../../data/utils/constants.dart';
 import '../../../components/loading_animation.dart';
 import '../../../components/product_details_sheet.dart';
 import '../../../components/shimmer_effect.dart';

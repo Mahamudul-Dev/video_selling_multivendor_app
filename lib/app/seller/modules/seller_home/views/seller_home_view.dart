@@ -13,7 +13,7 @@ class SellerHomeView extends GetView<SellerHomeController> {
     return Scaffold(
       backgroundColor: DARK_ASH,
       body: Obx(() => controller.pages[controller.currentPage.value]),
-      floatingActionButton: FloatingActionButton(backgroundColor: SECONDARY_APP_COLOR, shape: const CircleBorder(), onPressed: (){}, child: const Icon(Icons.add, color: Colors.white,),),
+      floatingActionButton: FloatingActionButton(backgroundColor: Colors.white, shape: const CircleBorder(), onPressed: (){}, child: const Icon(Icons.add, color: SECONDARY_APP_COLOR, size: 35,),),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const BottomNavbar(),
     );

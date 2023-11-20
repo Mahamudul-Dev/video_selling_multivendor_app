@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../connections/connections.dart';
-import '../../../../models/cart.model.dart';
-import '../../../../models/product.model.dart';
-import '../../../../models/profile.model.dart';
+import '../../../../data/models/cart.model.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/models/profile.model.dart';
 
 class BuyerCartController extends GetxController {
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;

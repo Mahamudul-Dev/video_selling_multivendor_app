@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../connections/authentication.dart';
-import '../../../models/profile.model.dart';
+import '../../../data/models/profile.model.dart';
 import '../../../preferences/local_preferences.dart';
 import '../../../routes/app_pages.dart';
 
@@ -23,6 +23,49 @@ class LoginController extends GetxController {
 
   // function for google signin
   Future<void> signInWithGoogle() async {
+    // FirebaseAuth auth = FirebaseAuth.instance;
+    // final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    // try {
+    //   final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+
+    //   if (googleUser == null) {
+    //     Logger().d('GoogleSignInAccount null');
+    //     return null;
+    //   }
+
+    //   final googleAuth = await googleUser.authentication;
+
+
+    //   /// Create new credentials
+    //   final AuthCredential credential = GoogleAuthProvider.credential(
+    //     accessToken: googleAuth.accessToken,
+    //     idToken: googleAuth.idToken,
+    //   );
+
+    //   final userCredential = await auth.signInWithCredential(credential);
+    //   final User? user = userCredential.user;
+
+    //   if (user != null) {
+    //     Logger().d("User is signed in with Google!");
+    //     Logger().d("User UID: ${user.uid}");
+    //     Logger().d("Display Name: ${user.displayName}");
+    //     Logger().d("Email: ${user.email}");
+    //     Logger().d("Photo URL: ${user.photoURL}");
+        
+
+    //     return user; //googleAuth.accessToken;
+    //   } else {
+    //     Logger().e("Error signing in with Google");
+
+    //     return null;
+    //   }
+    // } catch (e) {
+    //   Logger().e("Error signing in with Google: $e");
+    //   return null;
+    // }
+
     try {
       googleAccount.value = await _googleSignIn.signIn();
       Logger().i({"logged in account": googleAccount.value?.displayName});
@@ -32,29 +75,57 @@ class LoginController extends GetxController {
   }
 
   // function for facebook signin
-  Future<void> signInWithFacebook() async {
-    final LoginResult result = await FacebookAuth.instance.login(
-      permissions: ['public_profile', 'email', 'picture'],
-    );
+  Future<User?> signInWithFacebook() async {
+     try {
+      final LoginResult result = await FacebookAuth.instance.login();
 
-    if (result.status == LoginStatus.success) {
-      // you are logged
-      final AccessToken accessToken = result.accessToken!;
-      final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(accessToken.token);
-      final userCredential = await FirebaseAuth.instance
-          .signInWithCredential(facebookAuthCredential);
+      if (result.status == LoginStatus.success) {
+        final AuthCredential credential =
+            FacebookAuthProvider.credential(result.accessToken!.token);
 
-      final Profile userInformation = Profile(
-          name: userCredential.user?.displayName,
-          email: userCredential.user?.email ?? userCredential.user?.phoneNumber,
-          emailIsVerified: userCredential.user?.emailVerified);
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
 
-      Get.snackbar('Success', 'Welcomeback ${userInformation.name}');
-    } else {
-      Get.snackbar('Sorry', 'We are working on this issue, try later');
-      Logger().e({'status': result.status, 'message': result.message});
+        final User? user = userCredential.user;
+
+        //userCredential.
+
+        // logger.d("Logged in as: ${user?.displayName}");
+        Logger().i('Logged In ${user?.displayName}');
+        return user;
+      } else {
+        // logger.d("Fb login failed. ${result.status}");
+        Logger().i('Result  ${result.status}');
+        return null;
+      }
+    } catch (e) {
+      // logger.d("Error logging in with Facebook: $e");
+      Logger().i('Error  $e');
+      return null;
     }
+    
+    // final LoginResult result = await FacebookAuth.instance.login(
+    //   // permissions: ['public_profile', 'email', 'picture'],
+    // );
+
+    // if (result.status == LoginStatus.success) {
+    //   // you are logged
+    //   final AccessToken accessToken = result.accessToken!;
+    //   final OAuthCredential facebookAuthCredential =
+    //       FacebookAuthProvider.credential(accessToken.token);
+    //   final userCredential = await FirebaseAuth.instance
+    //       .signInWithCredential(facebookAuthCredential);
+
+    //   final Profile userInformation = Profile(
+    //       name: userCredential.user?.displayName,
+    //       email: userCredential.user?.email ?? userCredential.user?.phoneNumber,
+    //       emailIsVerified: userCredential.user?.emailVerified);
+
+    //   Get.snackbar('Success', 'Welcomeback ${userInformation.name}');
+    // } else {
+    //   Get.snackbar('Sorry', 'We are working on this issue, try later');
+    //   Logger().e({'status': result.status, 'message': result.message});
+    // }
   }
 
   // function for email & password signin
@@ -64,6 +135,8 @@ class LoginController extends GetxController {
         {'email': emailController.text, 'password': passwordController.text});
     final response = await Authentication.loginConnection(
         email: emailController.text, password: passwordController.text);
+
+    Logger().i({'Response:': response.body});
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/constants.dart';
+import '../../data/utils/asset_maneger.dart';
+import '../../data/utils/constants.dart';
 
 class TopProfileComponent extends StatelessWidget {
   const TopProfileComponent({

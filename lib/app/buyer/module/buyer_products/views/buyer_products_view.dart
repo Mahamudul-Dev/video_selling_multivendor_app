@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pod_player/pod_player.dart';
 
-import '../../../../models/product.model.dart';
-import '../../../../models/product_filter.enum.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/models/product_filter.enum.dart';
+import '../../../../data/utils/asset_maneger.dart';
+import '../../../../data/utils/constants.dart';
 import '../../../components/loading_animation.dart';
 import '../../../components/product_details_sheet.dart';
 import '../../../components/shimmer_effect.dart';

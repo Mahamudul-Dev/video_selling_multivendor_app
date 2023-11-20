@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:pod_player/pod_player.dart';
 import '../../../../../connections/connections.dart';
-import '../../../../models/product.model.dart';
-import '../../../../models/product_filter.enum.dart';
-import '../../../../models/profile.model.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/models/product_filter.enum.dart';
+import '../../../../data/models/profile.model.dart';
 
 class BuyerDashboardController extends GetxController {
   List<ProductModel> topSaleProducts = <ProductModel>[];

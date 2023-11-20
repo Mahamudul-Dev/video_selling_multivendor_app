@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import '../../../../../themes/app_colors.dart';
-import '../../../../models/profile.model.dart';
+import '../../../../data/models/profile.model.dart';
+import '../../../../data/utils/asset_maneger.dart';
 import '../../../../routes/app_pages.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/utils/constants.dart';
 import '../../../components/loading_animation.dart';
 import '../controllers/buyer_profile_controller.dart';
 

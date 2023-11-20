@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
 import '../app/preferences/local_preferences.dart';
-import '../app/utils/constants.dart';
+import '../app/data/utils/constants.dart';
 
 class ProfileConnection {
   static Future<http.Response> userProfileConnection(

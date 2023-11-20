@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../models/profile.model.dart';
+import '../../data/models/profile.model.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({

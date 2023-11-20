@@ -5,7 +5,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:get/get.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/utils/asset_maneger.dart';
+import '../../../../data/utils/constants.dart';
 import '../controllers/buyer_message_controller.dart';
 
 class BuyerMessageView extends GetView<BuyerMessageController> {

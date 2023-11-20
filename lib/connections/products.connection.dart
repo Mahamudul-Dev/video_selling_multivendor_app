@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 
-import '../app/models/product_filter.enum.dart';
+import '../app/data/models/product_filter.enum.dart';
 import '../app/preferences/local_preferences.dart';
-import '../app/utils/constants.dart';
+import '../app/data/utils/constants.dart';
 
 class ProductsConnection {
   static Future<http.Response> getAllProducts() async {

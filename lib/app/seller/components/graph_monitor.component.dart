@@ -7,15 +7,17 @@ class GraphMonitor extends StatelessWidget {
   const GraphMonitor({
     Key? key,
     required this.monitorTitle,
+    required this.monitorSubTitle,
+    required this.yAxisDataType,
     this.salesData,
-    this.xAxisLabels,
-    this.yAxisLabels,
+    this.xAxisLabels
   }) : super(key: key);
 
   final String monitorTitle;
+  final String monitorSubTitle;
+  final String yAxisDataType;
   final List<double>? salesData;
   final List<String>? xAxisLabels;
-  final List<String>? yAxisLabels;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class GraphMonitor extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10,),
-            Text('Top Sale: ${salesData?.last}', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white),),
+            Text('$monitorSubTitle: ${salesData?.last}', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white),),
             const SizedBox(height: 16),
             salesData != null && salesData!.isNotEmpty
                 ? AspectRatio(
@@ -127,7 +129,7 @@ SideTitles _buildRightTitles() {
       // if (labels.isNotEmpty && value >= 0 && value < labels.length) {
       //   return value.toString();
       // }
-       return '\$$value';
+       return yAxisDataType == 'dollar' ? '\$$value' : '$value';
     },
   );
 }

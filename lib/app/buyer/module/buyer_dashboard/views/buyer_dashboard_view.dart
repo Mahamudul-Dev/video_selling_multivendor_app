@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:pod_player/pod_player.dart';
-import 'package:video_selling_multivendor_app/app/buyer/components/shimmer_effect.dart';
-import 'package:video_selling_multivendor_app/themes/app_colors.dart';
+import '../../../../../themes/app_colors.dart';
+import '../../../../data/utils/asset_maneger.dart';
 import '../../../../routes/app_pages.dart';
-import '../../../../utils/constants.dart';
 import '../../../components/loading_animation.dart';
 import '../../../components/product_details_sheet.dart';
+import '../../../components/shimmer_effect.dart';
 import '../../../components/video_card_full.dart';
 import '../../../components/video_card_short.dart';
 import '../../buyer_cart/controllers/buyer_cart_controller.dart';
@@ -23,7 +23,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
         body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                _buildAppBar(context),
+                _buildAppBar(context)
               ];
             },
             body: LiquidPullToRefresh(

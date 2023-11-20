@@ -4,7 +4,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:get/get.dart';
 import '../../../../../themes/app_colors.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/utils/asset_maneger.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/buyer_chat_controller.dart';
 

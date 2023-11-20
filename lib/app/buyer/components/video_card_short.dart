@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:video_selling_multivendor_app/app/buyer/components/shimmer_effect.dart';
-import 'package:video_selling_multivendor_app/app/utils/constants.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../models/profile.model.dart';
+import '../../data/models/profile.model.dart';
+import '../../data/utils/asset_maneger.dart';
 
 class VideoCardShort extends StatelessWidget {
   const VideoCardShort({

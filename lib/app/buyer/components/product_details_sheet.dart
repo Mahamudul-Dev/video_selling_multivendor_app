@@ -2,13 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pod_player/pod_player.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../models/product.model.dart';
-import '../../models/profile.model.dart';
-import '../../utils/constants.dart';
+import '../../data/models/product.model.dart';
+import '../../data/models/profile.model.dart';
+import '../../data/utils/asset_maneger.dart';
 import 'shimmer_effect.dart';
 
 class ProductDetailsSheet extends StatelessWidget {

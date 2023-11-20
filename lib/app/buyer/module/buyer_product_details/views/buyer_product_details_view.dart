@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 import 'package:pod_player/pod_player.dart';
 
 import '../../../../../themes/app_colors.dart';
-import '../../../../models/product.model.dart';
-import '../../../../models/profile.model.dart';
-import '../../../../utils/constants.dart';
+import '../../../../data/models/product.model.dart';
+import '../../../../data/models/profile.model.dart';
+import '../../../../data/utils/asset_maneger.dart';
+import '../../../../data/utils/constants.dart';
 import '../../../components/loading_animation.dart';
 import '../../../components/shimmer_effect.dart';
 import '../../buyer_cart/controllers/buyer_cart_controller.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../models/message.model.dart';
+import '../../../../data/models/message.model.dart';
 
 class BuyerMessageController extends GetxController {
   final TextEditingController messageTextController = TextEditingController();
