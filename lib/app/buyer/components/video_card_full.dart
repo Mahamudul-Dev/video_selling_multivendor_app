@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:video_selling_multivendor_app/app/buyer/components/shimmer_effect.dart';
-import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../data/models/profile.model.dart';
+import '../../data/models/product.model.dart';
 import '../../data/utils/asset_maneger.dart';
 
 class VideoCardFull extends StatelessWidget {
@@ -20,8 +18,8 @@ class VideoCardFull extends StatelessWidget {
 
   final String thumbnail;
   final String title;
-  final Future<Profile?> Function() author;
   final String price;
+  final Author author;
   final void Function()? onCartPressed;
   final void Function()? onItemPressed;
   final void Function()? onAuthorPressed;
@@ -57,25 +55,15 @@ class VideoCardFull extends StatelessWidget {
                   flex: 2,
                   child: InkWell(
                     onTap: onAuthorPressed,
-                    child: FutureBuilder(
-                        future: author(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return CircleAvatar(
+                    child: CircleAvatar(
                               radius: 25,
                               backgroundColor: Colors.grey,
                               backgroundImage: CachedNetworkImageProvider(
-                                  snapshot.data?.profilePic == 'N/A'
+                                  author.profilePic == 'N/A'
                                       ? PLACEHOLDER_PHOTO
-                                      : snapshot.data?.profilePic ??
+                                      : author.profilePic ??
                                           PLACEHOLDER_PHOTO),
-                            );
-                          }
-                          return const ShimmerEffect.circuller(
-                            width: 25,
-                            height: 25,
-                          );
-                        }),
+                            ),
                   ),
                 ),
                 Expanded(
@@ -94,19 +82,11 @@ class VideoCardFull extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ),
-                            FutureBuilder(
-                                future: author(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(snapshot.data?.name ?? '',
+                            Text(author.name ?? '',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodySmall);
-                                  }
-                                  return const ShimmerEffect.rectangular(
-                                      height: 20);
-                                }),
+                                            .bodySmall),
                             Flexible(
                               flex: 2,
                               child: Row(

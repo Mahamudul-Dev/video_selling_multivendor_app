@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pod_player/pod_player.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
+
 
 import '../../../../data/models/product.model.dart';
-import '../../../../data/models/product_filter.enum.dart';
 import '../../../../data/utils/asset_maneger.dart';
-import '../../../../data/utils/constants.dart';
-import '../../../components/loading_animation.dart';
-import '../../../components/product_details_sheet.dart';
+import '../../../../data/utils/enums.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../components/shimmer_effect.dart';
 import '../../../components/video_card_tile.dart';
-import '../../buyer_cart/controllers/buyer_cart_controller.dart';
 import '../controllers/buyer_products_controller.dart';
 
 class BuyerProductsView extends GetView<BuyerProductsController> {
@@ -32,62 +30,19 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
                     : Filter.SALEH2L),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView.separated(
+                if (snapshot.data!.isNotEmpty) {
+                  return ListView.separated(
                     itemBuilder: (context, index) {
                       return VideoCardTile(
                         thumbnail: snapshot.data![index].thumbnail == 'N/A'
                             ? PLACEHOLDER_THUMBNAIL
-                            : snapshot.data![index].thumbnail ??
-                                PLACEHOLDER_PHOTO,
+                            : '$BASE_URL${snapshot.data![index].thumbnail}',
                         title: snapshot.data![index].title ?? '',
-                        author: () => controller.getProfile(
-                            id: snapshot.data![index].author!),
-                        price: snapshot.data![index].price ?? '00',
-                        onItemPressed: () {
-                          showBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return FutureBuilder<PodPlayerController>(
-                                    future: controller.getPlayerController(
-                                        snapshot.data![index].previewUrl!),
-                                    builder: (context, playerSnapshot) {
-                                      if (playerSnapshot.hasData) {
-                                        return ProductDetailsSheet(
-                                          thumbnail:
-                                              snapshot.data![index].thumbnail,
-                                          trailerUrl:
-                                              snapshot.data![index].previewUrl,
-                                          title:
-                                              snapshot.data![index].title ?? '',
-                                          price: snapshot.data![index].price ??
-                                              '00.00',
-                                          author: () => controller.getProfile(
-                                              id: snapshot
-                                                  .data![index].author!),
-                                          initialReting: double.parse(snapshot
-                                              .data![index].ratings
-                                              .toString()),
-                                          productDescription: snapshot
-                                                  .data![index].description ??
-                                              '',
-                                          playerController:
-                                              playerSnapshot.data!,
-                                          reviews:
-                                              snapshot.data![index].reviews ??
-                                                  [],
-                                          onAuthorPressed: () {},
-                                          onCartPressed: () =>
-                                              Get.find<BuyerCartController>()
-                                                  .addToCart(
-                                                      snapshot.data![index]),
-                                          onContactPressed: () {},
-                                        );
-                                      }
-
-                                      return const LoadingAnimation();
-                                    });
-                              });
-                        },
+                        author: snapshot.data![index].author!,
+                        price: snapshot.data![index].price.toString(),
+                        views: int.parse(snapshot.data![index].viewsCount ?? '0'),
+                        initialRating: snapshot.data![index].ratings ?? 0,
+                        onItemPressed: () => Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product': snapshot.data![index]}),
                         onAuthorPressed: () {},
                       );
                     },
@@ -100,13 +55,35 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
                       );
                     },
                     itemCount: snapshot.data!.length);
+                } else {
+                  return Center(child: Text('No product for display', style: Theme.of(context).textTheme.bodyMedium,),);
+                }
               }
               return ListView.separated(
                   itemBuilder: (context, index) {
-                    return ShimmerEffect.rectangular(
-                      height: MediaQuery.of(context).size.width * 0.5,
+                    return ListTile(
+                      leading: ShimmerEffect.rectangular(
+                      height: double.infinity,
+                      width: MediaQuery.of(context).size.width * 0.2,
                       shapeBorder: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.circular(4)),
+                    ),
+
+                      title: ShimmerEffect.rectangular(
+                      height: 10,
+                      width: double.infinity,
+                      shapeBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                    ),
+
+                    subtitle: SizedBox(
+                      child: ShimmerEffect.rectangular(
+                        height: 10,
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        shapeBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4)),
+                      ),
+                    ),
                     );
                   },
                   separatorBuilder: (context, index) {

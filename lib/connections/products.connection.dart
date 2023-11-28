@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-import '../app/data/models/product_filter.enum.dart';
+import '../app/data/utils/enums.dart';
 import '../app/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 

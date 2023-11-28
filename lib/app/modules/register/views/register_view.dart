@@ -8,7 +8,11 @@ import '../../../routes/app_pages.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
-  const RegisterView({Key? key}) : super(key: key);
+  RegisterView({Key? key}) : super(key: key);
+
+  final String? pageTitle = Get.arguments['title'] ?? 'Sign Up';
+  final String? actionButtonTitle = Get.arguments['buttonTitle'] ?? 'Sign Up';
+  final bool? passwordRequired = Get.arguments['passwordRequired'] ?? true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class RegisterView extends GetView<RegisterController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Sign up',
+                              pageTitle!,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
@@ -64,7 +68,7 @@ class RegisterView extends GetView<RegisterController> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  controller: controller.nameController,
+                                  controller: RegisterController.nameController,
                                   decoration: InputDecoration(
                                       label: Text('Name',
                                           style: Theme.of(context)
@@ -88,7 +92,7 @@ class RegisterView extends GetView<RegisterController> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                  controller: controller.emailController,
+                                  controller: RegisterController.emailController,
                                   decoration: InputDecoration(
                                       label: Text('Email',
                                           style: Theme.of(context)
@@ -114,9 +118,10 @@ class RegisterView extends GetView<RegisterController> {
                                 const SizedBox(
                                   height: 10,
                                 ),
+                                passwordRequired! ?
                                 Obx(() => TextFormField(
                                       obscureText: controller.obsecure.value,
-                                      controller: controller.passwordController,
+                                      controller: RegisterController.passwordController,
                                       validator: (value) {
                                         if (value == null || value == '') {
                                           return 'Password is required';
@@ -150,17 +155,19 @@ class RegisterView extends GetView<RegisterController> {
                                                   : const Icon(Icons
                                                       .remove_red_eye_rounded))),
                                           suffixIconColor: SECONDARY_APP_COLOR),
-                                    )),
+                                    )) : const SizedBox.shrink(),
                                 const SizedBox(
                                   height: 10,
                                 ),
+
+                                passwordRequired! ?
                                 Obx(() => TextFormField(
                                       obscureText: controller.obsecure.value,
                                       validator: (value) {
                                         if (value == null || value == '') {
                                           return 'Confirm password is required';
                                         } else if (value !=
-                                            controller
+                                            RegisterController
                                                 .passwordController.text) {
                                           return 'Password is not correct';
                                         } else {
@@ -179,7 +186,7 @@ class RegisterView extends GetView<RegisterController> {
                                               .textTheme
                                               .bodyMedium
                                               ?.copyWith(color: Colors.grey)),
-                                    ))
+                                    )) : const SizedBox.shrink()
                               ],
                             ),
                           ),
@@ -246,9 +253,9 @@ class RegisterView extends GetView<RegisterController> {
                                   controller.registerNewAccount();
                                 }
                               },
-                              child: const Text(
-                                'Sign up',
-                                style: TextStyle(
+                              child: Text(
+                                actionButtonTitle!,
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               )),
@@ -256,6 +263,8 @@ class RegisterView extends GetView<RegisterController> {
                         const SizedBox(
                           height: 10,
                         ),
+
+                        passwordRequired! ?
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -277,7 +286,7 @@ class RegisterView extends GetView<RegisterController> {
                               ),
                             )
                           ],
-                        ),
+                        ) : const SizedBox.shrink(),
                         const SizedBox(
                           height: 5,
                         )

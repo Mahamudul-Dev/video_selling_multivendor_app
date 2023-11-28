@@ -27,3 +27,12 @@ const String FILTER_PRODUCT = '/api/v1/product/allProducts?filter=';
 // Cart Endpoints
 const String CART = '/api/v1/cart/';
 const String ADD_CART = '/api/v1/cart/addItemToCart';
+
+// Favourite Endpoints
+const String ADD_FAVOURITE_API = '/api/v1/favourite/addItemToFavourite'; // need to pass product id in body
+const String FAVOURITE_API = '/api/v1/favourite/'; // can be use as delete & get favourite
+
+// Wishlist Endpoints
+const String WISHLIST_API = '/api/v1/wishlist/';
+const String ADD_WISHLIST_API = '/api/v1/wishlist/addItemToWishlist';
+

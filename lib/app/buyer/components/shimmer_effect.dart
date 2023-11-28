@@ -13,7 +13,7 @@ class ShimmerEffect extends StatelessWidget {
 
   const ShimmerEffect.rectangular(
       {super.key,
-      this.width = double.infinity,
+      required this.width,
       required this.height,
       this.shapeBorder = const RoundedRectangleBorder()});
 

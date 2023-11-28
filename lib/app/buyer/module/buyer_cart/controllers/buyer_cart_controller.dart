@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:video_selling_multivendor_app/app/routes/app_pages.dart';
 
 import '../../../../../connections/connections.dart';
 import '../../../../data/models/cart.model.dart';
@@ -9,7 +10,7 @@ import '../../../../data/models/product.model.dart';
 import '../../../../data/models/profile.model.dart';
 
 class BuyerCartController extends GetxController {
-  RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
+  RxList<CartItem> cartItems = <CartItem>[].obs;
   RxDouble totalCartItemPrice = 00.00.obs;
   RxBool isLoading = false.obs;
   RxBool cartRemoveLoading = false.obs;
@@ -17,25 +18,22 @@ class BuyerCartController extends GetxController {
   Future<void> addToCart(ProductModel? item) async {
     if (item != null) {
       final response = await CartConnection.addCartItem(item.id!);
-      final authorResponse =
-          await ProfileConnection.userProfileConnection(id: item.author!);
 
-      if (response.statusCode == 200 && authorResponse.statusCode == 200) {
-        final author = ProfileModel.fromJson(jsonDecode(authorResponse.body));
-        cartItems.add(CartItemModel(
+      if (response.statusCode == 200) {
+        
+        cartItems.add(CartItem(
             title: item.title,
             price: item.price,
             duration: item.duration,
             thumbnail: item.thumbnail,
-            author: Author(
-                name: author.data?.first.name,
-                profilePic: author.data?.first.profilePic,
-                country: author.data?.first.country,
-                city: author.data?.first.city)));
+            author: item.author));
         totalCartItemPrice.value =
-            totalCartItemPrice.value + double.parse(item.price!);
+            totalCartItemPrice.value + double.parse(item.price.toString());
         Get.snackbar('Wow!', 'Video added successfully to cart');
+      } else {
+        Get.snackbar('Sorry', 'There are some error!');
       }
+      
     }
   }
 
@@ -47,7 +45,7 @@ class BuyerCartController extends GetxController {
     Logger().i(response.body);
     if (response.statusCode == 200) {
       totalCartItemPrice.value =
-          totalCartItemPrice.value - double.parse(cartItems[index].price!);
+          totalCartItemPrice.value - cartItems[index].price!;
       cartItems.removeAt(index);
       cartRemoveLoading.value = false;
       Get.back();
@@ -75,25 +73,40 @@ class BuyerCartController extends GetxController {
     return profile?.data?.first;
   }
 
-  Future<List<CartItemModel>> getAllCartItems() async {
+  Future<List<CartItem>> getAllCartItems() async {
     cartItems.value.clear();
     totalCartItemPrice.value = 00.00;
     final response = await CartConnection.viewCartItem();
     if (response.statusCode == 200) {
       Logger().i({'Cart Response': response.body});
-      final data = CartModel.fromJson(jsonDecode(response.body));
+      final data = CartItemModel.fromJson(jsonDecode(response.body));
       cartItems.value.addAll(data.cartItems ?? []);
       cartItems.refresh();
       for (var item in cartItems.value) {
         totalCartItemPrice.value =
-            totalCartItemPrice.value + double.parse(item.price ?? '00.00');
+            totalCartItemPrice.value + item.price!;
         Logger().i('Price $totalCartItemPrice');
       }
     }
     update();
+    Logger().i(cartItems.value.length);
     return cartItems.value;
   }
 
+  Future<void> viewProduct(int index) async {
+    isLoading.value = true;
+
+    final response = await ProductsConnection.getSingleProduct(cartItems.value[index].productId!);
+
+    if (response.statusCode == 200) {
+      isLoading.value = false;
+      final ProductModel product = ProductModel.fromJson(jsonDecode(response.body));
+      Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':product});
+    } else {
+      isLoading.value = false;
+      Get.snackbar('Opps', 'Product not found');
+    }
+  }
   @override
   void onReady() async {
     // await getAllCartItems();

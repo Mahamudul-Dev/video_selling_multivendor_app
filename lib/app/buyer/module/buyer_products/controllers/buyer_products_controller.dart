@@ -6,8 +6,8 @@ import 'package:pod_player/pod_player.dart';
 
 import '../../../../../connections/connections.dart';
 import '../../../../data/models/product.model.dart';
-import '../../../../data/models/product_filter.enum.dart';
 import '../../../../data/models/profile.model.dart';
+import '../../../../data/utils/enums.dart';
 
 class BuyerProductsController extends GetxController {
   Future<PodPlayerController> getPlayerController(String trailerVideo) async {
@@ -41,12 +41,16 @@ class BuyerProductsController extends GetxController {
     Logger().i({'Filterd Video': response.statusCode});
     Logger().i({'Filterd Video Data': response.body});
 
-    if (response.statusCode == 200) {
+    try {
+      if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       for (var i = 0; i < data.length; i++) {
         Logger().i(i);
         products.add(ProductModel.fromJson(data[i]));
       }
+    }
+    } catch (e) {
+      Logger().e(e);
     }
 
     return products;

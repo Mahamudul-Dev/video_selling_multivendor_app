@@ -3,11 +3,10 @@ import 'package:http/http.dart' as http;
 import '../app/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
-class CartConnection {
-  // view cart items
-  static Future<http.Response> viewCartItem() async {
+class FavouriteConnection {
+  static Future<http.Response> viewFavouriteItem() async {
     try {
-      final response = await http.get(Uri.parse('$BASE_URL$CART'), headers: {
+      final response = await http.get(Uri.parse('$BASE_URL$FAVOURITE_API'), headers: {
         'Authorization':
             'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
       });
@@ -17,10 +16,9 @@ class CartConnection {
     }
   }
 
-  // remove a item from cart
-  static Future<http.Response> removeCartItem(String productId) async {
+  static Future<http.Response> removeFavouriteItem(String productId) async {
     try {
-      final response = await http.delete(Uri.parse('$BASE_URL$CART'),
+      final response = await http.delete(Uri.parse('$BASE_URL$FAVOURITE_API'),
           body: {
             'productId':productId
           },
@@ -34,11 +32,10 @@ class CartConnection {
     }
   }
 
-  // add a item in cart
-  static Future<http.Response> addCartItem(String productId) async {
+  static Future<http.Response> addFavouriteItem(String productId) async {
     final bodyData = {"productId": productId};
     try {
-      final response = await http.post(Uri.parse('$BASE_URL$ADD_CART'),
+      final response = await http.post(Uri.parse('$BASE_URL$ADD_FAVOURITE_API'),
           body: bodyData,
           headers: {
             'Authorization':

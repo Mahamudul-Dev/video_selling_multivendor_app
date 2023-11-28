@@ -39,6 +39,8 @@ import '../seller/modules/seller_profile/bindings/seller_profile_binding.dart';
 import '../seller/modules/seller_profile/views/seller_profile_view.dart';
 import '../seller/modules/wallet/bindings/wallet_binding.dart';
 import '../seller/modules/wallet/views/wallet_view.dart';
+import '../seller/modules/wallet_history/bindings/wallet_history_binding.dart';
+import '../seller/modules/wallet_history/views/wallet_history_view.dart';
 
 part 'app_routes.dart';
 
@@ -46,18 +48,18 @@ class AppPages {
   AppPages._();
 
   static String getInitialRoute() {
-    return Routes.SELLER_HOME;
-    // final data = LocalPreferences.getCurrentLoginInfo();
-    // if (data.token != null && data.accountType != null) {
-    //   if (data.accountType == 'buyer') {
-    //     return Routes.HOME_BUYER;
-    //   } else {
-    //     Logger().i({'Account Type': data.accountType});
-    //     return Routes.SELLER_HOME;
-    //   }
-    // } else {
-    //   return Routes.LOGIN;
-    // }
+    final data = LocalPreferences.getCurrentLoginInfo();
+    Logger().i({'Account Type': data.accountType});
+    if (data.token != null && data.accountType != null) {
+      if (data.accountType == 'Buyer') {
+        return Routes.HOME_BUYER;
+      } else {
+        Logger().i({'Account Type': data.accountType});
+        return Routes.SELLER_HOME;
+      }
+    } else {
+      return Routes.LOGIN;
+    }
   }
 
   static final routes = [
@@ -75,7 +77,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => const RegisterView(),
+      page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
@@ -157,13 +159,18 @@ class AppPages {
     GetPage(
       name: _Paths.SELLER_HOME,
       page: () => const SellerHomeView(),
-      bindings:[
+      bindings: [
         SellerHomeBinding(),
         SellerDashboardBinding(),
         WalletBinding(),
         SellerInboxBinding(),
         SellerProfileBinding()
       ],
+    ),
+    GetPage(
+      name: _Paths.WALLET_HISTORY,
+      page: () => WalletHistoryView(),
+      binding: WalletHistoryBinding(),
     ),
   ];
 }

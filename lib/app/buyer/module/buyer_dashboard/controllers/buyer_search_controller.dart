@@ -12,6 +12,8 @@ import '../../../../data/models/profile.model.dart';
 class BuyerSearchController extends GetxController {
   List<ProductModel> searchResult = <ProductModel>[];
   RxList<ProductModel> filteredResult = <ProductModel>[].obs;
+  RxList<Author> filteredCreatorList = <Author>[].obs;
+  RxList<Author> creatorList = <Author>[].obs;
   TextEditingController filterMinPrice = TextEditingController();
   TextEditingController filterMaxPrice = TextEditingController();
   RxBool filterPriceLowToHigh = false.obs;
@@ -24,9 +26,13 @@ class BuyerSearchController extends GetxController {
       final result = jsonDecode(response.body);
       Logger().i(result);
       searchResult.clear();
+      creatorList.clear();
 
       for (var i = 0; i < result.length; i++) {
         searchResult.add(ProductModel.fromJson(result[i]));
+        if (!creatorList.value.contains(ProductModel.fromJson(result[i]).author!)) {
+          creatorList.add(ProductModel.fromJson(result[i]).author!);
+        }
       }
     }
 
@@ -43,14 +49,14 @@ class BuyerSearchController extends GetxController {
           Logger().i({'Filter Max Price': filterMaxPrice.text});
           // filtered maximum price is setted
           filteredResult.value.addAll(searchResult.where((product) =>
-              double.parse(product.price!) <=
+              product.price! <=
                   double.parse(filterMaxPrice.text) &&
-              double.parse(product.price!) >
+              product.price! >
                   double.parse(filterMinPrice.text)));
         } else {
           // filterred max price not setted that's means infinity
           filteredResult.value.addAll(searchResult.where((product) =>
-              double.parse(product.price!) >
+              product.price! >
               double.parse(filterMinPrice.text)));
         }
       }
@@ -74,6 +80,16 @@ class BuyerSearchController extends GetxController {
               (product) => product.ratings?.toDouble() == filterRating.value);
         }
       }
+
+
+       if (filteredResult.isNotEmpty) {
+         for (var i = 0; i < filteredResult.length; i++) {
+           if (!filteredCreatorList.value.contains(filteredResult[i].author!)) {
+          filteredCreatorList.add(filteredResult[i].author!);
+        }
+         }
+       }
+
     } catch (e) {
       Logger().i(e);
     }
@@ -87,6 +103,7 @@ class BuyerSearchController extends GetxController {
     filterPriceLowToHigh.value = false;
     filterRating.value = 0.0;
     filteredResult.value.clear();
+    filteredCreatorList.value.clear();
     Get.back();
   }
 
@@ -122,6 +139,8 @@ class BuyerSearchController extends GetxController {
     filterMaxPrice.dispose();
     filterPriceLowToHigh.close();
     filterRating.close();
+    filteredCreatorList.close();
+    creatorList.clear();
     super.onClose();
   }
 }

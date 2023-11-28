@@ -12,6 +12,7 @@ class CartItemCard extends StatelessWidget {
     required this.productImage,
     required this.price,
     this.onRemovePress,
+    this.onProductPress,
   }) : super(key: key);
 
   final String productName;
@@ -19,6 +20,7 @@ class CartItemCard extends StatelessWidget {
   final String productImage;
   final String price;
   final void Function()? onRemovePress;
+  final void Function()? onProductPress;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +46,12 @@ class CartItemCard extends StatelessWidget {
         children: [
           Expanded(
               flex: 2,
-              child: Image(
-                image: CachedNetworkImageProvider(productImage),
-                fit: BoxFit.fitWidth,
+              child: InkWell(
+                onTap: onProductPress,
+                child: Image(
+                  image: CachedNetworkImageProvider(productImage),
+                  fit: BoxFit.fitWidth,
+                ),
               )),
           Expanded(
               flex: 5,
@@ -58,11 +63,14 @@ class CartItemCard extends StatelessWidget {
                     Row(
                       children: [
                         Flexible(
-                            child: Text(
-                          productName,
-                          style: Theme.of(context).textTheme.titleSmall,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                            child: InkWell(
+                          onTap: onProductPress,
+                          child: Text(
+                            productName,
+                            style: Theme.of(context).textTheme.titleSmall,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
                         )),
                       ],
                     ),

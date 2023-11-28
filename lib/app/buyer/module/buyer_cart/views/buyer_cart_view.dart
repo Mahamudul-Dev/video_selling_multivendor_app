@@ -31,12 +31,13 @@ class CartView extends GetView<BuyerCartController> {
                           productName: controller.cartItems[index].title ?? '',
                           productImage:
                               controller.cartItems[index].thumbnail ?? '',
-                          price: controller.cartItems[index].price ?? '',
+                          price: controller.cartItems[index].price.toString(),
                           author: () async {
                             final profile = controller.getProfile(
                                 id: controller.cartItems[index].author!);
                             return profile;
                           },
+                          onProductPress: ()=> controller.viewProduct(index),
                           onRemovePress: () {
                             showDialog(
                                 context: context,

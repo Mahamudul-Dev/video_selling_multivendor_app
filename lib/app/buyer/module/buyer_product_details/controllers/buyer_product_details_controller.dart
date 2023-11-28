@@ -1,22 +1,74 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:pod_player/pod_player.dart';
+import 'package:video_selling_multivendor_app/app/data/models/favourite.model.dart';
+import 'package:video_selling_multivendor_app/app/data/models/wishlist.model.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
+import 'package:video_selling_multivendor_app/themes/app_colors.dart';
 
 import '../../../../../connections/connections.dart';
+import '../../../../../connections/favourite.connection.dart';
+import '../../../../../connections/wishlist.connection.dart';
 import '../../../../data/models/product.model.dart';
 import '../../../../data/models/profile.model.dart';
 
 class BuyerProductDetailsController extends GetxController {
-  Future<PodPlayerController> getPlayerController(String videoUrl) async {
-    PodPlayerController playerController = PodPlayerController(
-        playVideoFrom: PlayVideoFrom.youtube(videoUrl),
+
+  late PodPlayerController playerController;
+  RxBool isFavourite = false.obs;
+  RxBool isWishlist = false.obs;
+  RxBool favLoading = false.obs;
+  RxBool wishlistLoading = false.obs;
+
+  Future<PodPlayerController> getPlayerController(String videoUrl, String productId) async {
+    Logger().i(videoUrl);
+    playerController = PodPlayerController(
+        playVideoFrom: PlayVideoFrom.network(BASE_URL+videoUrl),
         podPlayerConfig: const PodPlayerConfig(
             autoPlay: false,
             isLooping: false,
             videoQualityPriority: [720, 360]))
       ..initialise();
+
+      final favResponse = await FavouriteConnection.viewFavouriteItem();
+    final wishlistResponse = await WishlistConnection.viewWishlistItem();
+
+    if (favResponse.statusCode == 200) {
+      try {
+        final favItem = FavouriteModel.fromJson(jsonDecode(favResponse.body));
+
+      final targetItem = favItem.favouriteItems?.firstWhereOrNull((product) => product.productId == productId);
+
+      if (targetItem != null && targetItem.productId == productId) {
+        isFavourite.value = true;
+      }
+      } catch (e) {
+        Logger().e(e);
+      }
+    } else {
+      Logger().e(favResponse.body);
+    }
+
+
+    if (wishlistResponse.statusCode == 200) {
+      try {
+        final wishItem = WishlistModel.fromJson(jsonDecode(wishlistResponse.body));
+        Logger().i(wishItem);
+
+      final targetItem = wishItem.wishlistItems?.firstWhereOrNull((product) => product.productId == productId);
+      Logger().i({'Wishlist Item': targetItem?.title});
+      if (targetItem != null && targetItem.productId == productId) {
+        isWishlist.value = true;
+      }
+      } catch (e) {
+        Logger().e(e);
+      }
+    } else {
+      Logger().e(wishlistResponse.body);
+    }
 
     return playerController;
   }
@@ -24,6 +76,7 @@ class BuyerProductDetailsController extends GetxController {
   Future<ProductModel?> getProductDetails(String productId) async {
     ProductModel? product;
     final response = await ProductsConnection.getSingleProduct(productId);
+    
 
     if (response.statusCode == 200) {
       product = ProductModel.fromJson(jsonDecode(response.body));
@@ -46,5 +99,47 @@ class BuyerProductDetailsController extends GetxController {
     Logger().i({'Profile': profile?.toJson()});
 
     return profile?.data?.first;
+  }
+
+
+  Future<void> addFavorite(String productId, BuildContext context)async{
+    favLoading.value = true;
+    final response = await FavouriteConnection.addFavouriteItem(productId);
+
+    if (response.statusCode == 200) {
+      isFavourite.value = true;
+      favLoading.value = false;
+      Get.rawSnackbar(messageText: Text('Product added to favourite.', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.white),), backgroundColor: SECONDARY_APP_COLOR);
+    } else {
+      favLoading.value = false;
+      Logger().i(response.body);
+      Get.snackbar('Opps', 'There are some error');
+    }
+  }
+
+
+  Future<void> addWishlist(String productId, BuildContext context)async{
+    wishlistLoading.value = true;
+    final response = await WishlistConnection.addWishlistItem(productId);
+
+    if (response.statusCode == 200) {
+      isWishlist.value = true;
+      wishlistLoading.value = false;
+      Get.rawSnackbar(messageText: Text('Product added to wishlist.', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.white),), backgroundColor: SECONDARY_APP_COLOR);
+    } else {
+      wishlistLoading.value = false;
+      Logger().i(response.body);
+      Get.snackbar('Opps', 'There are some error');
+    }
+  }
+
+  @override
+  void onClose() {
+    playerController.dispose();
+    isFavourite.close();
+    isWishlist.close();
+    favLoading.close();
+    wishlistLoading.close();
+    super.onClose();
   }
 }

@@ -22,6 +22,7 @@ abstract class Routes {
   static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
   static const SELLER_NOTIFICATION = _Paths.SELLER_NOTIFICATION;
   static const SELLER_HOME = _Paths.SELLER_HOME;
+  static const WALLET_HISTORY = _Paths.WALLET_HISTORY;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const PRODUCT_DETAILS = '/product-details';
   static const SELLER_NOTIFICATION = '/seller-notification';
   static const SELLER_HOME = '/seller-home';
+  static const WALLET_HISTORY = '/wallet-history';
 }

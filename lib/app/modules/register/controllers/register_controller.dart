@@ -16,10 +16,10 @@ class RegisterController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool obsecure = true.obs;
   final uuid = const Uuid();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passwordController = TextEditingController();
+  static TextEditingController confirmPasswordController = TextEditingController();
 
   void toggleSeller(bool? value) {
     isSeller.value = value ?? false;
