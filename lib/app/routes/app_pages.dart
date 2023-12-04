@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
+import '../buyer/module/author_profile/bindings/author_profile_binding.dart';
+import '../buyer/module/author_profile/views/author_profile_view.dart';
 import '../buyer/module/buyer_cart/bindings/buyer_cart_binding.dart';
 import '../buyer/module/buyer_cart/views/buyer_cart_view.dart';
 import '../buyer/module/buyer_chat/bindings/buyer_chat_binding.dart';
@@ -171,6 +173,11 @@ class AppPages {
       name: _Paths.WALLET_HISTORY,
       page: () => WalletHistoryView(),
       binding: WalletHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTHOR_PROFILE,
+      page: () => AuthorProfileView(),
+      binding: AuthorProfileBinding(),
     ),
   ];
 }

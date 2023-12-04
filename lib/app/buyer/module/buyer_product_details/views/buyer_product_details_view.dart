@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:pod_player/pod_player.dart';
 
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../../../../themes/app_colors.dart';
 import '../../../../data/models/product.model.dart';
 import '../../../../data/utils/asset_maneger.dart';
@@ -132,7 +134,7 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                   ),
                   // author details
                   ListTile(
-                    onTap: () {}, // TO:DO: navigate to cretor profile
+                    onTap: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':product.author!.id}), // TO:DO: navigate to cretor profile
                     leading: CircleAvatar(
                       backgroundColor: Colors.grey,
                       backgroundImage: CachedNetworkImageProvider(
@@ -362,20 +364,25 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(SECONDARY_APP_COLOR)),
-                  onPressed: () =>
-                      Get.find<BuyerCartController>().addToCart(product),
+                  onPressed: () {
+                    if (controller.isCartAdded.value) {
+                      Get.snackbar('Opps!', 'Product already in cart');
+                    } else {
+                      Get.find<BuyerCartController>().addToCart(product);
+                    }
+                  },
                   icon: const Icon(
                     CupertinoIcons.cart_fill_badge_plus,
                     color: Colors.white,
                     size: 25,
                   ),
-                  label: Text(
-                    'Add to cart',
+                  label:  Obx(() => Get.find<BuyerCartController>().cartLoading.value ? LoadingAnimationWidget.horizontalRotatingDots(color: Colors.white, size: 20) : Obx(() => Text(
+                    controller.isCartAdded.value ? 'Already Added' : 'Add to cart',
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium
                         ?.copyWith(color: Colors.white),
-                  )),
+                  )))),
             ),
           ],
         ),

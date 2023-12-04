@@ -9,7 +9,7 @@ import 'app/data/utils/constants.dart';
 import 'app/routes/app_pages.dart';
 import 'themes/app_colors.dart';
 import 'themes/app_themes.dart';
-
+         
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,

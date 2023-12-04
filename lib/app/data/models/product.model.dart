@@ -22,7 +22,7 @@ class ProductModel {
     final String? videoStatus;
     final int? videoStrike;
     final int? totalSales;
-    final String? viewsCount;
+    final int? viewsCount;
     final Author? author;
     final double? ratings;
     final List<Review>? reviews;
@@ -110,7 +110,7 @@ class Author {
     });
 
     factory Author.fromJson(Map<String, dynamic> json) => Author(
-      id: json["_id"],
+      id: json["authorId"],
         name: json["name"],
         country: json["country"],
         city: json["city"],

@@ -8,6 +8,10 @@ const FACEBOOK_APP_CLIENT_ID = "fb300818426154864";
 const FACEBOOK_CLIENT_TOKEN = "51f825d8ec719b40f44e1648ddb96d2c";
 
 
+// Tawk.to live chat credential
+const TAWK_LIVE_CHAT_URL = 'https://embed.tawk.to/6568d8a2ff45ca7d47855f7c/1hggosfgi';
+
+
 
 const String BASE_URL = 'http://203.161.62.117:5656';
 

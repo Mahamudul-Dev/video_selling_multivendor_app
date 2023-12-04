@@ -14,12 +14,14 @@ import '../../../../../connections/favourite.connection.dart';
 import '../../../../../connections/wishlist.connection.dart';
 import '../../../../data/models/product.model.dart';
 import '../../../../data/models/profile.model.dart';
+import '../../buyer_cart/controllers/buyer_cart_controller.dart';
 
 class BuyerProductDetailsController extends GetxController {
 
   late PodPlayerController playerController;
   RxBool isFavourite = false.obs;
   RxBool isWishlist = false.obs;
+  RxBool isCartAdded = false.obs;
   RxBool favLoading = false.obs;
   RxBool wishlistLoading = false.obs;
 
@@ -70,22 +72,16 @@ class BuyerProductDetailsController extends GetxController {
       Logger().e(wishlistResponse.body);
     }
 
+    // check product is already in cart or not
+    final cartProduct = Get.find<BuyerCartController>().cartItems.firstWhereOrNull((element) => element.productId == productId);
+
+    if (cartProduct != null) {
+      isCartAdded.value = true;
+    }
+
     return playerController;
   }
 
-  Future<ProductModel?> getProductDetails(String productId) async {
-    ProductModel? product;
-    final response = await ProductsConnection.getSingleProduct(productId);
-    
-
-    if (response.statusCode == 200) {
-      product = ProductModel.fromJson(jsonDecode(response.body));
-    } else {
-      Get.snackbar('Opps', 'Error loading data');
-    }
-
-    return product;
-  }
 
   Future<Profile?> getProductAuthor({required String id}) async {
     ProfileModel? profile;
@@ -140,6 +136,7 @@ class BuyerProductDetailsController extends GetxController {
     isWishlist.close();
     favLoading.close();
     wishlistLoading.close();
+    isCartAdded.close();
     super.onClose();
   }
 }

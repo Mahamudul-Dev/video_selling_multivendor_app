@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/asset_maneger.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 
 import '../../../themes/app_colors.dart';
-import '../../data/models/profile.model.dart';
+import '../../data/models/product.model.dart';
+import '../../routes/app_pages.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
@@ -16,7 +20,7 @@ class CartItemCard extends StatelessWidget {
   }) : super(key: key);
 
   final String productName;
-  final Future<Profile?> Function() author;
+  final Author author;
   final String productImage;
   final String price;
   final void Function()? onRemovePress;
@@ -26,7 +30,6 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 110,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -74,34 +77,28 @@ class CartItemCard extends StatelessWidget {
                         )),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Flexible(
-                            child: FutureBuilder(
-                                future: author(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      snapshot.data?.name ?? '',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(color: Colors.grey),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    );
-                                  }
-                                  return Text(
-                                    'Unknown',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(color: Colors.grey),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  );
-                                })),
-                      ],
+                    const SizedBox(height: 5,),
+                    InkWell(
+                      onTap: ()=>Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':author.id}),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 8,
+                            backgroundColor: Colors.grey,
+                            backgroundImage: CachedNetworkImageProvider(author.profilePic != 'N/A' ? BASE_URL+author.profilePic! : PLACEHOLDER_PHOTO),
+                          ),
+                          Flexible(
+                              child: Text(
+                                        author.name ?? 'Unknown',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(color: Colors.grey),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      )),
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

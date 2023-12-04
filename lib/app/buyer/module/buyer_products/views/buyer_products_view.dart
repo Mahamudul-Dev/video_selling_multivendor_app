@@ -37,11 +37,11 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
                         thumbnail: snapshot.data![index].thumbnail == 'N/A'
                             ? PLACEHOLDER_THUMBNAIL
                             : '$BASE_URL${snapshot.data![index].thumbnail}',
-                        title: snapshot.data![index].title ?? '',
+                        title: snapshot.data?[index].title ?? '',
                         author: snapshot.data![index].author!,
                         price: snapshot.data![index].price.toString(),
-                        views: int.parse(snapshot.data![index].viewsCount ?? '0'),
-                        initialRating: snapshot.data![index].ratings ?? 0,
+                        views: snapshot.data?[index].viewsCount ?? 0,
+                        initialRating: snapshot.data?[index].ratings ?? 0,
                         onItemPressed: () => Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product': snapshot.data![index]}),
                         onAuthorPressed: () {},
                       );

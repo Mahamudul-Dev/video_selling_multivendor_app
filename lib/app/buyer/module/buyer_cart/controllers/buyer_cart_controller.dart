@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:video_selling_multivendor_app/app/routes/app_pages.dart';
 
@@ -13,13 +14,16 @@ class BuyerCartController extends GetxController {
   RxList<CartItem> cartItems = <CartItem>[].obs;
   RxDouble totalCartItemPrice = 00.00.obs;
   RxBool isLoading = false.obs;
+  RxBool cartLoading = false.obs;
   RxBool cartRemoveLoading = false.obs;
 
   Future<void> addToCart(ProductModel? item) async {
     if (item != null) {
+      cartLoading.value = true;
       final response = await CartConnection.addCartItem(item.id!);
 
       if (response.statusCode == 200) {
+        cartLoading.value = false;
         
         cartItems.add(CartItem(
             title: item.title,
@@ -31,6 +35,7 @@ class BuyerCartController extends GetxController {
             totalCartItemPrice.value + double.parse(item.price.toString());
         Get.snackbar('Wow!', 'Video added successfully to cart');
       } else {
+        cartLoading.value = false;
         Get.snackbar('Sorry', 'There are some error!');
       }
       
@@ -118,6 +123,7 @@ class BuyerCartController extends GetxController {
     cartItems.close();
     totalCartItemPrice.close();
     isLoading.close();
+    cartLoading.close();
     cartRemoveLoading.close();
     super.onClose();
   }

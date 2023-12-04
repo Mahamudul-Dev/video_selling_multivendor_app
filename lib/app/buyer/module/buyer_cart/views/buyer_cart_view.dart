@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
+import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 
 import '../../../../../themes/app_colors.dart';
 import '../../../../data/utils/asset_maneger.dart';
@@ -30,13 +30,9 @@ class CartView extends GetView<BuyerCartController> {
                         return CartItemCard(
                           productName: controller.cartItems[index].title ?? '',
                           productImage:
-                              controller.cartItems[index].thumbnail ?? '',
+                              controller.cartItems[index].thumbnail != 'N/A' ? '$BASE_URL${controller.cartItems[index].thumbnail}' : PLACEHOLDER_THUMBNAIL,
                           price: controller.cartItems[index].price.toString(),
-                          author: () async {
-                            final profile = controller.getProfile(
-                                id: controller.cartItems[index].author!);
-                            return profile;
-                          },
+                          author: controller.cartItems[index].author!,
                           onProductPress: ()=> controller.viewProduct(index),
                           onRemovePress: () {
                             showDialog(

@@ -4,19 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pod_player/pod_player.dart';
-import 'package:video_selling_multivendor_app/app/buyer/components/search_filter_dialog.dart';
 
 import '../../../../../themes/app_colors.dart';
 import '../../../../data/models/product.model.dart';
 import '../../../../data/utils/asset_maneger.dart';
 import '../../../../data/utils/constants.dart';
 import '../../../../routes/app_pages.dart';
-import '../../../components/loading_animation.dart';
-import '../../../components/product_details_sheet.dart';
+import '../../../components/search_filter_dialog.dart';
 import '../../../components/shimmer_effect.dart';
 import '../../../components/video_card_tile.dart';
-import '../../buyer_cart/controllers/buyer_cart_controller.dart';
 import '../controllers/buyer_search_controller.dart';
 
 class BuyerSearchDelegate extends SearchDelegate<String> {
@@ -187,8 +183,7 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                           PLACEHOLDER_PHOTO,
                               title: controller.filteredResult.value[index].title ??
                                   'Untitled',
-                              views: int.parse(
-                                  controller.filteredResult[index].viewsCount ?? '0'),
+                              views: controller.filteredResult[index].viewsCount ?? 0,
                               initialRating:
                                   controller.filteredResult[index].ratings ?? 0,
                               author: controller.filteredResult.value[index].author!,
@@ -199,7 +194,7 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                   arguments: {
                                     'product': controller.filteredResult.value[index]
                                   }),
-                              onAuthorPressed: () {},
+                              onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':controller.filteredResult.value[index].author!.id}),
                             );
                           },
                           separatorBuilder: (context, index) {
@@ -291,9 +286,9 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                             'Untitled',
                                     author:
                                         controller.searchResult[index].author!,
-                                    views: int.parse(controller
+                                    views: controller
                                             .searchResult[index].viewsCount ??
-                                        '0'),
+                                        0,
                                     initialRating: controller
                                             .searchResult[index].ratings ??
                                         0,
@@ -305,7 +300,7 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                           'product':
                                               controller.searchResult[index]
                                         }),
-                                    onAuthorPressed: () {},
+                                    onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':controller.searchResult[index].author!.id}),
                                   );
                                 },
                                 separatorBuilder: (context, index) {
@@ -358,14 +353,17 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.grey,
-                backgroundImage: CachedNetworkImageProvider(
-                    creatorList[index].profilePic == null ||
-                            creatorList[index].profilePic == 'N/A'
-                        ? PLACEHOLDER_PHOTO
-                        : creatorList[index].profilePic!),
+              InkWell(
+                onTap: ()=> Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':creatorList[index].id}),
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.grey,
+                  backgroundImage: CachedNetworkImageProvider(
+                      creatorList[index].profilePic == null ||
+                              creatorList[index].profilePic == 'N/A'
+                          ? PLACEHOLDER_PHOTO
+                          : creatorList[index].profilePic!),
+                ),
               ),
               const SizedBox(height: 3,),
               SizedBox(

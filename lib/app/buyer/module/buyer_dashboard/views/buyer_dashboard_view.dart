@@ -194,7 +194,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                         Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
                         
                       },
-                      onAuthorPressed: () {},
+                      onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
                     );
                   },
                   separatorBuilder: (context, index) => const SizedBox(
@@ -248,7 +248,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                         Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
                         
                       },
-                      onAuthorPressed: () {},
+                      onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
                     );
                   },
                   separatorBuilder: (context, index) => const SizedBox(
@@ -303,7 +303,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                     Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
                     
                   },
-                  onAuthorPressed: () {},
+                  onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(
