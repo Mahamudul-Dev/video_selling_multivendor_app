@@ -20,14 +20,12 @@ class CartConnection {
   // remove a item from cart
   static Future<http.Response> removeCartItem(String productId) async {
     try {
-      final response = await http.delete(Uri.parse('$BASE_URL$CART'),
-          body: {
-            'productId':productId
-          },
-          headers: {
-            'Authorization':
-                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
-          });
+      final response = await http.delete(Uri.parse('$BASE_URL$CART'), body: {
+        'productId': productId
+      }, headers: {
+        'Authorization':
+            'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+      });
       return response;
     } catch (e) {
       throw e;

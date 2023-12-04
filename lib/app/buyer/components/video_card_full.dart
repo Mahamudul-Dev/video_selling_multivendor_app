@@ -56,14 +56,13 @@ class VideoCardFull extends StatelessWidget {
                   child: InkWell(
                     onTap: onAuthorPressed,
                     child: CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.grey,
-                              backgroundImage: CachedNetworkImageProvider(
-                                  author.profilePic == 'N/A'
-                                      ? PLACEHOLDER_PHOTO
-                                      : author.profilePic ??
-                                          PLACEHOLDER_PHOTO),
-                            ),
+                      radius: 25,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: CachedNetworkImageProvider(
+                          author.profilePic == 'N/A'
+                              ? PLACEHOLDER_PHOTO
+                              : author.profilePic ?? PLACEHOLDER_PHOTO),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -83,10 +82,8 @@ class VideoCardFull extends StatelessWidget {
                               ),
                             ),
                             Text(author.name ?? '',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall),
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.bodySmall),
                             Flexible(
                               flex: 2,
                               child: Row(

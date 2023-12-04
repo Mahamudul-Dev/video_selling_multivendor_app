@@ -78,28 +78,25 @@ class VideoCardShort extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CircleAvatar(
-                                        radius: 13,
-                                        backgroundColor: Colors.grey,
-                                        backgroundImage:
-                                            CachedNetworkImageProvider(author.profilePic ==
-                                                    'N/A'
-                                                ? PLACEHOLDER_PHOTO
-                                                : author.profilePic ??
-                                                    PLACEHOLDER_PHOTO),
-                                      ),
+                                radius: 13,
+                                backgroundColor: Colors.grey,
+                                backgroundImage: CachedNetworkImageProvider(
+                                    author.profilePic == 'N/A'
+                                        ? PLACEHOLDER_PHOTO
+                                        : author.profilePic ??
+                                            PLACEHOLDER_PHOTO),
+                              ),
                               const SizedBox(
                                 width: 4,
                               ),
                               SizedBox(
-                                        width: 50,
-                                        child: Text(
-                                         author.name ?? '',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall,
-                                        ),
-                                      )
+                                width: 50,
+                                child: Text(
+                                  author.name ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              )
                             ],
                           ),
                         ),

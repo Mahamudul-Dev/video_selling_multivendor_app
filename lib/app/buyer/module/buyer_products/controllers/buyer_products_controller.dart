@@ -43,12 +43,12 @@ class BuyerProductsController extends GetxController {
 
     try {
       if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        Logger().i(i);
-        products.add(ProductModel.fromJson(data[i]));
+        final data = jsonDecode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          Logger().i(i);
+          products.add(ProductModel.fromJson(data[i]));
+        }
       }
-    }
     } catch (e) {
       Logger().e(e);
     }

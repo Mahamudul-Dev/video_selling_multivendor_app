@@ -48,9 +48,7 @@ class VideoCardTile extends StatelessWidget {
                         topLeft: Radius.circular(10.0),
                         bottomLeft: Radius.circular(10.0)),
                     child: CachedNetworkImage(
-                      imageUrl: thumbnail,
-                      fit: BoxFit.fitHeight
-                    ),
+                        imageUrl: thumbnail, fit: BoxFit.fitHeight),
                   )),
             ),
             Expanded(
@@ -69,7 +67,8 @@ class VideoCardTile extends StatelessWidget {
                         itemCount: 5,
                         itemSize: 15,
                         ignoreGestures: true,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 1.0),
                         itemBuilder: (context, index) {
                           return const Icon(
                             Icons.star,
@@ -115,16 +114,26 @@ class VideoCardTile extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.remove_red_eye_rounded, color: Colors.grey, size: 16,),
-                            const SizedBox(width: 4,),
-                            Text('$views', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey),)
+                            const Icon(
+                              Icons.remove_red_eye_rounded,
+                              color: Colors.grey,
+                              size: 16,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              '$views',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: Colors.grey),
+                            )
                           ],
                         ),
-      
                         Container(
                           padding: const EdgeInsets.all(7.0),
                           decoration: BoxDecoration(
@@ -153,48 +162,45 @@ class VideoCardTile extends StatelessWidget {
   }
 }
 
- // ListTile(
-        //   onTap: onItemPressed,
-        //   leading: InkWell(
-        //       onTap: onAuthorPressed,
-        //       child: CachedNetworkImage(
-        //         imageUrl: thumbnail,
-        //         fit: BoxFit.cover,
-        //         width: 120,
-        //         height: 100,
-        //         color: Colors.green,
-        //       )),
-        //   title: Text(
-        //     title,
-        //     style: Theme.of(context)
-        //         .textTheme
-        //         .titleSmall
-        //         ?.copyWith(color: SECONDARY_APP_COLOR),
-        //     maxLines: 2,
-        //     overflow: TextOverflow.ellipsis,
-        //   ),
-        //   subtitle: Row(
-        //     children: [
-        //       CircleAvatar(
-        //                 radius: 10,
-        //                 backgroundColor: Colors.grey,
-        //                 backgroundImage: CachedNetworkImageProvider(
-        //                     author.profilePic == 'N/A'
-        //                         ? PLACEHOLDER_PHOTO
-        //                         : author.profilePic ?? PLACEHOLDER_PHOTO),
-        //               ),
-        //       Text(author.name ?? '',
-        //                   overflow: TextOverflow.ellipsis,
-        //                   style: Theme.of(context)
-        //                       .textTheme
-        //                       .bodySmall
-        //                       ?.copyWith(color: SECONDARY_APP_COLOR)),
-        //     ],
-        //   ),
-        // ),
-
-
-
+// ListTile(
+//   onTap: onItemPressed,
+//   leading: InkWell(
+//       onTap: onAuthorPressed,
+//       child: CachedNetworkImage(
+//         imageUrl: thumbnail,
+//         fit: BoxFit.cover,
+//         width: 120,
+//         height: 100,
+//         color: Colors.green,
+//       )),
+//   title: Text(
+//     title,
+//     style: Theme.of(context)
+//         .textTheme
+//         .titleSmall
+//         ?.copyWith(color: SECONDARY_APP_COLOR),
+//     maxLines: 2,
+//     overflow: TextOverflow.ellipsis,
+//   ),
+//   subtitle: Row(
+//     children: [
+//       CircleAvatar(
+//                 radius: 10,
+//                 backgroundColor: Colors.grey,
+//                 backgroundImage: CachedNetworkImageProvider(
+//                     author.profilePic == 'N/A'
+//                         ? PLACEHOLDER_PHOTO
+//                         : author.profilePic ?? PLACEHOLDER_PHOTO),
+//               ),
+//       Text(author.name ?? '',
+//                   overflow: TextOverflow.ellipsis,
+//                   style: Theme.of(context)
+//                       .textTheme
+//                       .bodySmall
+//                       ?.copyWith(color: SECONDARY_APP_COLOR)),
+//     ],
+//   ),
+// ),
 
 // SizedBox(
 //               height: 50,

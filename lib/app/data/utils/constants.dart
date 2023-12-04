@@ -7,11 +7,9 @@ const FACEBOOK_APP_ID = "300818426154864";
 const FACEBOOK_APP_CLIENT_ID = "fb300818426154864";
 const FACEBOOK_CLIENT_TOKEN = "51f825d8ec719b40f44e1648ddb96d2c";
 
-
 // Tawk.to live chat credential
-const TAWK_LIVE_CHAT_URL = 'https://embed.tawk.to/6568d8a2ff45ca7d47855f7c/1hggosfgi';
-
-
+const TAWK_LIVE_CHAT_URL =
+    'https://embed.tawk.to/6568d8a2ff45ca7d47855f7c/1hggosfgi';
 
 const String BASE_URL = 'http://203.161.62.117:5656';
 
@@ -33,10 +31,11 @@ const String CART = '/api/v1/cart/';
 const String ADD_CART = '/api/v1/cart/addItemToCart';
 
 // Favourite Endpoints
-const String ADD_FAVOURITE_API = '/api/v1/favourite/addItemToFavourite'; // need to pass product id in body
-const String FAVOURITE_API = '/api/v1/favourite/'; // can be use as delete & get favourite
+const String ADD_FAVOURITE_API =
+    '/api/v1/favourite/addItemToFavourite'; // need to pass product id in body
+const String FAVOURITE_API =
+    '/api/v1/favourite/'; // can be use as delete & get favourite
 
 // Wishlist Endpoints
 const String WISHLIST_API = '/api/v1/wishlist/';
 const String ADD_WISHLIST_API = '/api/v1/wishlist/addItemToWishlist';
-

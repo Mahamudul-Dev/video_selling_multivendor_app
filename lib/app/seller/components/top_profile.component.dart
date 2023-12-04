@@ -25,17 +25,38 @@ class TopProfileComponent extends StatelessWidget {
     return ListTile(
       minVerticalPadding: 10.0,
       leading: CircleAvatar(
-            radius: MediaQuery.of(context).size.width * 0.10,
-            backgroundColor: Colors.grey,
-            backgroundImage: CachedNetworkImageProvider(profilePhoto ?? PLACEHOLDER_PHOTO),
-          ),
-      title: Text(name, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
+        radius: MediaQuery.of(context).size.width * 0.10,
+        backgroundColor: Colors.grey,
+        backgroundImage:
+            CachedNetworkImageProvider(profilePhoto ?? PLACEHOLDER_PHOTO),
+      ),
+      title: Text(
+        name,
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: Colors.white),
+      ),
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Subscriber: $subscriberCount', style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white),),
-          const SizedBox(width: 8.0,),
-          Text('Total Videos: $totalVideosCount', style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white),),
+          Text(
+            'Subscriber: $subscriberCount',
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(color: Colors.white),
+          ),
+          const SizedBox(
+            width: 8.0,
+          ),
+          Text(
+            'Total Videos: $totalVideosCount',
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(color: Colors.white),
+          ),
         ],
       ),
     );

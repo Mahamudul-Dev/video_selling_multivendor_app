@@ -21,9 +21,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
     return Scaffold(
         body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                _buildAppBar(context)
-              ];
+              return [_buildAppBar(context)];
             },
             body: LiquidPullToRefresh(
               color: SECONDARY_APP_COLOR,
@@ -180,30 +178,43 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
           if (snapshot.hasData) {
             if (snapshot.data!.isNotEmpty) {
               return SizedBox(
-              height: MediaQuery.of(context).size.width * 0.6,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return VideoCardShort(
-                      thumbnail: snapshot.data![index].thumbnail != null ? BASE_URL+snapshot.data![index].thumbnail! : PLACEHOLDER_PHOTO,
-                      title: snapshot.data![index].title ?? '',
-                      author: snapshot.data![index].author!,
-                      price: snapshot.data![index].price.toString(),
-                      
-                      onItemPressed: () {
-                        Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
-                        
-                      },
-                      onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
-                    );
-                  },
-                  separatorBuilder: (context, index) => const SizedBox(
-                        width: 15.0,
-                      ),
-                  itemCount: snapshot.data!.length),
-            ); //controller.trendingVideos.length));
+                height: MediaQuery.of(context).size.width * 0.6,
+                child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return VideoCardShort(
+                        thumbnail: snapshot.data![index].thumbnail != null
+                            ? BASE_URL + snapshot.data![index].thumbnail!
+                            : PLACEHOLDER_PHOTO,
+                        title: snapshot.data![index].title ?? '',
+                        author: snapshot.data![index].author!,
+                        price: snapshot.data![index].price.toString(),
+                        onItemPressed: () {
+                          Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
+                              arguments: {'product': snapshot.data![index]});
+                        },
+                        onAuthorPressed: () =>
+                            Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
+                          'id': snapshot.data![index].author!.id
+                        }),
+                      );
+                    },
+                    separatorBuilder: (context, index) => const SizedBox(
+                          width: 15.0,
+                        ),
+                    itemCount: snapshot.data!.length),
+              ); //controller.trendingVideos.length));
             } else {
-              return SizedBox(height: MediaQuery.of(context).size.width * 0.6, child: Center(child: Text('No Products Found.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),)));
+              return SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.6,
+                  child: Center(
+                      child: Text(
+                    'No Products Found.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Colors.black),
+                  )));
             }
           }
 
@@ -234,30 +245,43 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
           if (snapshot.hasData) {
             if (snapshot.data!.isNotEmpty) {
               return SizedBox(
-              height: MediaQuery.of(context).size.width * 0.6,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return VideoCardShort(
-                      thumbnail: snapshot.data![index].thumbnail != null ? BASE_URL+snapshot.data![index].thumbnail! : PLACEHOLDER_PHOTO,
-                      title: snapshot.data![index].title ?? '',
-                      author:snapshot.data![index].author!,
-                      price: snapshot.data![index].price.toString(),
-                      
-                      onItemPressed: () {
-                        Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
-                        
-                      },
-                      onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
-                    );
-                  },
-                  separatorBuilder: (context, index) => const SizedBox(
-                        width: 15.0,
-                      ),
-                  itemCount: snapshot.data!.length),
-            ); //controller.trendingVideos.length));
+                height: MediaQuery.of(context).size.width * 0.6,
+                child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return VideoCardShort(
+                        thumbnail: snapshot.data![index].thumbnail != null
+                            ? BASE_URL + snapshot.data![index].thumbnail!
+                            : PLACEHOLDER_PHOTO,
+                        title: snapshot.data![index].title ?? '',
+                        author: snapshot.data![index].author!,
+                        price: snapshot.data![index].price.toString(),
+                        onItemPressed: () {
+                          Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
+                              arguments: {'product': snapshot.data![index]});
+                        },
+                        onAuthorPressed: () =>
+                            Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
+                          'id': snapshot.data![index].author!.id
+                        }),
+                      );
+                    },
+                    separatorBuilder: (context, index) => const SizedBox(
+                          width: 15.0,
+                        ),
+                    itemCount: snapshot.data!.length),
+              ); //controller.trendingVideos.length));
             } else {
-              return SizedBox(height: MediaQuery.of(context).size.width * 0.6, child: Center(child: Text('No Products Found.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),)));
+              return SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.6,
+                  child: Center(
+                      child: Text(
+                    'No Products Found.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Colors.black),
+                  )));
             }
           }
 
@@ -288,32 +312,45 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
           if (snapshot.hasData) {
             if (snapshot.data!.isNotEmpty) {
               return SliverList.separated(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                return VideoCardFull(
-                  thumbnail: snapshot.data![index].thumbnail != null ? BASE_URL+snapshot.data![index].thumbnail! : PLACEHOLDER_PHOTO,
-                  title: snapshot.data![index].title ?? '',
-                  author: snapshot.data![index].author!,
-                  price: snapshot.data![index].price.toString(),
-                  onCartPressed: () {
-                    Get.find<BuyerCartController>()
-                        .addToCart(snapshot.data![index]);
-                  },
-                  onItemPressed: () {
-                    Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':snapshot.data![index]});
-                    
-                  },
-                  onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':snapshot.data![index].author!.id}),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                height: 20.0,
-              ),
-            ); //controller.trendingVideos.length));
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  return VideoCardFull(
+                    thumbnail: snapshot.data![index].thumbnail != null
+                        ? BASE_URL + snapshot.data![index].thumbnail!
+                        : PLACEHOLDER_PHOTO,
+                    title: snapshot.data![index].title ?? '',
+                    author: snapshot.data![index].author!,
+                    price: snapshot.data![index].price.toString(),
+                    onCartPressed: () {
+                      Get.find<BuyerCartController>()
+                          .addToCart(snapshot.data![index]);
+                    },
+                    onItemPressed: () {
+                      Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
+                          arguments: {'product': snapshot.data![index]});
+                    },
+                    onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE,
+                        arguments: {'id': snapshot.data![index].author!.id}),
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 20.0,
+                ),
+              ); //controller.trendingVideos.length));
             } else {
-              return SliverToBoxAdapter(child: SizedBox( height: MediaQuery.of(context).size.width, width: MediaQuery.of(context).size.width, child: Center(child: Text('No Products Found.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),))));
+              return SliverToBoxAdapter(
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                          child: Text(
+                        'No Products Found.',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.black),
+                      ))));
             }
-
           }
 
           return SliverList.separated(

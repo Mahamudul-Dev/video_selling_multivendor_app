@@ -1,14 +1,14 @@
 // ignore_for_file: constant_identifier_names
 
-
 const PLACEHOLDER_PHOTO =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
 const PLACEHOLDER_THUMBNAIL =
     'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png';
 
-const DEMO_PROFILE_PHOTO = 'https://shotkit.com/wp-content/uploads/2021/06/cool-profile-pic-matheus-ferrero.jpeg';
-    
+const DEMO_PROFILE_PHOTO =
+    'https://shotkit.com/wp-content/uploads/2021/06/cool-profile-pic-matheus-ferrero.jpeg';
+
 // Animations
 const String MAINTAINANCE_MOOD_ANIM = 'assets/anim/maintainance-mood-anim.json';
 const String NO_CART_ANIM = 'assets/anim/empty-cart-anim.json';

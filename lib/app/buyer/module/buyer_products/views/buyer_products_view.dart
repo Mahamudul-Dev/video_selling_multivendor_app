@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 
-
 import '../../../../data/models/product.model.dart';
 import '../../../../data/utils/asset_maneger.dart';
 import '../../../../data/utils/enums.dart';
@@ -32,58 +31,63 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
               if (snapshot.hasData) {
                 if (snapshot.data!.isNotEmpty) {
                   return ListView.separated(
-                    itemBuilder: (context, index) {
-                      return VideoCardTile(
-                        thumbnail: snapshot.data![index].thumbnail == 'N/A'
-                            ? PLACEHOLDER_THUMBNAIL
-                            : '$BASE_URL${snapshot.data![index].thumbnail}',
-                        title: snapshot.data?[index].title ?? '',
-                        author: snapshot.data![index].author!,
-                        price: snapshot.data![index].price.toString(),
-                        views: snapshot.data?[index].viewsCount ?? 0,
-                        initialRating: snapshot.data?[index].ratings ?? 0,
-                        onItemPressed: () => Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product': snapshot.data![index]}),
-                        onAuthorPressed: () {},
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        color: Colors.grey,
-                        thickness: 0.3,
-                        indent: 10,
-                        endIndent: 10,
-                      );
-                    },
-                    itemCount: snapshot.data!.length);
+                      itemBuilder: (context, index) {
+                        return VideoCardTile(
+                          thumbnail: snapshot.data![index].thumbnail == 'N/A'
+                              ? PLACEHOLDER_THUMBNAIL
+                              : '$BASE_URL${snapshot.data![index].thumbnail}',
+                          title: snapshot.data?[index].title ?? '',
+                          author: snapshot.data![index].author!,
+                          price: snapshot.data![index].price.toString(),
+                          views: snapshot.data?[index].viewsCount ?? 0,
+                          initialRating: snapshot.data?[index].ratings ?? 0,
+                          onItemPressed: () => Get.toNamed(
+                              Routes.BUYER_PRODUCT_DETAILS,
+                              arguments: {'product': snapshot.data![index]}),
+                          onAuthorPressed: () {},
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Divider(
+                          color: Colors.grey,
+                          thickness: 0.3,
+                          indent: 10,
+                          endIndent: 10,
+                        );
+                      },
+                      itemCount: snapshot.data!.length);
                 } else {
-                  return Center(child: Text('No product for display', style: Theme.of(context).textTheme.bodyMedium,),);
+                  return Center(
+                    child: Text(
+                      'No product for display',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  );
                 }
               }
               return ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: ShimmerEffect.rectangular(
-                      height: double.infinity,
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      shapeBorder: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                    ),
-
-                      title: ShimmerEffect.rectangular(
-                      height: 10,
-                      width: double.infinity,
-                      shapeBorder: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                    ),
-
-                    subtitle: SizedBox(
-                      child: ShimmerEffect.rectangular(
-                        height: 10,
-                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: double.infinity,
+                        width: MediaQuery.of(context).size.width * 0.2,
                         shapeBorder: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4)),
                       ),
-                    ),
+                      title: ShimmerEffect.rectangular(
+                        height: 10,
+                        width: double.infinity,
+                        shapeBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4)),
+                      ),
+                      subtitle: SizedBox(
+                        child: ShimmerEffect.rectangular(
+                          height: 10,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          shapeBorder: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4)),
+                        ),
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) {

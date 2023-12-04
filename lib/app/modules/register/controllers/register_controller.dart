@@ -19,7 +19,8 @@ class RegisterController extends GetxController {
   static TextEditingController nameController = TextEditingController();
   static TextEditingController emailController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
-  static TextEditingController confirmPasswordController = TextEditingController();
+  static TextEditingController confirmPasswordController =
+      TextEditingController();
 
   void toggleSeller(bool? value) {
     isSeller.value = value ?? false;
@@ -61,7 +62,7 @@ class RegisterController extends GetxController {
       final response = await Authentication.regsterConnection(
           name: nameController.text,
           userName:
-          '@${splitUserName(sentence: nameController.text.trim())}${uuid.v1()}',
+              '@${splitUserName(sentence: nameController.text.trim())}${uuid.v1()}',
           email: emailController.text,
           password: passwordController.text,
           accountType: isSeller.value ? 'Seller' : 'Buyer');
@@ -78,13 +79,16 @@ class RegisterController extends GetxController {
         });
 
         LocalPreferences.saveCurrentLogin(
-            data['profile']['_id'], data['profile']['email'], data['token'], data['profile']['accountType']);
+            data['profile']['_id'],
+            data['profile']['email'],
+            data['token'],
+            data['profile']['accountType']);
         isLoading.value = false;
         Get.snackbar('Congrats!', 'You successfully created your account');
-        if(isSeller.value){
+        if (isSeller.value) {
           Get.offAllNamed(Routes.SELLER_HOME);
         }
-        if(isBuyer.value){
+        if (isBuyer.value) {
           Get.offAllNamed(Routes.HOME_BUYER);
         }
       }

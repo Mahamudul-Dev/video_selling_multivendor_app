@@ -126,12 +126,13 @@ class ProductsConnection {
     }
   }
 
-  static Future<http.Response> getSingleProduct (String productId) async {
+  static Future<http.Response> getSingleProduct(String productId) async {
     try {
-      final response = await http.get(Uri.parse('$BASE_URL$PRODUCTS$productId'), headers: {
-        'Authorization':
-        'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
-      });
+      final response = await http.get(Uri.parse('$BASE_URL$PRODUCTS$productId'),
+          headers: {
+            'Authorization':
+                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+          });
       return response;
     } catch (e) {
       throw e;

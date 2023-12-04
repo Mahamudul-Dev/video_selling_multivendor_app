@@ -6,10 +6,11 @@ import '../app/data/utils/constants.dart';
 class FavouriteConnection {
   static Future<http.Response> viewFavouriteItem() async {
     try {
-      final response = await http.get(Uri.parse('$BASE_URL$FAVOURITE_API'), headers: {
-        'Authorization':
-            'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
-      });
+      final response = await http.get(Uri.parse('$BASE_URL$FAVOURITE_API'),
+          headers: {
+            'Authorization':
+                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+          });
       return response;
     } catch (e) {
       throw e;
@@ -20,7 +21,7 @@ class FavouriteConnection {
     try {
       final response = await http.delete(Uri.parse('$BASE_URL$FAVOURITE_API'),
           body: {
-            'productId':productId
+            'productId': productId
           },
           headers: {
             'Authorization':

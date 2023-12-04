@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -45,8 +44,13 @@ class WalletTransactionCard extends StatelessWidget {
                       .labelLarge
                       ?.copyWith(color: Colors.white),
                 ),
-
-                Text(DateFormat('dd/MM/yyyy').format(timestamp), style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.grey.shade300),)
+                Text(
+                  DateFormat('dd/MM/yyyy').format(timestamp),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(color: Colors.grey.shade300),
+                )
               ],
             ),
             const SizedBox(height: 10.0),
@@ -54,7 +58,8 @@ class WalletTransactionCard extends StatelessWidget {
               height: 60,
               width: 60,
               decoration: BoxDecoration(
-                  color: type == TransactionType.TOPUP ? TEAL : Colors.red, borderRadius: BorderRadius.circular(8)),
+                  color: type == TransactionType.TOPUP ? TEAL : Colors.red,
+                  borderRadius: BorderRadius.circular(8)),
               child: Center(
                 child: SvgPicture.asset(
                   type == TransactionType.TOPUP

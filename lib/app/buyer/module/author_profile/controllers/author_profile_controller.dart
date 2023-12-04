@@ -11,21 +11,18 @@ import '../../../../data/models/product.model.dart';
 import '../../../../data/models/profile.model.dart';
 
 class AuthorProfileController extends GetxController {
-  
-
-  Future<ProfileModel?> getAuthorProfile(String id)async{
+  Future<ProfileModel?> getAuthorProfile(String id) async {
     ProfileModel? profile;
     final response = await ProfileConnection.userProfileConnection(id: id);
     if (response.statusCode == 200) {
       profile = ProfileModel.fromJson(jsonDecode(response.body));
-    } else if(response.statusCode == 400){
+    } else if (response.statusCode == 400) {
       Get.snackbar('Sorry', 'Author Id incorrect!');
     } else {
       Get.snackbar('Sorry', 'Server busy!');
     }
     return profile;
   }
-
 
   Future<List<ProductModel>> getAuthorProducts(String username) async {
     final List<ProductModel> productList = [];
@@ -38,7 +35,6 @@ class AuthorProfileController extends GetxController {
 
       for (var i = 0; i < result.length; i++) {
         productList.add(ProductModel.fromJson(result[i]));
-        
       }
     }
 
@@ -54,7 +50,4 @@ class AuthorProfileController extends GetxController {
     final format = NumberFormat.compact();
     return format.format(number);
   }
-
-
-  
 }

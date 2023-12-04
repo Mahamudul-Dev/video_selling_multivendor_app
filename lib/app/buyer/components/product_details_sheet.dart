@@ -152,7 +152,10 @@ class ProductDetailsSheet extends StatelessWidget {
                         );
                       }
 
-                      return const ShimmerEffect.rectangular(height: 50, width: double.infinity,);
+                      return const ShimmerEffect.rectangular(
+                        height: 50,
+                        width: double.infinity,
+                      );
                     }),
                 // product description
                 Padding(

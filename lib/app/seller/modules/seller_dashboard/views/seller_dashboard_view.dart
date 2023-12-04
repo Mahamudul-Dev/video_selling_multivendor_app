@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../themes/app_colors.dart';
+import '../../../../buyer/components/shimmer_effect.dart';
 import '../../../../data/utils/asset_maneger.dart';
-import '../../../../data/utils/constants.dart';
 import '../../../components/expansion_product_tile.component.dart';
 import '../../../components/graph_monitor.component.dart';
 import '../../../components/top_profile.component.dart';
@@ -24,13 +24,34 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 SliverToBoxAdapter(
-                  child: TopProfileComponent(
-                    name: 'Michel Janson',
-                    subTitle: 'Mobile App Developer',
-                    subscriberCount: controller.formatNumber(152587878787),
-                    totalVideosCount: controller.formatNumber(500),
-                  ),
-                ),
+                    child: FutureBuilder(
+                        future: controller.getSellerProfile(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return TopProfileComponent(
+                              name: snapshot.data?.name ?? 'Unknown',
+                              subTitle: snapshot.data?.email,
+                              subscriberCount: controller.formatNumber(snapshot
+                                      .data?.creatorSubscriptionList?.length ??
+                                  0),
+                              totalVideosCount: controller.formatNumber(
+                                  snapshot.data?.totalVideos ?? 0),
+                            );
+                          }
+                          return ListTile(
+                            leading: const ShimmerEffect.circuller(
+                                width: 50, height: 50),
+                            title: ShimmerEffect.rectangular(
+                                width: MediaQuery.of(context).size.width,
+                                height: 18),
+                            subtitle: SizedBox(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: ShimmerEffect.rectangular(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 18),
+                            ),
+                          );
+                        })),
               ];
             },
             body: CustomScrollView(
@@ -66,33 +87,67 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
                     ),
                   ),
                 ),
-
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15, top: 15,  bottom: 0),
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 15, bottom: 0),
                     child: Row(
                       children: [
-                        Text('Content', style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
+                        Text(
+                          'Content',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge
+                              ?.copyWith(color: Colors.white),
+                        )
                       ],
                     ),
                   ),
                 ),
+                FutureBuilder(
+                    future: controller.getSellerProducts(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return SliverList.builder(
+                          itemBuilder: (context, index) {
+                            return ExpansionProductTile(
+                                productName:
+                                    snapshot.data?[index].title ?? 'Unknown',
+                                productThumbnail:
+                                    snapshot.data?[index].thumbnail ??
+                                        PLACEHOLDER_THUMBNAIL,
+                                duration: controller.formatDuration(Duration(
+                                    milliseconds: int.parse(
+                                        snapshot.data?[index].duration ??
+                                            "0"))),
+                                totalClicks: controller.formatNumber(
+                                    snapshot.data?[index].viewsCount ?? 0),
+                                totalSaleTime: controller.formatNumber(
+                                    snapshot.data?[index].totalSales ?? 0),
+                                totalEarning: controller.formatNumber(82173618),
+                                category: snapshot.data?[index].category ?? '');
+                          },
+                          itemCount: snapshot.data?.length,
+                        );
+                      }
 
-                SliverToBoxAdapter(
-                  child: ExpansionProductTile(productName: 'This is a title', productThumbnail: PLACEHOLDER_THUMBNAIL, duration: '5 Min 34 Sec', totalClicks: controller.formatNumber(45000), totalSaleTime: controller.formatNumber(32000), totalEarning: controller.formatNumber(4992000), category: 'Programming')
-                ),
-
-                 SliverToBoxAdapter(
-                  child: ExpansionProductTile(productName: 'This is a title', productThumbnail: PLACEHOLDER_THUMBNAIL, duration: '5 Min 34 Sec', totalClicks: controller.formatNumber(45000), totalSaleTime: controller.formatNumber(32000), totalEarning: controller.formatNumber(4992000), category: 'Programming')
-                ),
-
-
-                 SliverToBoxAdapter(
-                  child: ExpansionProductTile(productName: 'This is a title', productThumbnail: PLACEHOLDER_THUMBNAIL, duration: '5 Min 34 Sec', totalClicks: controller.formatNumber(45000), totalSaleTime: controller.formatNumber(32000), totalEarning: controller.formatNumber(4992000), category: 'Programming')
-                )
+                      return SliverList.builder(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: const ShimmerEffect.rectangular(
+                                width: 60, height: 40),
+                            title: ShimmerEffect.rectangular(
+                                width: MediaQuery.of(context).size.width,
+                                height: 18),
+                            subtitle: ShimmerEffect.rectangular(
+                                width: MediaQuery.of(context).size.width,
+                                height: 18),
+                          );
+                        },
+                        itemCount: 3,
+                      );
+                    })
               ],
-            ))
-        
-        );
+            )));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../themes/app_colors.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../components/bottom_navbar.components.dart';
 import '../controllers/seller_home_controller.dart';
 
@@ -13,7 +14,16 @@ class SellerHomeView extends GetView<SellerHomeController> {
     return Scaffold(
       backgroundColor: DARK_ASH,
       body: Obx(() => controller.pages[controller.currentPage.value]),
-      floatingActionButton: FloatingActionButton(backgroundColor: Colors.white, shape: const CircleBorder(), onPressed: (){}, child: const Icon(Icons.add, color: SECONDARY_APP_COLOR, size: 35,),),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        shape: const CircleBorder(),
+        onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
+        child: const Icon(
+          Icons.add,
+          color: SECONDARY_APP_COLOR,
+          size: 35,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const BottomNavbar(),
     );

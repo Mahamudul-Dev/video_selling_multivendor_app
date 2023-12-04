@@ -31,11 +31,30 @@ class WalletView extends GetView<WalletController> {
                   ListTile(
                     leading: const CircleAvatar(
                       backgroundColor: DARK_ASH,
-                      backgroundImage: CachedNetworkImageProvider(DEMO_PROFILE_PHOTO),
+                      backgroundImage:
+                          CachedNetworkImageProvider(DEMO_PROFILE_PHOTO),
                     ),
-                    title: Text('Alezabeth Midina', style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
-                    subtitle: Text('Instructor of Photography', style: Theme.of(context).textTheme.bodySmall?.copyWith(color:Colors.grey.shade300),),
-                    trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.shade300, size: 20,)),
+                    title: Text(
+                      'Alezabeth Midina',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      'Instructor of Photography',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.grey.shade300),
+                    ),
+                    trailing: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.grey.shade300,
+                          size: 20,
+                        )),
                   ),
                   const BalanceCard(
                     balance: 1200.87,
@@ -46,55 +65,63 @@ class WalletView extends GetView<WalletController> {
             const SizedBox(
               height: 15,
             ),
-            Padding(padding: const EdgeInsets.all(10.0), child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Recent Transfer',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(color: Colors.white),
-                ),
-                TextButton(
-                    onPressed: () => Get.toNamed(Routes.WALLET_HISTORY, arguments: {'type':'transfer'}),
-                    child: Text(
-                      'View All',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.white),
-                    ))
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            _buildRecentTransferRow(context),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Recent Transaction',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(color: Colors.white),
-                ),
-                TextButton(
-                    onPressed: () => Get.toNamed(Routes.WALLET_HISTORY, arguments: {'type':'transaction'}),
-                    child: Text(
-                      'View All',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.white),
-                    ))
-              ],
-            ),
-            _buildRecentTransactionList(context)
-            ],),)
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recent Transfer',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge
+                            ?.copyWith(color: Colors.white),
+                      ),
+                      TextButton(
+                          onPressed: () => Get.toNamed(Routes.WALLET_HISTORY,
+                              arguments: {'type': 'transfer'}),
+                          child: Text(
+                            'View All',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: Colors.white),
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  _buildRecentTransferRow(context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recent Transaction',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge
+                            ?.copyWith(color: Colors.white),
+                      ),
+                      TextButton(
+                          onPressed: () => Get.toNamed(Routes.WALLET_HISTORY,
+                              arguments: {'type': 'transaction'}),
+                          child: Text(
+                            'View All',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: Colors.white),
+                          ))
+                    ],
+                  ),
+                  _buildRecentTransactionList(context)
+                ],
+              ),
+            )
           ],
         ));
   }
@@ -173,7 +200,8 @@ class WalletView extends GetView<WalletController> {
         itemBuilder: (context, index) {
           return WalletTransactionCard(
               title: 'Topup',
-              content: 'Topup for boosting sifjwoifjow iucheuchec ecyeuycge uygruewyrgcduwyg erfhi3eufh4 ve4hc ieufhiwuhdwiuhdwiudhwiduhw xwiuxhwiuxhw iruhwiuhw dewuhdwiudhh wu wuwuxhhwiudhwiqh jfoj',
+              content:
+                  'Topup for boosting sifjwoifjow iucheuchec ecyeuycge uygruewyrgcduwyg erfhi3eufh4 ve4hc ieufhiwuhdwiuhdwiudhwiduhw xwiuxhwiuxhw iruhwiuhw dewuhdwiudhh wu wuwuxhhwiudhwiqh jfoj',
               timestamp: DateTime.now(),
               amount: 1000.89,
               type: TransactionType.TOPUP);

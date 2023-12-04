@@ -9,8 +9,8 @@ final APP_THEME = ThemeData(
     useMaterial3: true,
     textTheme: text_theme,
     iconTheme: const IconThemeData(
-          color: Colors.white, // Change this color to your desired color
-        ),
+      color: Colors.white, // Change this color to your desired color
+    ),
     appBarTheme: AppBarTheme(
         backgroundColor: SECONDARY_APP_COLOR,
         foregroundColor: Colors.white,

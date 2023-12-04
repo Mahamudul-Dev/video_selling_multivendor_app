@@ -38,14 +38,14 @@ class BuyerDashboardController extends GetxController {
 
     try {
       Logger().i({'Top Sale': response.body});
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        Logger().i(i);
-        topSaleProducts.add(ProductModel.fromJson(data[i]));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          Logger().i(i);
+          topSaleProducts.add(ProductModel.fromJson(data[i]));
+        }
       }
-    }
-    Logger().i('Loop End');
+      Logger().i('Loop End');
     } catch (e) {
       Logger().e(e);
     }
@@ -58,12 +58,12 @@ class BuyerDashboardController extends GetxController {
         await ProductsConnection.getProductByFilter(Filter.RATINGH2L);
     try {
       if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        Logger().i(i);
-        topRatedProducts.add(ProductModel.fromJson(data[i]));
+        final data = jsonDecode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          Logger().i(i);
+          topRatedProducts.add(ProductModel.fromJson(data[i]));
+        }
       }
-    }
     } catch (e) {
       Logger().e(e);
     }
@@ -76,12 +76,12 @@ class BuyerDashboardController extends GetxController {
         await ProductsConnection.getProductByFilter(Filter.PRICEL2H);
     try {
       if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        Logger().i(i);
-        youMayLikeProducts.add(ProductModel.fromJson(data[i]));
+        final data = jsonDecode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          Logger().i(i);
+          youMayLikeProducts.add(ProductModel.fromJson(data[i]));
+        }
       }
-    }
     } catch (e) {
       Logger().e(e);
     }

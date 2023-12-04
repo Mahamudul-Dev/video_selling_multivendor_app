@@ -4,12 +4,13 @@ import '../app/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
 class WishlistConnection {
-   static Future<http.Response> viewWishlistItem() async {
+  static Future<http.Response> viewWishlistItem() async {
     try {
-      final response = await http.get(Uri.parse('$BASE_URL$WISHLIST_API'), headers: {
-        'Authorization':
-            'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
-      });
+      final response = await http.get(Uri.parse('$BASE_URL$WISHLIST_API'),
+          headers: {
+            'Authorization':
+                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+          });
       return response;
     } catch (e) {
       throw e;
@@ -20,7 +21,7 @@ class WishlistConnection {
     try {
       final response = await http.delete(Uri.parse('$BASE_URL$WISHLIST_API'),
           body: {
-            'productId':productId
+            'productId': productId
           },
           headers: {
             'Authorization':

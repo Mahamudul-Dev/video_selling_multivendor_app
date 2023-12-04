@@ -92,7 +92,8 @@ class RegisterView extends GetView<RegisterController> {
                                   height: 10,
                                 ),
                                 TextFormField(
-                                  controller: RegisterController.emailController,
+                                  controller:
+                                      RegisterController.emailController,
                                   decoration: InputDecoration(
                                       label: Text('Email',
                                           style: Theme.of(context)
@@ -118,75 +119,83 @@ class RegisterView extends GetView<RegisterController> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                passwordRequired! ?
-                                Obx(() => TextFormField(
-                                      obscureText: controller.obsecure.value,
-                                      controller: RegisterController.passwordController,
-                                      validator: (value) {
-                                        if (value == null || value == '') {
-                                          return 'Password is required';
-                                        } else if (value.length < 6) {
-                                          return 'Password must be at least 6 charecter';
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                          label: Text('Password',
-                                              style: Theme.of(context)
+                                passwordRequired!
+                                    ? Obx(() => TextFormField(
+                                          obscureText:
+                                              controller.obsecure.value,
+                                          controller: RegisterController
+                                              .passwordController,
+                                          validator: (value) {
+                                            if (value == null || value == '') {
+                                              return 'Password is required';
+                                            } else if (value.length < 6) {
+                                              return 'Password must be at least 6 charecter';
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                              label: Text('Password',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                          color: Colors.grey)),
+                                              hintText: 'Type your password',
+                                              hintStyle: Theme.of(context)
                                                   .textTheme
-                                                  .labelMedium
+                                                  .bodyMedium
                                                   ?.copyWith(
-                                                      color: Colors.grey)),
-                                          hintText: 'Type your password',
-                                          hintStyle: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.copyWith(color: Colors.grey),
-                                          suffixIcon: IconButton(
-                                              onPressed: () {
-                                                controller.obsecure.value =
-                                                    !controller.obsecure.value;
-                                              },
-                                              icon: Obx(() => controller
-                                                      .obsecure.value
-                                                  ? const Icon(
-                                                      Icons.password_rounded)
-                                                  : const Icon(Icons
-                                                      .remove_red_eye_rounded))),
-                                          suffixIconColor: SECONDARY_APP_COLOR),
-                                    )) : const SizedBox.shrink(),
+                                                      color: Colors.grey),
+                                              suffixIcon: IconButton(
+                                                  onPressed: () {
+                                                    controller.obsecure.value =
+                                                        !controller
+                                                            .obsecure.value;
+                                                  },
+                                                  icon: Obx(() => controller
+                                                          .obsecure.value
+                                                      ? const Icon(Icons
+                                                          .password_rounded)
+                                                      : const Icon(Icons
+                                                          .remove_red_eye_rounded))),
+                                              suffixIconColor:
+                                                  SECONDARY_APP_COLOR),
+                                        ))
+                                    : const SizedBox.shrink(),
                                 const SizedBox(
                                   height: 10,
                                 ),
-
-                                passwordRequired! ?
-                                Obx(() => TextFormField(
-                                      obscureText: controller.obsecure.value,
-                                      validator: (value) {
-                                        if (value == null || value == '') {
-                                          return 'Confirm password is required';
-                                        } else if (value !=
-                                            RegisterController
-                                                .passwordController.text) {
-                                          return 'Password is not correct';
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                          label: Text('Confirm',
-                                              style: Theme.of(context)
+                                passwordRequired!
+                                    ? Obx(() => TextFormField(
+                                          obscureText:
+                                              controller.obsecure.value,
+                                          validator: (value) {
+                                            if (value == null || value == '') {
+                                              return 'Confirm password is required';
+                                            } else if (value !=
+                                                RegisterController
+                                                    .passwordController.text) {
+                                              return 'Password is not correct';
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                              label: Text('Confirm',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                          color: Colors.grey)),
+                                              hintText: 'Retype your password',
+                                              hintStyle: Theme.of(context)
                                                   .textTheme
-                                                  .labelMedium
+                                                  .bodyMedium
                                                   ?.copyWith(
                                                       color: Colors.grey)),
-                                          hintText: 'Retype your password',
-                                          hintStyle: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.copyWith(color: Colors.grey)),
-                                    )) : const SizedBox.shrink()
+                                        ))
+                                    : const SizedBox.shrink()
                               ],
                             ),
                           ),
@@ -263,30 +272,32 @@ class RegisterView extends GetView<RegisterController> {
                         const SizedBox(
                           height: 10,
                         ),
-
-                        passwordRequired! ?
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "Already have a account?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(color: SECONDARY_APP_COLOR),
-                            ),
-                            TextButton(
-                              onPressed: () => Get.offAllNamed(Routes.LOGIN),
-                              child: Text(
-                                "Sign in",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(color: Colors.blueGrey),
-                              ),
-                            )
-                          ],
-                        ) : const SizedBox.shrink(),
+                        passwordRequired!
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Already have a account?",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(color: SECONDARY_APP_COLOR),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Get.offAllNamed(Routes.LOGIN),
+                                    child: Text(
+                                      "Sign in",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium
+                                          ?.copyWith(color: Colors.blueGrey),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink(),
                         const SizedBox(
                           height: 5,
                         )

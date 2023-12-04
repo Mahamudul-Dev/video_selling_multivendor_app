@@ -24,7 +24,7 @@ class BuyerCartController extends GetxController {
 
       if (response.statusCode == 200) {
         cartLoading.value = false;
-        
+
         cartItems.add(CartItem(
             title: item.title,
             price: item.price,
@@ -38,7 +38,6 @@ class BuyerCartController extends GetxController {
         cartLoading.value = false;
         Get.snackbar('Sorry', 'There are some error!');
       }
-      
     }
   }
 
@@ -88,8 +87,7 @@ class BuyerCartController extends GetxController {
       cartItems.value.addAll(data.cartItems ?? []);
       cartItems.refresh();
       for (var item in cartItems.value) {
-        totalCartItemPrice.value =
-            totalCartItemPrice.value + item.price!;
+        totalCartItemPrice.value = totalCartItemPrice.value + item.price!;
         Logger().i('Price $totalCartItemPrice');
       }
     }
@@ -101,17 +99,21 @@ class BuyerCartController extends GetxController {
   Future<void> viewProduct(int index) async {
     isLoading.value = true;
 
-    final response = await ProductsConnection.getSingleProduct(cartItems.value[index].productId!);
+    final response = await ProductsConnection.getSingleProduct(
+        cartItems.value[index].productId!);
 
     if (response.statusCode == 200) {
       isLoading.value = false;
-      final ProductModel product = ProductModel.fromJson(jsonDecode(response.body));
-      Get.toNamed(Routes.BUYER_PRODUCT_DETAILS, arguments: {'product':product});
+      final ProductModel product =
+          ProductModel.fromJson(jsonDecode(response.body));
+      Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
+          arguments: {'product': product});
     } else {
       isLoading.value = false;
       Get.snackbar('Opps', 'Product not found');
     }
   }
+
   @override
   void onReady() async {
     // await getAllCartItems();

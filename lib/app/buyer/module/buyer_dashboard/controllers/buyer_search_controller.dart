@@ -30,7 +30,8 @@ class BuyerSearchController extends GetxController {
 
       for (var i = 0; i < result.length; i++) {
         searchResult.add(ProductModel.fromJson(result[i]));
-        if (!creatorList.value.contains(ProductModel.fromJson(result[i]).author!)) {
+        if (!creatorList.value
+            .contains(ProductModel.fromJson(result[i]).author!)) {
           creatorList.add(ProductModel.fromJson(result[i]).author!);
         }
       }
@@ -49,15 +50,12 @@ class BuyerSearchController extends GetxController {
           Logger().i({'Filter Max Price': filterMaxPrice.text});
           // filtered maximum price is setted
           filteredResult.value.addAll(searchResult.where((product) =>
-              product.price! <=
-                  double.parse(filterMaxPrice.text) &&
-              product.price! >
-                  double.parse(filterMinPrice.text)));
+              product.price! <= double.parse(filterMaxPrice.text) &&
+              product.price! > double.parse(filterMinPrice.text)));
         } else {
           // filterred max price not setted that's means infinity
-          filteredResult.value.addAll(searchResult.where((product) =>
-              product.price! >
-              double.parse(filterMinPrice.text)));
+          filteredResult.value.addAll(searchResult.where(
+              (product) => product.price! > double.parse(filterMinPrice.text)));
         }
       }
 
@@ -81,15 +79,13 @@ class BuyerSearchController extends GetxController {
         }
       }
 
-
-       if (filteredResult.isNotEmpty) {
-         for (var i = 0; i < filteredResult.length; i++) {
-           if (!filteredCreatorList.value.contains(filteredResult[i].author!)) {
-          filteredCreatorList.add(filteredResult[i].author!);
+      if (filteredResult.isNotEmpty) {
+        for (var i = 0; i < filteredResult.length; i++) {
+          if (!filteredCreatorList.value.contains(filteredResult[i].author!)) {
+            filteredCreatorList.add(filteredResult[i].author!);
+          }
         }
-         }
-       }
-
+      }
     } catch (e) {
       Logger().i(e);
     }

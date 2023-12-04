@@ -15,8 +15,6 @@ class SellerHomeController extends GetxController {
     const SellerProfileView()
   ];
 
-
-
   @override
   void onClose() {
     currentPage.close();

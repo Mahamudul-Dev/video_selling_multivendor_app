@@ -26,53 +26,52 @@ class LoginController extends GetxController {
 
   // function for google signin
   Future<void> signInWithGoogle() async {
-
     try {
       googleAccount.value = await _googleSignIn.signIn();
       Logger().i({"logged in account": googleAccount.value?.displayName});
 
-
       if (googleAccount.value != null) {
         // at first try to login with facebook credential
         final response = await Authentication.loginConnection(
-        email: googleAccount.value!.email, password: googleAccount.value!.id);
+            email: googleAccount.value!.email,
+            password: googleAccount.value!.id);
 
         if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      // account created go to next routes
-      final id = data['_id'];
-      final token = data['token'];
-      final email = data['email'];
-      final accountType = data['accountType'];
-      LocalPreferences.saveCurrentLogin(id, email, token, accountType);
+          final data = jsonDecode(response.body);
+          // account created go to next routes
+          final id = data['_id'];
+          final token = data['token'];
+          final email = data['email'];
+          final accountType = data['accountType'];
+          LocalPreferences.saveCurrentLogin(id, email, token, accountType);
 
-      isLoading.value = false;
-      Get.snackbar('Success!', 'Welcome back!');
-      if (accountType == 'buyer') {
-        Get.offAllNamed(Routes.HOME_BUYER);
-      } else {
-        Get.offAllNamed(Routes.SELLER_HOME);
+          isLoading.value = false;
+          Get.snackbar('Success!', 'Welcome back!');
+          if (accountType == 'buyer') {
+            Get.offAllNamed(Routes.HOME_BUYER);
+          } else {
+            Get.offAllNamed(Routes.SELLER_HOME);
+          }
+        } else if (response.statusCode == 400) {
+          // user not registerd with our server, so let's register it
+          isLoading.value = false;
+          RegisterController.emailController.text = googleAccount.value!.email;
+          RegisterController.nameController.text =
+              googleAccount.value!.displayName ?? '';
+          RegisterController.passwordController.text = googleAccount.value!.id;
+          RegisterController.confirmPasswordController.text =
+              googleAccount.value!.id;
+
+          Get.toNamed(Routes.REGISTER, arguments: {
+            'title': 'One More Step!',
+            'buttonTitle': "Let's Begin",
+            'passwordRequired': false
+          });
+        } else {
+          isLoading.value = false;
+          Get.snackbar('Opps', 'check your credentials');
+        }
       }
-    } else if (response.statusCode == 400) {
-      // user not registerd with our server, so let's register it
-      isLoading.value = false;
-      RegisterController.emailController.text = googleAccount.value!.email;
-      RegisterController.nameController.text = googleAccount.value!.displayName ?? '';
-      RegisterController.passwordController.text = googleAccount.value!.id;
-      RegisterController.confirmPasswordController.text = googleAccount.value!.id;
-
-      Get.toNamed(Routes.REGISTER, arguments: {'title': 'One More Step!', 'buttonTitle': "Let's Begin", 'passwordRequired': false});
-
-
-      
-    } else {
-      isLoading.value = false;
-      Get.snackbar('Opps', 'check your credentials');
-    }
-      }
-
-      
-
     } catch (e) {
       Logger().e(e);
     }
@@ -81,7 +80,7 @@ class LoginController extends GetxController {
   // function for facebook signin
   Future<void> signInWithFacebook() async {
     isLoading.value = true;
-     try {
+    try {
       final LoginResult result = await FacebookAuth.instance.login();
 
       if (result.status == LoginStatus.success) {
@@ -94,49 +93,52 @@ class LoginController extends GetxController {
         final User? user = userCredential.user;
 
         //userCredential.
-        Logger().i(
-          {'email':user?.email, 'name':user?.displayName, 'verified':user?.emailVerified, 'uid':user?.uid, 'photo':user?.photoURL}
-        );
+        Logger().i({
+          'email': user?.email,
+          'name': user?.displayName,
+          'verified': user?.emailVerified,
+          'uid': user?.uid,
+          'photo': user?.photoURL
+        });
 
         // at first try to login with facebook credential
         final response = await Authentication.loginConnection(
-        email: user?.email ?? user!.phoneNumber!, password: user!.uid);
+            email: user?.email ?? user!.phoneNumber!, password: user!.uid);
 
         if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      // account created go to next routes
-      final id = data['_id'];
-      final token = data['token'];
-      final email = data['email'];
-      final accountType = data['accountType'];
-      LocalPreferences.saveCurrentLogin(id, email, token, accountType);
+          final data = jsonDecode(response.body);
+          // account created go to next routes
+          final id = data['_id'];
+          final token = data['token'];
+          final email = data['email'];
+          final accountType = data['accountType'];
+          LocalPreferences.saveCurrentLogin(id, email, token, accountType);
 
-      isLoading.value = false;
-      Get.snackbar('Success!', 'Welcome back!');
-      if (accountType == 'buyer') {
-        Get.offAllNamed(Routes.HOME_BUYER);
-      } else {
-        Get.offAllNamed(Routes.SELLER_HOME);
-      }
-    } else if (response.statusCode == 400) {
-      // user not registerd with our server, so let's register it
-      isLoading.value = false;
-      RegisterController.emailController.text = user.email ?? user.phoneNumber ?? '';
-      RegisterController.nameController.text = user.displayName ?? '';
-      RegisterController.passwordController.text = user.uid;
-      RegisterController.confirmPasswordController.text = user.uid;
+          isLoading.value = false;
+          Get.snackbar('Success!', 'Welcome back!');
+          if (accountType == 'buyer') {
+            Get.offAllNamed(Routes.HOME_BUYER);
+          } else {
+            Get.offAllNamed(Routes.SELLER_HOME);
+          }
+        } else if (response.statusCode == 400) {
+          // user not registerd with our server, so let's register it
+          isLoading.value = false;
+          RegisterController.emailController.text =
+              user.email ?? user.phoneNumber ?? '';
+          RegisterController.nameController.text = user.displayName ?? '';
+          RegisterController.passwordController.text = user.uid;
+          RegisterController.confirmPasswordController.text = user.uid;
 
-      Get.toNamed(Routes.REGISTER, arguments: {'title': 'One More Step!', 'buttonTitle': "Let's Begin", 'passwordRequired': false});
-
-
-      
-    } else {
-      isLoading.value = false;
-      Get.snackbar('Opps', 'check your credentials');
-    }
-
-
-
+          Get.toNamed(Routes.REGISTER, arguments: {
+            'title': 'One More Step!',
+            'buttonTitle': "Let's Begin",
+            'passwordRequired': false
+          });
+        } else {
+          isLoading.value = false;
+          Get.snackbar('Opps', 'check your credentials');
+        }
 
         // logger.d("Logged in as: ${user?.displayName}");
         Logger().i('Logged In ${user?.displayName}');
@@ -151,7 +153,6 @@ class LoginController extends GetxController {
       Logger().i('Error  $e');
       // return null;
     }
-    
   }
 
   // function for email & password signin
@@ -166,28 +167,28 @@ class LoginController extends GetxController {
 
     try {
       if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      // account created go to next routes
-      final id = data['_id'];
-      final token = data['token'];
-      final email = data['email'];
-      final accountType = data['accountType'];
-      LocalPreferences.saveCurrentLogin(id, email, token, accountType);
+        final data = jsonDecode(response.body);
+        // account created go to next routes
+        final id = data['_id'];
+        final token = data['token'];
+        final email = data['email'];
+        final accountType = data['accountType'];
+        LocalPreferences.saveCurrentLogin(id, email, token, accountType);
 
-      isLoading.value = false;
-      Get.snackbar('Success!', 'Welcome back!');
-      if (accountType == 'buyer') {
-        Get.offAllNamed(Routes.HOME_BUYER);
+        isLoading.value = false;
+        Get.snackbar('Success!', 'Welcome back!');
+        if (accountType == 'buyer') {
+          Get.offAllNamed(Routes.HOME_BUYER);
+        } else {
+          Get.offAllNamed(Routes.SELLER_HOME);
+        }
+      } else if (response.statusCode == 400) {
+        isLoading.value = false;
+        Get.snackbar('Opps', response.body);
       } else {
-        Get.offAllNamed(Routes.SELLER_HOME);
+        isLoading.value = false;
+        Get.snackbar('Opps', 'check your credentials');
       }
-    } else if (response.statusCode == 400) {
-      isLoading.value = false;
-      Get.snackbar('Opps', response.body);
-    } else {
-      isLoading.value = false;
-      Get.snackbar('Opps', 'check your credentials');
-    }
     } catch (e) {
       isLoading.value = false;
       Get.snackbar('Opps', 'check your connection');

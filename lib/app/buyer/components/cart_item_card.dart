@@ -77,26 +77,32 @@ class CartItemCard extends StatelessWidget {
                         )),
                       ],
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     InkWell(
-                      onTap: ()=>Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':author.id}),
+                      onTap: () => Get.toNamed(Routes.AUTHOR_PROFILE,
+                          arguments: {'id': author.id}),
                       child: Row(
                         children: [
                           CircleAvatar(
                             radius: 8,
                             backgroundColor: Colors.grey,
-                            backgroundImage: CachedNetworkImageProvider(author.profilePic != 'N/A' ? BASE_URL+author.profilePic! : PLACEHOLDER_PHOTO),
+                            backgroundImage: CachedNetworkImageProvider(
+                                author.profilePic != 'N/A'
+                                    ? BASE_URL + author.profilePic!
+                                    : PLACEHOLDER_PHOTO),
                           ),
                           Flexible(
                               child: Text(
-                                        author.name ?? 'Unknown',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(color: Colors.grey),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      )),
+                            author.name ?? 'Unknown',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: Colors.grey),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          )),
                         ],
                       ),
                     ),

@@ -124,91 +124,104 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
           if (snapshot.hasData) {
             return Obx(() => controller.filteredResult.value.isNotEmpty
                 ? Column(
-                  children: [
-                    Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, top: 8),
-                                child: Text(
-                                  'Creators',
-                                  style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                      color: SECONDARY_APP_COLOR),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, top: 8),
-                                child: Text(
-                                  'See all',
-                                  style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: SECONDARY_APP_COLOR),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: 80,
-                            // color: Colors.green,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 10),
-                            child: _buildCreatorList(controller.filteredCreatorList),
-                          ),
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 15),
+                                left: 10, right: 10, top: 8),
                             child: Text(
-                              'Products',
+                              'Creators',
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20,
                                   color: SECONDARY_APP_COLOR),
                             ),
                           ),
-                    Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return VideoCardTile(
-                              thumbnail:
-                                  controller.filteredResult.value[index].thumbnail ==
-                                          'N/A'
-                                      ? PLACEHOLDER_THUMBNAIL
-                                      : controller.filteredResult.value[index]
-                                              .thumbnail ??
-                                          PLACEHOLDER_PHOTO,
-                              title: controller.filteredResult.value[index].title ??
-                                  'Untitled',
-                              views: controller.filteredResult[index].viewsCount ?? 0,
-                              initialRating:
-                                  controller.filteredResult[index].ratings ?? 0,
-                              author: controller.filteredResult.value[index].author!,
-                              price: controller.filteredResult.value[index].price
-                                  .toString(),
-                              onItemPressed: () => Get.toNamed(
-                                  Routes.BUYER_PRODUCT_DETAILS,
-                                  arguments: {
-                                    'product': controller.filteredResult.value[index]
-                                  }),
-                              onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':controller.filteredResult.value[index].author!.id}),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Divider(
-                              color: Colors.grey,
-                              thickness: 0.3,
-                              indent: 10,
-                              endIndent: 10,
-                            );
-                          },
-                          itemCount: controller.filteredResult.value.length),
-                    ),
-                  ],
-                )
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10, right: 10, top: 8),
+                            child: Text(
+                              'See all',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: SECONDARY_APP_COLOR),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 80,
+                        // color: Colors.green,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 10),
+                        child:
+                            _buildCreatorList(controller.filteredCreatorList),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, right: 10, top: 15),
+                        child: Text(
+                          'Products',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: SECONDARY_APP_COLOR),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return VideoCardTile(
+                                thumbnail: controller.filteredResult
+                                            .value[index].thumbnail ==
+                                        'N/A'
+                                    ? PLACEHOLDER_THUMBNAIL
+                                    : controller.filteredResult.value[index]
+                                            .thumbnail ??
+                                        PLACEHOLDER_PHOTO,
+                                title: controller
+                                        .filteredResult.value[index].title ??
+                                    'Untitled',
+                                views: controller
+                                        .filteredResult[index].viewsCount ??
+                                    0,
+                                initialRating:
+                                    controller.filteredResult[index].ratings ??
+                                        0,
+                                author: controller
+                                    .filteredResult.value[index].author!,
+                                price: controller
+                                    .filteredResult.value[index].price
+                                    .toString(),
+                                onItemPressed: () => Get.toNamed(
+                                    Routes.BUYER_PRODUCT_DETAILS,
+                                    arguments: {
+                                      'product':
+                                          controller.filteredResult.value[index]
+                                    }),
+                                onAuthorPressed: () => Get.toNamed(
+                                    Routes.AUTHOR_PROFILE,
+                                    arguments: {
+                                      'id': controller.filteredResult
+                                          .value[index].author!.id
+                                    }),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(
+                                color: Colors.grey,
+                                thickness: 0.3,
+                                indent: 10,
+                                endIndent: 10,
+                              );
+                            },
+                            itemCount: controller.filteredResult.value.length),
+                      ),
+                    ],
+                  )
                 : controller.searchResult.isEmpty
                     ? SizedBox(
                         height: MediaQuery.of(context).size.width * 0.4,
@@ -300,7 +313,12 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                           'product':
                                               controller.searchResult[index]
                                         }),
-                                    onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':controller.searchResult[index].author!.id}),
+                                    onAuthorPressed: () => Get.toNamed(
+                                        Routes.AUTHOR_PROFILE,
+                                        arguments: {
+                                          'id': controller
+                                              .searchResult[index].author!.id
+                                        }),
                                   );
                                 },
                                 separatorBuilder: (context, index) {
@@ -348,13 +366,14 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
 
   Widget _buildCreatorList(List<Author> creatorList) {
     return ListView.separated(
-      scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
-                onTap: ()=> Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {'id':creatorList[index].id}),
+                onTap: () => Get.toNamed(Routes.AUTHOR_PROFILE,
+                    arguments: {'id': creatorList[index].id}),
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.grey,
@@ -365,7 +384,9 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                           : creatorList[index].profilePic!),
                 ),
               ),
-              const SizedBox(height: 3,),
+              const SizedBox(
+                height: 3,
+              ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
                 child: Text(
@@ -373,7 +394,9 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500, fontSize: 14, color: SECONDARY_APP_COLOR),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: SECONDARY_APP_COLOR),
                 ),
               )
             ],

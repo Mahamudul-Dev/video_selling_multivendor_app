@@ -29,11 +29,13 @@ class CartView extends GetView<BuyerCartController> {
                       itemBuilder: (context, index) {
                         return CartItemCard(
                           productName: controller.cartItems[index].title ?? '',
-                          productImage:
-                              controller.cartItems[index].thumbnail != 'N/A' ? '$BASE_URL${controller.cartItems[index].thumbnail}' : PLACEHOLDER_THUMBNAIL,
+                          productImage: controller.cartItems[index].thumbnail !=
+                                  'N/A'
+                              ? '$BASE_URL${controller.cartItems[index].thumbnail}'
+                              : PLACEHOLDER_THUMBNAIL,
                           price: controller.cartItems[index].price.toString(),
                           author: controller.cartItems[index].author!,
-                          onProductPress: ()=> controller.viewProduct(index),
+                          onProductPress: () => controller.viewProduct(index),
                           onRemovePress: () {
                             showDialog(
                                 context: context,
