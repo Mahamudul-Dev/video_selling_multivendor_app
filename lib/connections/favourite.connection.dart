@@ -13,13 +13,13 @@ class FavouriteConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
-  static Future<http.Response> removeFavouriteItem(String productId) async {
+  static Future<http.Response> removeFavouriteItem(String productId, String favoriteId) async {
     try {
-      final response = await http.delete(Uri.parse('$BASE_URL$FAVOURITE_API'),
+      final response = await http.delete(Uri.parse('$BASE_URL$FAVOURITE_API$favoriteId'),
           body: {
             'productId': productId
           },
@@ -29,7 +29,7 @@ class FavouriteConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -44,7 +44,7 @@ class FavouriteConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

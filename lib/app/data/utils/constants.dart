@@ -11,7 +11,10 @@ const FACEBOOK_CLIENT_TOKEN = "51f825d8ec719b40f44e1648ddb96d2c";
 const TAWK_LIVE_CHAT_URL =
     'https://embed.tawk.to/6568d8a2ff45ca7d47855f7c/1hggosfgi';
 
+
+
 const String BASE_URL = 'http://203.161.62.117:5656';
+const String SOCKET_URL = 'http://203.161.62.117:3434';
 
 // Authentication endpoints
 const String REGISTER_API = '/api/v1/user/register';
@@ -39,3 +42,7 @@ const String FAVOURITE_API =
 // Wishlist Endpoints
 const String WISHLIST_API = '/api/v1/wishlist/';
 const String ADD_WISHLIST_API = '/api/v1/wishlist/addItemToWishlist';
+
+// Messages endpoint
+const String INBOX_API = '/api/v1/message/allConversations';
+const String MESSAGES_API = '/api/v1/message';

@@ -13,11 +13,11 @@ String wishlistModelToJson(WishlistModel data) => json.encode(data.toJson());
 
 class WishlistModel {
   final List<WishlistItem>? wishlistItems;
-  final String? favouriteId;
+  final String? wishlistId;
 
   WishlistModel({
     this.wishlistItems,
-    this.favouriteId,
+    this.wishlistId,
   });
 
   factory WishlistModel.fromJson(Map<String, dynamic> json) => WishlistModel(
@@ -25,14 +25,14 @@ class WishlistModel {
             ? []
             : List<WishlistItem>.from(
                 json["wishlistItems"]!.map((x) => WishlistItem.fromJson(x))),
-        favouriteId: json["favouriteId"],
+        wishlistId: json["wishlistId"],
       );
 
   Map<String, dynamic> toJson() => {
         "wishlistItems": wishlistItems == null
             ? []
             : List<dynamic>.from(wishlistItems!.map((x) => x.toJson())),
-        "favouriteId": favouriteId,
+        "wishlistId": wishlistId,
       };
 }
 

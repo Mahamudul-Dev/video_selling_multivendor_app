@@ -14,6 +14,11 @@ const String MAINTAINANCE_MOOD_ANIM = 'assets/anim/maintainance-mood-anim.json';
 const String NO_CART_ANIM = 'assets/anim/empty-cart-anim.json';
 const String FIRE_ANIM = 'assets/anim/fire-anim.lottie';
 const String NO_SEARCH_RESULT_ANIM = 'assets/anim/no_search_result_anim.lottie';
+const String ERROR_ANIM = 'assets/anim/error-anim.json';
+const String EMPTY_BOX_ANIM = 'assets/anim/empty-box-anim.json';
+const String NO_CHAT_ANIM = 'assets/anim/no-chat-anim.json';
+const String NO_NOTIFICATION_ANIM = 'assets/anim/no-notification-anim.json';
+
 
 // icons
 const String GOOGLE_LOGO = 'assets/images/google-icon.png';

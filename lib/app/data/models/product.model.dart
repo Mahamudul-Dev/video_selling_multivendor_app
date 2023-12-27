@@ -1,82 +1,67 @@
-// To parse this JSON data, do
-//
-//     final productModel = productModelFromJson(jsonString);
-
-import 'dart:convert';
-
-ProductModel productModelFromJson(String str) =>
-    ProductModel.fromJson(json.decode(str));
-
-String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
-  final String? id;
-  final String? title;
-  final String? description;
-  final double? price;
-  final String? category;
-  final List<String>? tags;
-  final String? duration;
-  final String? thumbnail;
-  final String? downloadUrl;
-  final String? previewUrl;
-  final String? videoStatus;
-  final int? videoStrike;
-  final int? totalSales;
-  final int? viewsCount;
-  final Author? author;
-  final double? ratings;
-  final List<Review>? reviews;
-  final int? v;
+    String? id;
+    String? title;
+    String? description;
+    double? price;
+    String? category;
+    List<String>? tags;
+    String? duration;
+    String? thumbnail;
+    String? downloadUrl;
+    String? previewUrl;
+    String? videoStatus;
+    List<dynamic>? videoStrike;
+    int? totalSales;
+    int? viewsCount;
+    Author? author;
+    double? ratings;
+    List<Review>? reviews;
+    int? v;
 
-  ProductModel({
-    this.id,
-    this.title,
-    this.description,
-    this.price,
-    this.category,
-    this.tags,
-    this.duration,
-    this.thumbnail,
-    this.downloadUrl,
-    this.previewUrl,
-    this.videoStatus,
-    this.videoStrike,
-    this.totalSales,
-    this.viewsCount,
-    this.author,
-    this.ratings,
-    this.reviews,
-    this.v,
-  });
+    ProductModel({
+        this.id,
+        this.title,
+        this.description,
+        this.price,
+        this.category,
+        this.tags,
+        this.duration,
+        this.thumbnail,
+        this.downloadUrl,
+        this.previewUrl,
+        this.videoStatus,
+        this.videoStrike,
+        this.totalSales,
+        this.viewsCount,
+        this.author,
+        this.ratings,
+        this.reviews,
+        this.v,
+    });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["_id"],
         title: json["title"],
         description: json["description"],
-        price: json["price"].toDouble(),
+        price: json["price"]?.toDouble(),
         category: json["category"],
-        tags: json["tags"] == null
-            ? []
-            : List<String>.from(json["tags"]!.map((x) => x)),
+        tags: json["tags"] == null ? [] : List<String>.from(json["tags"]!.map((x) => x)),
         duration: json["duration"],
         thumbnail: json["thumbnail"],
         downloadUrl: json["downloadUrl"],
         previewUrl: json["previewUrl"],
         videoStatus: json["videoStatus"],
-        videoStrike: json["videoStrike"],
+        videoStrike: json["videoStrike"] == null ? [] : List<dynamic>.from(json["videoStrike"]!.map((x) => x)),
         totalSales: json["totalSales"],
         viewsCount: json["viewsCount"],
         author: json["author"] == null ? null : Author.fromJson(json["author"]),
         ratings: json["ratings"].toDouble(),
-        reviews: json["reviews"] == null
-            ? []
-            : List<Review>.from(
-                json["reviews"]!.map((x) => Review.fromJson(x))),
+        reviews: json["reviews"] == null ? [] : List<Review>.from(json["reviews"]!.map((x) => Review.fromJson(x))),
         v: json["__v"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "_id": id,
         "title": title,
         "description": description,
@@ -88,74 +73,76 @@ class ProductModel {
         "downloadUrl": downloadUrl,
         "previewUrl": previewUrl,
         "videoStatus": videoStatus,
-        "videoStrike": videoStrike,
+        "videoStrike": videoStrike == null ? [] : List<dynamic>.from(videoStrike!.map((x) => x)),
         "totalSales": totalSales,
         "viewsCount": viewsCount,
         "author": author?.toJson(),
         "ratings": ratings,
-        "reviews": reviews == null
-            ? []
-            : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+        "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x.toJson())),
         "__v": v,
-      };
+    };
 }
 
 class Author {
-  final String? id;
-  final String? name;
-  final String? country;
-  final String? city;
-  final int? totalVideos;
-  final String? profilePic;
+    String? authorId;
+    String? name;
+    String? country;
+    String? city;
+    int? totalVideos;
+    String? profilePic;
 
-  Author({
-    this.id,
-    this.name,
-    this.country,
-    this.city,
-    this.totalVideos,
-    this.profilePic,
-  });
+    Author({
+        this.authorId,
+        this.name,
+        this.country,
+        this.city,
+        this.totalVideos,
+        this.profilePic,
+    });
 
-  factory Author.fromJson(Map<String, dynamic> json) => Author(
-        id: json["authorId"],
+    factory Author.fromJson(Map<String, dynamic> json) => Author(
+        authorId: json["authorId"],
         name: json["name"],
         country: json["country"],
         city: json["city"],
-        totalVideos: json["totalVideos"],
+        totalVideos: json["totalVideos"] ?? 0,
         profilePic: json["profilePic"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
+    Map<String, dynamic> toJson() => {
+        "authorId": authorId,
         "name": name,
         "country": country,
         "city": city,
         "totalVideos": totalVideos,
         "profilePic": profilePic,
-      };
+    };
 }
 
 class Review {
-  final String? text;
-  final int? rating;
-  final String? reviewer;
+    String? user;
+    int? rating;
+    String? review;
+    String? id;
 
-  Review({
-    this.text,
-    this.rating,
-    this.reviewer,
-  });
+    Review({
+        this.user,
+        this.rating,
+        this.review,
+        this.id,
+    });
 
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-        text: json["text"],
+    factory Review.fromJson(Map<String, dynamic> json) => Review(
+        user: json["user"],
         rating: json["rating"],
-        reviewer: json["reviewer"],
-      );
+        review: json["review"],
+        id: json["_id"],
+    );
 
-  Map<String, dynamic> toJson() => {
-        "text": text,
+    Map<String, dynamic> toJson() => {
+        "user": user,
         "rating": rating,
-        "reviewer": reviewer,
-      };
+        "review": review,
+        "_id": id,
+    };
 }

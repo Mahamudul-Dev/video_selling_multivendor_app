@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a027c25-da57-45b8-8515-150a95de9f90" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/app/data/models/progress.model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/progress/bindings/progress_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/progress/controllers/progress_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/app/seller/modules/progress/views/progress_view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/components/cart_item_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/components/cart_item_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/controllers/buyer_cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/views/buyer_cart_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_cart/views/buyer_cart_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_dashboard_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_search_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/controllers/buyer_search_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_search_delegate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_dashboard/views/buyer_search_delegate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/controllers/buyer_product_details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/controllers/buyer_product_details_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/views/buyer_product_details_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_product_details/views/buyer_product_details_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/views/buyer_products_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_products/views/buyer_products_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/models/cart.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/models/cart.model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/models/product.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/models/product.model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/login/controllers/login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/login/controllers/login_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/register/controllers/register_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/register/controllers/register_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/register/views/register_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/register/views/register_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/views/buyer_profile_edit_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/buyer/module/buyer_profile/views/buyer_profile_edit_view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/connections/cart.connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/cart.connection.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/seller/modules/create_product/controllers/create_product_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/seller/modules/create_product/controllers/create_product_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/seller/modules/create_product/views/create_product_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/seller/modules/create_product/views/create_product_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/bindings/seller_dashboard_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/bindings/seller_dashboard_binding.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/controllers/seller_dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/controllers/seller_dashboard_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/views/seller_dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/seller/modules/seller_dashboard/views/seller_dashboard_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/connections/products.connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/products.connection.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/mahamudul-dev/.android/avd/Pixel_3_API_28.avd]" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/android">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,22 +79,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mahamudul-dev/Workspace/Flutter Project/video_selling_multivendor_app&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "/home/mahamudul-dev/development/flutter/bin",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="$PROJECT_DIR$/../../Flutter P…g_multivendor_app/android [signinReport]" />

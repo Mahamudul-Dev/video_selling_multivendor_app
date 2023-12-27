@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
-import '../app/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
 class Authentication {
@@ -36,7 +35,7 @@ class Authentication {
       } else {
         Logger().e('An unexpected error occurred: $e');
       }
-      throw e;
+      rethrow;
     }
   }
 
@@ -60,7 +59,7 @@ class Authentication {
       } else {
         Logger().e('An unexpected error occurred: $e');
       }
-      throw e;
+      rethrow;
     }
   }
 }

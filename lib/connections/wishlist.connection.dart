@@ -13,13 +13,13 @@ class WishlistConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
-  static Future<http.Response> removeWishlistItem(String productId) async {
+  static Future<http.Response> removeWishlistItem(String productId, String wishlistId) async {
     try {
-      final response = await http.delete(Uri.parse('$BASE_URL$WISHLIST_API'),
+      final response = await http.delete(Uri.parse('$BASE_URL$WISHLIST_API$wishlistId'),
           body: {
             'productId': productId
           },
@@ -29,7 +29,7 @@ class WishlistConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -44,7 +44,7 @@ class WishlistConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

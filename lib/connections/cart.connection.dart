@@ -13,14 +13,14 @@ class CartConnection {
       });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   // remove a item from cart
-  static Future<http.Response> removeCartItem(String productId) async {
+  static Future<http.Response> removeCartItem(String productId, String cartId) async {
     try {
-      final response = await http.delete(Uri.parse('$BASE_URL$CART'), body: {
+      final response = await http.delete(Uri.parse('$BASE_URL$CART$cartId'), body: {
         'productId': productId
       }, headers: {
         'Authorization':
@@ -28,7 +28,7 @@ class CartConnection {
       });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -44,7 +44,7 @@ class CartConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

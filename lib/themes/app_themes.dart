@@ -3,18 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'app_colors.dart';
+part 'app_colors.dart';
 
-final APP_THEME = ThemeData(
+final lightTheme = ThemeData(
     useMaterial3: true,
     textTheme: text_theme,
-    iconTheme: const IconThemeData(
-      color: Colors.white, // Change this color to your desired color
-    ),
-    appBarTheme: AppBarTheme(
-        backgroundColor: SECONDARY_APP_COLOR,
-        foregroundColor: Colors.white,
-        titleTextStyle: text_theme.titleLarge?.copyWith(color: Colors.white)));
+    colorScheme: lightColorScheme);
+
+final darkTheme = ThemeData(
+    useMaterial3: true,
+    textTheme: text_theme, colorScheme: darkColorScheme);
+
+
 
 final text_theme = TextTheme(
     titleLarge: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 20),
@@ -22,8 +22,8 @@ final text_theme = TextTheme(
     titleSmall: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
     labelLarge: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 16),
     labelMedium: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 16),
-    labelSmall: TextStyle(),
-    bodyLarge: TextStyle(),
+    labelSmall: const TextStyle(),
+    bodyLarge: const TextStyle(),
     bodyMedium:
         GoogleFonts.poppins(fontWeight: FontWeight.normal, fontSize: 14),
     bodySmall:

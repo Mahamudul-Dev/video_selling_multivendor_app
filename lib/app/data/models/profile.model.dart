@@ -45,7 +45,8 @@ class Profile {
   final String? name;
   final String? userName;
   final String? email;
-  final bool? emailIsVerified;
+  final bool? isEmailVerified;
+  final bool? userNameChanged;
   final String? password;
   final String? accountType;
   final String? accountStatus;
@@ -69,7 +70,8 @@ class Profile {
     this.name,
     this.userName,
     this.email,
-    this.emailIsVerified,
+    this.isEmailVerified,
+    this.userNameChanged,
     this.password,
     this.accountType,
     this.accountStatus,
@@ -94,7 +96,8 @@ class Profile {
         name: json["name"],
         userName: json["userName"],
         email: json["email"],
-        emailIsVerified: json["emailIsVerified"],
+        isEmailVerified: json["isEmailVerified"],
+        userNameChanged: json["userNameChanged"],
         password: json["password"],
         accountType: json["accountType"],
         accountStatus: json["accountStatus"],
@@ -130,7 +133,8 @@ class Profile {
         "name": name,
         "userName": userName,
         "email": email,
-        "emailIsVerified": emailIsVerified,
+        "isEmailVerified": isEmailVerified,
+        "userNameChanged" : userNameChanged,
         "password": password,
         "accountType": accountType,
         "accountStatus": accountStatus,

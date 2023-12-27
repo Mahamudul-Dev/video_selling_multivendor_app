@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -16,7 +18,7 @@ class ProfileConnection {
       Logger().i(response.body);
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -24,14 +26,14 @@ class ProfileConnection {
       {required String id, required Map<String, dynamic> bodyData}) async {
     try {
       final response = await http
-          .put(Uri.parse('$BASE_URL$UPDATE_PROFILE_API$id'), headers: {
+          .put(Uri.parse('$BASE_URL$UPDATE_PROFILE_API$id'), body: jsonEncode(bodyData), headers: {
         'Authorization':
             'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
       });
       Logger().i(response.body);
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -51,7 +53,7 @@ class ProfileConnection {
       final response = await request.send();
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

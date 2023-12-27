@@ -1,48 +1,56 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-import '../buyer/module/author_profile/bindings/author_profile_binding.dart';
-import '../buyer/module/author_profile/views/author_profile_view.dart';
-import '../buyer/module/buyer_cart/bindings/buyer_cart_binding.dart';
-import '../buyer/module/buyer_cart/views/buyer_cart_view.dart';
-import '../buyer/module/buyer_chat/bindings/buyer_chat_binding.dart';
-import '../buyer/module/buyer_chat/views/buyer_chat_view.dart';
-import '../buyer/module/buyer_dashboard/bindings/buyer_dashboard_binding.dart';
-import '../buyer/module/buyer_dashboard/views/buyer_dashboard_view.dart';
-import '../buyer/module/buyer_message/bindings/buyer_message_binding.dart';
-import '../buyer/module/buyer_message/views/buyer_message_view.dart';
-import '../buyer/module/buyer_product_details/bindings/buyer_product_details_binding.dart';
-import '../buyer/module/buyer_product_details/views/buyer_product_details_view.dart';
-import '../buyer/module/buyer_products/bindings/buyer_products_binding.dart';
-import '../buyer/module/buyer_products/views/buyer_products_view.dart';
-import '../buyer/module/buyer_profile/bindings/buyer_profile_binding.dart';
-import '../buyer/module/buyer_profile/views/buyer_profile_edit_view.dart';
-import '../buyer/module/buyer_profile/views/buyer_profile_view.dart';
-import '../buyer/module/home/bindings/buyer_home_binding.dart';
-import '../buyer/module/home/views/buyer_home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
-import '../modules/register/bindings/register_binding.dart';
-import '../modules/register/views/register_view.dart';
+import '../modules/buyer/author_profile/bindings/author_profile_binding.dart';
+import '../modules/buyer/author_profile/views/author_profile_view.dart';
+import '../modules/buyer/buyer_cart/bindings/buyer_cart_binding.dart';
+import '../modules/buyer/buyer_cart/views/buyer_cart_view.dart';
+import '../modules/buyer/buyer_dashboard/bindings/buyer_dashboard_binding.dart';
+import '../modules/buyer/buyer_dashboard/views/buyer_dashboard_view.dart';
+import '../modules/buyer/buyer_product_details/bindings/buyer_product_details_binding.dart';
+import '../modules/buyer/buyer_product_details/views/buyer_product_details_view.dart';
+import '../modules/buyer/buyer_products/bindings/buyer_products_binding.dart';
+import '../modules/buyer/buyer_products/views/buyer_products_view.dart';
+import '../modules/buyer/buyer_profile/bindings/buyer_profile_binding.dart';
+import '../modules/buyer/buyer_profile/views/buyer_profile_edit_view.dart';
+import '../modules/buyer/buyer_profile/views/buyer_profile_view.dart';
+import '../modules/buyer/favorite_list/bindings/favorite_list_binding.dart';
+import '../modules/buyer/favorite_list/views/favorite_list_view.dart';
+import '../modules/buyer/home/bindings/buyer_home_binding.dart';
+import '../modules/buyer/home/views/buyer_home_view.dart';
+import '../modules/buyer/subscribed_creator_list/bindings/subscribed_creator_list_binding.dart';
+import '../modules/buyer/subscribed_creator_list/views/subscribed_creator_list_view.dart';
+import '../modules/buyer/wish_list/bindings/wish_list_binding.dart';
+import '../modules/buyer/wish_list/views/wish_list_view.dart';
+import '../modules/global/inbox/bindings/inbox_binding.dart';
+import '../modules/global/inbox/views/inbox_view.dart';
+import '../modules/global/login/bindings/login_binding.dart';
+import '../modules/global/login/views/login_view.dart';
+import '../modules/global/messages/bindings/message_binding.dart';
+import '../modules/global/messages/views/message_view.dart';
+import '../modules/global/notification/bindings/notification_binding.dart';
+import '../modules/global/notification/views/notification_view.dart';
+import '../modules/global/register/bindings/register_binding.dart';
+import '../modules/global/register/views/register_view.dart';
+import '../modules/global/support_chat/bindings/support_chat_binding.dart';
+import '../modules/global/support_chat/views/support_chat_view.dart';
 import '../preferences/local_preferences.dart';
-import '../seller/modules/create_product/bindings/create_product_binding.dart';
-import '../seller/modules/create_product/views/create_product_view.dart';
-import '../seller/modules/product_details/bindings/product_details_binding.dart';
-import '../seller/modules/product_details/views/product_details_view.dart';
-import '../seller/modules/seller_dashboard/bindings/seller_dashboard_binding.dart';
-import '../seller/modules/seller_dashboard/views/seller_dashboard_view.dart';
-import '../seller/modules/seller_home/bindings/seller_home_binding.dart';
-import '../seller/modules/seller_home/views/seller_home_view.dart';
-import '../seller/modules/seller_inbox/bindings/seller_inbox_binding.dart';
-import '../seller/modules/seller_inbox/views/seller_inbox_view.dart';
-import '../seller/modules/seller_notification/bindings/seller_notification_binding.dart';
-import '../seller/modules/seller_notification/views/seller_notification_view.dart';
-import '../seller/modules/seller_profile/bindings/seller_profile_binding.dart';
-import '../seller/modules/seller_profile/views/seller_profile_view.dart';
-import '../seller/modules/wallet/bindings/wallet_binding.dart';
-import '../seller/modules/wallet/views/wallet_view.dart';
-import '../seller/modules/wallet_history/bindings/wallet_history_binding.dart';
-import '../seller/modules/wallet_history/views/wallet_history_view.dart';
+import '../modules/seller/create_product/bindings/create_product_binding.dart';
+import '../modules/seller/create_product/views/create_product_view.dart';
+import '../modules/seller/product_details/bindings/product_details_binding.dart';
+import '../modules/seller/product_details/views/product_details_view.dart';
+import '../modules/seller/seller_dashboard/bindings/seller_dashboard_binding.dart';
+import '../modules/seller/seller_dashboard/views/seller_dashboard_view.dart';
+import '../modules/seller/seller_home/bindings/seller_home_binding.dart';
+import '../modules/seller/seller_home/views/seller_home_view.dart';
+import '../modules/seller/seller_notification/bindings/seller_notification_binding.dart';
+import '../modules/seller/seller_notification/views/seller_notification_view.dart';
+import '../modules/seller/seller_profile/bindings/seller_profile_binding.dart';
+import '../modules/seller/seller_profile/views/seller_profile_view.dart';
+import '../modules/seller/wallet/bindings/wallet_binding.dart';
+import '../modules/seller/wallet/views/wallet_view.dart';
+import '../modules/seller/wallet_history/bindings/wallet_history_binding.dart';
+import '../modules/seller/wallet_history/views/wallet_history_view.dart';
 
 part 'app_routes.dart';
 
@@ -55,9 +63,11 @@ class AppPages {
     if (data.token != null && data.accountType != null) {
       if (data.accountType == 'Buyer') {
         return Routes.HOME_BUYER;
-      } else {
+      } else if (data.accountType == 'Seller') {
         Logger().i({'Account Type': data.accountType});
         return Routes.SELLER_HOME;
+      } else {
+        return Routes.LOGIN;
       }
     } else {
       return Routes.LOGIN;
@@ -93,9 +103,9 @@ class AppPages {
       binding: CartBinding(),
     ),
     GetPage(
-      name: _Paths.CHAT_BUYER,
-      page: () => const BuyerChatView(),
-      binding: BuyerChatBinding(),
+      name: _Paths.INBOX,
+      page: () => const InboxView(),
+      binding: InboxBinding(),
     ),
     GetPage(
       name: _Paths.Buyer_PROFILE,
@@ -108,9 +118,9 @@ class AppPages {
       binding: BuyerProfileBinding(),
     ),
     GetPage(
-      name: _Paths.BUYER_MESSAGE,
-      page: () => const BuyerMessageView(),
-      binding: BuyerMessageBinding(),
+      name: _Paths.MESSAGE,
+      page: () => MessageView(),
+      binding: MessageBinding(),
     ),
     GetPage(
       name: _Paths.BUYER_PRODUCTS,
@@ -132,11 +142,6 @@ class AppPages {
       name: _Paths.WALLET,
       page: () => const WalletView(),
       binding: WalletBinding(),
-    ),
-    GetPage(
-      name: _Paths.SELLER_INBOX,
-      page: () => const SellerInboxView(),
-      binding: SellerInboxBinding(),
     ),
     GetPage(
       name: _Paths.SELLER_PROFILE,
@@ -165,7 +170,7 @@ class AppPages {
         SellerHomeBinding(),
         SellerDashboardBinding(),
         WalletBinding(),
-        SellerInboxBinding(),
+        InboxBinding(),
         SellerProfileBinding()
       ],
     ),
@@ -178,6 +183,31 @@ class AppPages {
       name: _Paths.AUTHOR_PROFILE,
       page: () => AuthorProfileView(),
       binding: AuthorProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUPPORT_CHAT,
+      page: () => const SupportChatView(),
+      binding: SupportChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORITE_LIST,
+      page: () => const FavoriteListView(),
+      binding: FavoriteListBinding(),
+    ),
+    GetPage(
+      name: _Paths.WISH_LIST,
+      page: () => const WishListView(),
+      binding: WishListBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBSCRIBED_CREATOR_LIST,
+      page: () => const SubscribedCreatorListView(),
+      binding: SubscribedCreatorListBinding(),
     ),
   ];
 }

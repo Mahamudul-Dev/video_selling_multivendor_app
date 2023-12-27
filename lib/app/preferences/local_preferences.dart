@@ -1,4 +1,5 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 
 class LocalPreferences {
   static final box = GetStorage();
@@ -9,6 +10,27 @@ class LocalPreferences {
     box.write('email', email);
     box.write('token', token);
     box.write('accountType', accountType);
+  }
+
+  static clearPrefrences(){
+    box.remove('id');
+    box.remove('email');
+    box.remove('token');
+    box.remove('accountType');
+  }
+
+  static void saveThemeMode(bool isDark){
+    box.write('themeMode', isDark);
+  }
+
+  static bool getThemeMode(){
+    bool themeMode = true;
+    try {
+     themeMode = box.read('themeModel');
+    } catch (e) {
+      Logger().e(e);
+    }
+    return themeMode;
   }
 
   static LocalLoginInformationModel getCurrentLoginInfo() {

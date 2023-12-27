@@ -1,10 +1,15 @@
+
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
+import 'package:video_selling_multivendor_app/app/data/models/product.model.dart';
 
 import '../app/data/utils/enums.dart';
 import '../app/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
 class ProductsConnection {
+  static final _dio = Dio();
   static Future<http.Response> getAllProducts() async {
     try {
       final response = await http.get(Uri.parse('$BASE_URL$PRODUCTS'),
@@ -14,7 +19,7 @@ class ProductsConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -30,7 +35,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       case Filter.SALEL2H:
@@ -43,7 +48,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       case Filter.RATINGH2L:
@@ -56,7 +61,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       case Filter.RATINGL2H:
@@ -69,7 +74,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       case Filter.PRICEH2L:
@@ -82,7 +87,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       case Filter.PRICEL2H:
@@ -95,7 +100,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
 
       default:
@@ -108,7 +113,7 @@ class ProductsConnection {
               });
           return response;
         } catch (e) {
-          throw e;
+          rethrow;
         }
     }
   }
@@ -122,7 +127,7 @@ class ProductsConnection {
       });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -135,7 +140,59 @@ class ProductsConnection {
           });
       return response;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
+
+  static Future<Response> uploadVideo(ProductModel product,Function(int) onUploadProgress) async {
+    try {
+
+      Logger().i(product.toJson());
+
+      // Create FormData for the video file
+      FormData formData = FormData.fromMap({
+        "title": product.title,
+        "description": product.description,
+        "price": product.price,
+        "category": product.category,
+        "tags": product.tags,
+        "duration": product.duration,
+        "thumbnail": await MultipartFile.fromFile(
+          product.thumbnail!,
+        ),
+        "downloadUrl": await MultipartFile.fromFile(
+          product.downloadUrl!,
+        ),
+        "previewUrl": await MultipartFile.fromFile(
+          product.previewUrl!,
+        )
+      });
+
+      // Send the video file using Dio with onSendProgress callback
+      final res = await _dio.post(
+        BASE_URL+PRODUCTS,
+        data: formData,
+        options: Options(
+          headers: {
+            'Authorization':
+                'Bearer ${LocalPreferences.getCurrentLoginInfo().token}'
+          }
+        ),
+        onSendProgress: (int sent, int total) {
+          final percentage = (sent / total * 100).toInt();
+          Logger().i({'Uploading_Progress: ': percentage});
+          onUploadProgress(percentage);
+        },
+      );
+
+
+      print("Video uploaded successfully!");
+      return res;
+    } catch (error) {
+      print("Error uploading video: $error");
+      rethrow; // Rethrow the error to handle it appropriately in the UI
+    }
+  
+  }
+
 }
