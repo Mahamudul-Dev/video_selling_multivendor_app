@@ -8,7 +8,7 @@ import '../../../../../../connections/connections.dart';
 import '../../../../data/models/product.model.dart';
 import '../../../../data/models/profile.model.dart';
 import '../../../../data/models/search.model.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 
 class SellerDashboardController extends GetxController {
   RxList<ProductModel> productList = <ProductModel>[].obs;

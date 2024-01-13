@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:video_selling_multivendor_app/app/data/models/product.model.dart';
 
 import '../app/data/utils/enums.dart';
-import '../app/preferences/local_preferences.dart';
+import '../app/data/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
 class ProductsConnection {

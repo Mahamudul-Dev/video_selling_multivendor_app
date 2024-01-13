@@ -5,20 +5,20 @@ import 'package:get/get.dart';
 import '../controllers/product_details_controller.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
-  const ProductDetailsView({Key? key}) : super(key: key);
+  ProductDetailsView({Key? key}) : super(key: key);
+  final String productId = Get.arguments['id'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ProductDetailsView'),
-        centerTitle: true,
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.share, color: Theme.of(context).colorScheme.onBackground,)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.edit, color: Theme.of(context).colorScheme.onBackground,))
+        ],
       ),
-      body: const Center(
-        child: Text(
-          'ProductDetailsView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: ListView(
+        
+      )
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:get/get.dart';
 import '../../../../data/utils/asset_maneger.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/inbox_controller.dart';
 

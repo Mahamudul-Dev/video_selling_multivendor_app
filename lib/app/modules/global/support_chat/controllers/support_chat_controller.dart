@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../../connections/connections.dart';
 import '../../../../data/models/profile.model.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 
 class SupportChatController extends GetxController {
   

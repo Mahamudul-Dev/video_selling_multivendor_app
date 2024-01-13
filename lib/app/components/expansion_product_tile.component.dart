@@ -10,6 +10,7 @@ class ExpansionProductTile extends StatelessWidget {
     required this.totalSaleTime,
     required this.totalEarning,
     required this.category,
+    required this.onDetailsPressed
   }) : super(key: key);
 
   final String productName;
@@ -19,6 +20,7 @@ class ExpansionProductTile extends StatelessWidget {
   final String totalSaleTime;
   final String totalEarning;
   final String category;
+  final void Function()? onDetailsPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +156,7 @@ class ExpansionProductTile extends StatelessWidget {
             SizedBox(
                 height: 30,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onDetailsPressed,
                     style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll(Colors.white)),

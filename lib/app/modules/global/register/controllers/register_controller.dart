@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 import 'package:video_selling_multivendor_app/app/routes/app_pages.dart';
 
 import '../../../../../connections/authentication.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 
 class RegisterController extends GetxController {
   final formKey = GlobalKey<FormState>();

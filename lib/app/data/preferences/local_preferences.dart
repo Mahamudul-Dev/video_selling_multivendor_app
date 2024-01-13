@@ -12,11 +12,15 @@ class LocalPreferences {
     box.write('accountType', accountType);
   }
 
-  static clearPrefrences(){
-    box.remove('id');
-    box.remove('email');
+  // static clearPrefrences(){
+  //   box.remove('id');
+  //   box.remove('email');
+  //   box.remove('token');
+  //   box.remove('accountType');
+  // }
+
+  static removeToken(){
     box.remove('token');
-    box.remove('accountType');
   }
 
   static void saveThemeMode(bool isDark){

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import '../../../../../connections/authentication.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 import '../../../../routes/app_pages.dart';
 import '../../register/controllers/register_controller.dart';
 
@@ -204,6 +204,13 @@ class LoginController extends GetxController {
 
     // Use the RegExp `hasMatch` method to check if the email matches the pattern
     return emailRegExp.hasMatch(email);
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    emailController.text = LocalPreferences.getCurrentLoginInfo().email ?? '';
   }
 
   @override

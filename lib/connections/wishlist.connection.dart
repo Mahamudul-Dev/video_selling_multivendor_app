@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-import '../app/preferences/local_preferences.dart';
+import '../app/data/preferences/local_preferences.dart';
 import '../app/data/utils/constants.dart';
 
 class WishlistConnection {

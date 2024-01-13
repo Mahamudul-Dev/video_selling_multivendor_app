@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:video_selling_multivendor_app/app/preferences/local_preferences.dart';
+import 'package:video_selling_multivendor_app/app/data/preferences/local_preferences.dart';
 import 'package:video_selling_multivendor_app/services/socket_service.dart';
 
 import '../../../../../connections/message.connection.dart';

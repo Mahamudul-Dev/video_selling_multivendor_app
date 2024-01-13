@@ -273,6 +273,7 @@ Future<void> getProductThumbnail() async {
 
     if(response.statusCode == 200){
       status.value = 'Upload success!';
+      Get.snackbar('Congratulations!', 'Video uploaded successfully!.');
       isUploading.value = false;
       Get.back();
     }

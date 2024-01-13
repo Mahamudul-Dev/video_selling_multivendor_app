@@ -8,6 +8,7 @@ import '../../../../data/utils/constants.dart';
 import '../../../../components/expansion_product_tile.component.dart';
 import '../../../../components/graph_monitor.component.dart';
 import '../../../../components/top_profile.component.dart';
+import '../../../../routes/app_pages.dart';
 import '../../seller_home/controllers/seller_home_controller.dart';
 import '../../seller_profile/controllers/seller_profile_controller.dart';
 import '../controllers/seller_dashboard_controller.dart';
@@ -124,7 +125,9 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
                                 totalSaleTime: controller.formatNumber(
                                     snapshot.data?[index].totalSales ?? 0),
                                 totalEarning: controller.formatNumber(82173618),
-                                category: snapshot.data?[index].category ?? '');
+                                category: snapshot.data?[index].category ?? '',
+                                onDetailsPressed: ()=> Get.toNamed(Routes.PRODUCT_DETAILS, arguments: {'id':snapshot.data?[index].id}),  
+                              );
                           },
                           itemCount: snapshot.data?.length,
                         );

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../connections/profile.connection.dart';
 import '../../../../data/models/profile.model.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 import '../../../../routes/app_pages.dart';
 
 class SellerProfileController extends GetxController {
@@ -30,7 +30,7 @@ class SellerProfileController extends GetxController {
   }
 
   void logout(){
-    LocalPreferences.clearPrefrences();
+    LocalPreferences.removeToken();
     Get.offAllNamed(Routes.LOGIN);
   }
 }

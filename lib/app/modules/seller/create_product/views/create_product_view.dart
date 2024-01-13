@@ -229,34 +229,34 @@ class CreateProductView extends GetView<CreateProductController> {
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
-                  controller: controller.tagEditingFieldController,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium,
-                  decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(),
-                      border: const OutlineInputBorder(),
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .labelMedium,
-                      hintText: 'Add tags'),
-                  onFieldSubmitted: (value) => controller.addTag(value),
-                ),
-                Obx(() => Wrap(
-                    spacing: 5.0,
-                    children: controller.videoTags
-                        .map((element) => Chip(
-                              onDeleted: () => controller.onTagRemove(element),
-                              label: Text(element),
-                              labelStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium,
-                              avatar: const Icon(
-                                Icons.label,
-                              ),
-                            ))
-                        .toList()))
+                // TextFormField(
+                //   controller: controller.tagEditingFieldController,
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .bodyMedium,
+                //   decoration: InputDecoration(
+                //       focusedBorder: const OutlineInputBorder(),
+                //       border: const OutlineInputBorder(),
+                //       hintStyle: Theme.of(context)
+                //           .textTheme
+                //           .labelMedium,
+                //       hintText: 'Add tags'),
+                //   onFieldSubmitted: (value) => controller.addTag(value),
+                // ),
+                // Obx(() => Wrap(
+                //     spacing: 5.0,
+                //     children: controller.videoTags
+                //         .map((element) => Chip(
+                //               onDeleted: () => controller.onTagRemove(element),
+                //               label: Text(element),
+                //               labelStyle: Theme.of(context)
+                //                   .textTheme
+                //                   .bodyMedium,
+                //               avatar: const Icon(
+                //                 Icons.label,
+                //               ),
+                //             ))
+                //         .toList()))
               ],
             )),
           )

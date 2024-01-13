@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tawk/flutter_tawk.dart';
 
 import 'package:get/get.dart';
-import 'package:video_selling_multivendor_app/app/preferences/local_preferences.dart';
+import 'package:video_selling_multivendor_app/app/data/preferences/local_preferences.dart';
 
 import '../../../../components/loading_animation.dart';
 import '../controllers/support_chat_controller.dart';

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 import '../app/data/utils/constants.dart';
-import '../app/preferences/local_preferences.dart';
+import '../app/data/preferences/local_preferences.dart';
 
 class MessageConnection {
   static final _dio = Dio();

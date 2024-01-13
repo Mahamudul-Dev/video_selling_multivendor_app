@@ -1,10 +1,8 @@
 import 'package:logger/logger.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:video_selling_multivendor_app/app/data/models/message.model.dart';
 
 import '../app/data/utils/constants.dart';
-import '../app/modules/global/inbox/controllers/inbox_controller.dart';
-import '../app/preferences/local_preferences.dart';
+import '../app/data/preferences/local_preferences.dart';
 
 class SocketService {
   

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:video_selling_multivendor_app/app/data/utils/constants.dart';
 import '../../../../components/loading_animation.dart';
 import '../../../../data/utils/asset_maneger.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 import '../../inbox/controllers/inbox_controller.dart';
 import '../controllers/message_controller.dart';
 

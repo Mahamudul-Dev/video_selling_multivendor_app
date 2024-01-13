@@ -34,7 +34,7 @@ import '../modules/global/register/bindings/register_binding.dart';
 import '../modules/global/register/views/register_view.dart';
 import '../modules/global/support_chat/bindings/support_chat_binding.dart';
 import '../modules/global/support_chat/views/support_chat_view.dart';
-import '../preferences/local_preferences.dart';
+import '../data/preferences/local_preferences.dart';
 import '../modules/seller/create_product/bindings/create_product_binding.dart';
 import '../modules/seller/create_product/views/create_product_view.dart';
 import '../modules/seller/product_details/bindings/product_details_binding.dart';
@@ -155,7 +155,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PRODUCT_DETAILS,
-      page: () => const ProductDetailsView(),
+      page: () => ProductDetailsView(),
       binding: ProductDetailsBinding(),
     ),
     GetPage(

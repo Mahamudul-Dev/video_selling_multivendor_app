@@ -10,7 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../../connections/connections.dart';
 import '../../../../data/models/profile.model.dart';
-import '../../../../preferences/local_preferences.dart';
+import '../../../../data/preferences/local_preferences.dart';
 import '../../../../data/utils/constants.dart';
 import '../../../../routes/app_pages.dart';
 
@@ -155,7 +155,7 @@ class BuyerProfileController extends GetxController {
   Future<void> updateUsername()async{}
 
   void logout(){
-    LocalPreferences.clearPrefrences();
+    LocalPreferences.removeToken();
     Get.offAllNamed(Routes.LOGIN);
   }
 
