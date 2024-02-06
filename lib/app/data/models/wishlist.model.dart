@@ -56,7 +56,7 @@ class WishlistItem {
   factory WishlistItem.fromJson(Map<String, dynamic> json) => WishlistItem(
         productId: json["productId"],
         title: json["title"],
-        price: json["price"],
+        price: json["price"]?.toDouble(),
         thumbnail: json["thumbnail"],
         duration: json["duration"],
         author: json["author"] == null ? null : Author.fromJson(json["author"]),

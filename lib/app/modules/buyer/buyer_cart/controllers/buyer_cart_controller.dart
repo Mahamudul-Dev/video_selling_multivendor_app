@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:video_selling_multivendor_app/app/data/models/checkout_request.model.dart';
 
 import '../../../../../../connections/connections.dart';
 import '../../../../data/models/cart.model.dart';
@@ -59,10 +60,30 @@ class BuyerCartController extends GetxController {
     }
   }
 
-  void checkout() {
+  Future<void> checkout() async {
     // TO:DO: add payment processing functionality
+    CheckoutRequestModel requestModel = CheckoutRequestModel(productIds: []);
+    try{
+      for(int i = 0; i < cartItems.length ; i++){
+        requestModel.productIds!.add(cartItems[i].productId!);
+      }
+      Logger().i(requestModel.productIds!.length);
 
-    Get.snackbar('Opps', 'Checkout is not added yet');
+      final response = await ProductsConnection.checkoutProduct(requestModel);
+      Logger().e(response.body);
+      if(response.statusCode == 200){
+        Get.snackbar('Congrats', 'You purchased your content successfully!');
+        cartItems.clear();
+        totalCartItemPrice.value = 0.0;
+        cartItems.refresh();
+      } else {
+
+        Get.snackbar('Opps', 'Failed to checkout');
+      }
+    } catch(e){
+      Logger().e(e);
+      Get.snackbar('Opps', 'There was an server error.');
+    }
   }
 
   Future<Profile?> getProfile({required id}) async {

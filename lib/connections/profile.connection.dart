@@ -18,7 +18,7 @@ class ProfileConnection {
       Logger().i(response.body);
       return response;
     } catch (e) {
-      rethrow;
+      throw Exception(e);
     }
   }
 

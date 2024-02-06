@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../components/loading_animation.dart';
 import '../../../../components/video_card_tile.dart';
 import '../../../../data/utils/asset_maneger.dart';
 import '../../../../data/utils/constants.dart';
+import '../../../../routes/app_pages.dart';
 import '../controllers/wish_list_controller.dart';
 
 class WishListView extends GetView<WishListController> {
@@ -55,8 +57,7 @@ class WishListView extends GetView<WishListController> {
                               bool? shouldDismiss =
                                   await _showConfirmationDialog(
                                       context: context,
-                                      productId: controller.wishlistProducts
-                                          .value[index].productId!);
+                                      productId: controller.wishlistProducts[index].productId!);
                               if (shouldDismiss ?? false) {
                                 Navigator.of(context)
                                     .pop(); // Dismiss the widget
@@ -96,19 +97,30 @@ class WishListView extends GetView<WishListController> {
                             ),
                             child: VideoCardTile(
                               title: controller
-                                      .wishlistProducts.value[index].title ??
+                                      .wishlistProducts[index].title ??
                                   '',
                               thumbnail: controller.wishlistProducts
-                                          .value[index].thumbnail !=
+                                          [index].thumbnail !=
                                       null
-                                  ? '$BASE_URL${controller.wishlistProducts.value[index].thumbnail}'
+                                  ? '$BASE_URL${controller.wishlistProducts[index].thumbnail}'
                                   : PLACEHOLDER_THUMBNAIL,
                               author: controller
-                                  .wishlistProducts.value[index].author!,
+                                  .wishlistProducts[index].author!,
                               price: controller
-                                  .wishlistProducts.value[index].price
+                                  .wishlistProducts[index].price
                                   .toString(),
                               views: 0,
+                              onItemPressed: () => Get.toNamed(
+                                  Routes.BUYER_PRODUCT_DETAILS,
+                                  parameters: {
+                                    'productId':
+                                    controller.wishlistProducts[index].productId!
+                                  }),
+                              onAuthorPressed: () => Get.toNamed(
+                                  Routes.AUTHOR_PROFILE,
+                                  arguments: {
+                                    'id': controller.wishlistProducts[index].author!.authorId
+                                  }),
                             ));
                       },
                       itemCount: controller.wishlistProducts.length,
@@ -116,6 +128,7 @@ class WishListView extends GetView<WishListController> {
               }
 
               if (snapshot.hasError) {
+                Logger().e(snapshot.error);
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

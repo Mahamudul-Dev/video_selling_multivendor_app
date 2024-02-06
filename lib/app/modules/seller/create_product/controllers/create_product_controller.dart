@@ -74,57 +74,107 @@ class CreateProductController extends GetxController {
   }
 
 
+//   Future<void> getTrailer() async {
+//   FilePickerResult? result = await FilePicker.platform.pickFiles(
+//     type: FileType.video,
+//   );
+//
+//   if (result != null && result.files.isNotEmpty) {
+//     String filePath = result.files.single.path ?? '';
+//     Logger().i({'Video': filePath});
+//
+//     // Check file size
+//     File videoFile = File(filePath);
+//     int fileSizeInBytes = videoFile.lengthSync();
+//     int fileSizeInMB = fileSizeInBytes ~/ (1024 * 1024); // Convert to MB
+//
+//     if (fileSizeInMB > 300) {
+//       // Show error Snackbar for file size greater than 300 MB
+//       Get.showSnackbar(const GetSnackBar(message: 'Trailer file must be smaller then 300 MB', backgroundColor: Colors.red, duration: Duration(seconds: 2)));
+//       return;
+//     }
+//
+//     // Check video duration
+//     final videoInfo = await VideoCompress.getMediaInfo(filePath);
+//     double videoDurationInSeconds = videoInfo.duration ?? 0.0;
+//     double videoDurationInMinutes = videoDurationInSeconds / 60000.00;
+//
+//     Logger().i({
+//       'Video duration in sec': videoDurationInSeconds,
+//       'Video duration in min': videoDurationInMinutes
+//     });
+//
+//     if (videoDurationInMinutes > 2.00) {
+//       // Show error Snackbar for video duration longer than 2 minutes
+//       Get.showSnackbar(const GetSnackBar(message: 'Video duration should be less than 2 minutes', backgroundColor: Colors.red, duration: Duration(seconds: 2),));
+//       return;
+//     }
+//
+//     // Set the trailer path and thumbnail
+//     trailerPath.value = filePath;
+//     trailerThumbnail.value = await VideoCompress.getFileThumbnail(trailerPath.value);
+//     mediaScrollController.animateTo(
+//               mediaScrollController.position.maxScrollExtent / 2,
+//               duration: const Duration(seconds: 1), // Adjust the duration as needed
+//               curve: Curves.easeInOut,
+//             );
+//   } else {
+//     // User canceled file picking
+//     return Future.value(null);
+//   }
+// }
+
   Future<void> getTrailer() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.video,
-  );
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.video,
+    );
 
-  if (result != null && result.files.isNotEmpty) {
-    String filePath = result.files.single.path ?? '';
-    Logger().i({'Video': filePath});
+    if (result != null && result.files.isNotEmpty) {
+      String filePath = result.files.single.path ?? '';
+      Logger().i({'Video': filePath});
 
-    // Check file size
-    File videoFile = File(filePath);
-    int fileSizeInBytes = videoFile.lengthSync();
-    int fileSizeInMB = fileSizeInBytes ~/ (1024 * 1024); // Convert to MB
+      // Check file size
+      File videoFile = File(filePath);
+      int fileSizeInBytes = videoFile.lengthSync();
+      int fileSizeInMB = fileSizeInBytes ~/ (1024 * 1024); // Convert to MB
 
-    if (fileSizeInMB > 300) {
-      // Show error Snackbar for file size greater than 300 MB
-      Get.showSnackbar(const GetSnackBar(message: 'Trailer file must be smaller then 300 MB', backgroundColor: Colors.red, duration: Duration(seconds: 2)));
-      return;
+      if (fileSizeInMB > 300) {
+        // Show error Snackbar for file size greater than 300 MB
+        Get.showSnackbar(const GetSnackBar(message: 'Trailer file must be smaller than 300 MB', backgroundColor: Colors.red, duration: Duration(seconds: 2)));
+        return;
+      }
+
+      // Check video duration
+      final videoInfo = await VideoCompress.getMediaInfo(filePath);
+      double videoDurationInMilliseconds = videoInfo.duration ?? 0.0;
+      double videoDurationInSec = videoDurationInMilliseconds / 1000.0;
+
+      Logger().i({
+        'Video duration in sec': videoDurationInSec,
+      });
+
+      if (videoDurationInSec > 30.0) {
+        // Show error Snackbar for video duration longer than 30 seconds
+        Get.showSnackbar(const GetSnackBar(message: 'Trailer duration max 30 seconds', backgroundColor: Colors.red, duration: Duration(seconds: 2),));
+        return;
+      }
+
+      // Set the trailer path and thumbnail
+      trailerPath.value = filePath;
+      trailerThumbnail.value = await VideoCompress.getFileThumbnail(trailerPath.value);
+      mediaScrollController.animateTo(
+        mediaScrollController.position.maxScrollExtent / 2,
+        duration: const Duration(seconds: 1), // Adjust the duration as needed
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // User canceled file picking
+      return Future.value(null);
     }
-
-    // Check video duration
-    final videoInfo = await VideoCompress.getMediaInfo(filePath);
-    double videoDurationInSeconds = videoInfo.duration ?? 0.0;
-    double videoDurationInMinutes = videoDurationInSeconds / 60000.00;
-
-    Logger().i({
-      'Video duration in sec': videoDurationInSeconds,
-      'Video duration in min': videoDurationInMinutes
-    });
-
-    if (videoDurationInMinutes > 2.00) {
-      // Show error Snackbar for video duration longer than 2 minutes
-      Get.showSnackbar(const GetSnackBar(message: 'Video duration should be less than 2 minutes', backgroundColor: Colors.red, duration: Duration(seconds: 2),));
-      return;
-    }
-
-    // Set the trailer path and thumbnail
-    trailerPath.value = filePath;
-    trailerThumbnail.value = await VideoCompress.getFileThumbnail(trailerPath.value);
-    mediaScrollController.animateTo(
-              mediaScrollController.position.maxScrollExtent / 2,
-              duration: const Duration(seconds: 1), // Adjust the duration as needed
-              curve: Curves.easeInOut,
-            );
-  } else {
-    // User canceled file picking
-    return Future.value(null);
   }
-}
 
-Future<void> getProductThumbnail() async {
+
+  Future<void> getProductThumbnail() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.image,
   );
@@ -135,7 +185,7 @@ Future<void> getProductThumbnail() async {
 
     videoThumbnailPath.value = filePath;
 
-    productThumbnail.value = await VideoCompress.getFileThumbnail(filePath);
+    productThumbnail.value = File(videoThumbnailPath.value);
   } else {
     // User canceled file picking
     return Future.value(null);
@@ -275,7 +325,7 @@ Future<void> getProductThumbnail() async {
       status.value = 'Upload success!';
       Get.snackbar('Congratulations!', 'Video uploaded successfully!.');
       isUploading.value = false;
-      Get.back();
+      Get.offNamed(Routes.SELLER_HOME);
     }
 
     } else {
@@ -296,7 +346,6 @@ Future<void> getProductThumbnail() async {
     videoDescController.dispose();
     tagEditingFieldController.dispose();
     priceController.dispose();
-
     isUploading.close();
     progress.close();
     status.close();

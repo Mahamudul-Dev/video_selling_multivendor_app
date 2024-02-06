@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "com.example.video_selling_multivendor_app",
+      "package_name": "com.mycellvids.app",
+      "sha256_cert_fingerprints": ["63:63:36:DE:14:4D:A6:A6:86:95:D4:75:57:56:DE:07:6E:69:AE:17:E8:D7:BB:2D:B4:8A:86:EE:00:07:F3:90"]
+    }
+  }
+]

@@ -50,9 +50,12 @@ class CartItemCard extends StatelessWidget {
               flex: 2,
               child: InkWell(
                 onTap: onProductPress,
-                child: Image(
-                  image: CachedNetworkImageProvider(productImage),
-                  fit: BoxFit.fitWidth,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(13), bottomLeft: Radius.circular(13)),
+                  child: Image(
+                    image: CachedNetworkImageProvider(productImage),
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               )),
           Expanded(

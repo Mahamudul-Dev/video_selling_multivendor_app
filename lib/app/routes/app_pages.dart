@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
+import '../data/preferences/local_preferences.dart';
 import '../modules/buyer/author_profile/bindings/author_profile_binding.dart';
 import '../modules/buyer/author_profile/views/author_profile_view.dart';
 import '../modules/buyer/buyer_cart/bindings/buyer_cart_binding.dart';
@@ -18,6 +19,8 @@ import '../modules/buyer/favorite_list/bindings/favorite_list_binding.dart';
 import '../modules/buyer/favorite_list/views/favorite_list_view.dart';
 import '../modules/buyer/home/bindings/buyer_home_binding.dart';
 import '../modules/buyer/home/views/buyer_home_view.dart';
+import '../modules/buyer/purchase_list/bindings/purchase_list_binding.dart';
+import '../modules/buyer/purchase_list/views/purchase_list_view.dart';
 import '../modules/buyer/subscribed_creator_list/bindings/subscribed_creator_list_binding.dart';
 import '../modules/buyer/subscribed_creator_list/views/subscribed_creator_list_view.dart';
 import '../modules/buyer/wish_list/bindings/wish_list_binding.dart';
@@ -34,7 +37,8 @@ import '../modules/global/register/bindings/register_binding.dart';
 import '../modules/global/register/views/register_view.dart';
 import '../modules/global/support_chat/bindings/support_chat_binding.dart';
 import '../modules/global/support_chat/views/support_chat_view.dart';
-import '../data/preferences/local_preferences.dart';
+import '../modules/global/video_player/bindings/video_player_binding.dart';
+import '../modules/global/video_player/views/video_player_view.dart';
 import '../modules/seller/create_product/bindings/create_product_binding.dart';
 import '../modules/seller/create_product/views/create_product_view.dart';
 import '../modules/seller/product_details/bindings/product_details_binding.dart';
@@ -208,6 +212,16 @@ class AppPages {
       name: _Paths.SUBSCRIBED_CREATOR_LIST,
       page: () => const SubscribedCreatorListView(),
       binding: SubscribedCreatorListBinding(),
+    ),
+    GetPage(
+      name: _Paths.PURCHASE_LIST,
+      page: () => const PurchaseListView(),
+      binding: PurchaseListBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_PLAYER,
+      page: () => VideoPlayerView(),
+      binding: VideoPlayerBinding(),
     ),
   ];
 }

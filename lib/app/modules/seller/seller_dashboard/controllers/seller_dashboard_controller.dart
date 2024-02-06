@@ -74,22 +74,6 @@ class SellerDashboardController extends GetxController {
     return productList.value;
   }
 
-  // String formatDuration(Duration duration) {
-  //   String twoDigits(int n) {
-  //     if (n >= 10) return "$n";
-  //     return "0$n";
-  //   }
-
-  //   String hours = duration.inHours > 0 ? "${duration.inHours} hours " : "";
-  //   String minutes = duration.inMinutes.remainder(60) > 0
-  //       ? "${duration.inMinutes.remainder(60)} min "
-  //       : "";
-  //   String seconds = duration.inSeconds.remainder(60) > 0
-  //       ? "${duration.inSeconds.remainder(60)} sec"
-  //       : "";
-
-  //   return "$hours$minutes$seconds";
-  // }
 
   String formatDuration(double durationInMilliseconds) {
     int milliseconds = durationInMilliseconds.floor();

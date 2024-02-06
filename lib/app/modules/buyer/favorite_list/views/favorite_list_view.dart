@@ -9,117 +9,125 @@ import '../../../../components/loading_animation.dart';
 import '../../../../components/video_card_tile.dart';
 import '../../../../data/utils/asset_maneger.dart';
 import '../../../../data/utils/constants.dart';
+import '../../../../routes/app_pages.dart';
 import '../controllers/favorite_list_controller.dart';
 
 class FavoriteListView extends GetView<FavoriteListController> {
   const FavoriteListView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Favourits'),
-          centerTitle: true,
-        ),
-        body: FutureBuilder(
-            future: controller.getFavoriteProducts(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Obx(() => ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Dismissible(
-                            key: UniqueKey(),
-                            onDismissed: (direction) async {
-                              bool? shouldDismiss =
-                                  await _showConfirmationDialog(
-                                      context: context,
-                                      productId: 
-                                          controller.favouriteProducts
-                                              .value[index].productId!);
-                              if (shouldDismiss ?? false) {
-                                Navigator.of(context)
-                                    .pop(); // Dismiss the widget
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Canceles'),
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                );
-                              }
-                            },
-                            background: Container(
-                              color:
-                                  Theme.of(context).colorScheme.errorContainer,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(
-                                      Icons.delete_rounded,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onErrorContainer,
-                                    ),
-                                    Icon(
-                                      Icons.delete_rounded,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onErrorContainer,
-                                    ),
-                                  ],
-                                ),
-                              ),
+      appBar: AppBar(
+        title: const Text('Favourits'),
+        centerTitle: true,
+      ),
+      body: FutureBuilder(
+        future: controller.getFavoriteProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Obx(() => ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) async {
+                        bool? shouldDismiss = await _showConfirmationDialog(
+                            context: context,
+                            productId: controller
+                                .favouriteProducts.value[index].productId!);
+                        if (shouldDismiss ?? false) {
+                          Navigator.of(context).pop(); // Dismiss the widget
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Canceles'),
+                              duration: Duration(seconds: 2),
                             ),
-                            child: VideoCardTile(
-                              title: controller
-                                      .favouriteProducts.value[index].title ??
-                                  '',
-                              thumbnail: controller.favouriteProducts
-                                          .value[index].thumbnail !=
-                                      null
-                                  ? '$BASE_URL${controller.favouriteProducts.value[index].thumbnail}'
-                                  : PLACEHOLDER_THUMBNAIL,
-                              author: controller
-                                  .favouriteProducts.value[index].author!,
-                              price: controller
-                                  .favouriteProducts.value[index].price
-                                  .toString(),
-                              views: 0,
-                            ));
+                          );
+                        }
                       },
-                      itemCount: controller.favouriteProducts.length,
-                    ));
-              }
-
-              if (snapshot.hasError) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    LottieBuilder.asset(
-                      ERROR_ANIM,
-                      repeat: false,
-                      height: MediaQuery.of(context).size.width * 0.3,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 10),
-                      child: Text(
-                        'There was an error\nwe are fixing this issus as soon as possible. Please try again latter',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.error),
+                      background: Container(
+                        color: Theme.of(context).colorScheme.errorContainer,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.delete_rounded,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onErrorContainer,
+                              ),
+                              Icon(
+                                Icons.delete_rounded,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onErrorContainer,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    )
-                  ],
-                );
-              }
+                      child: VideoCardTile(
+                        title: controller.favouriteProducts[index].title ?? '',
+                        thumbnail: controller
+                                    .favouriteProducts[index].thumbnail !=
+                                null
+                            ? '$BASE_URL${controller.favouriteProducts[index].thumbnail}'
+                            : PLACEHOLDER_THUMBNAIL,
+                        author: controller.favouriteProducts[index].author!,
+                        price: controller.favouriteProducts[index].price
+                            .toString(),
+                        views: 0,
+                        onItemPressed: () => Get.toNamed(
+                            Routes.BUYER_PRODUCT_DETAILS,
+                            parameters: {
+                              'productId': controller.favouriteProducts[index].productId!
+                            }),
+                        onAuthorPressed: () =>
+                            Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
+                          'id': controller
+                              .favouriteProducts[index].author!.authorId
+                        }),
+                      ),
+                    );
+                  },
+                  itemCount: controller.favouriteProducts.length,
+                ));
+          }
 
-              return const LoadingAnimation();
-            }));
+          if (snapshot.hasError) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LottieBuilder.asset(
+                  ERROR_ANIM,
+                  repeat: false,
+                  height: MediaQuery.of(context).size.width * 0.3,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Text(
+                    'There was an error\nwe are fixing this issus as soon as possible. Please try again latter',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Theme.of(context).colorScheme.error),
+                  ),
+                )
+              ],
+            );
+          }
+
+          return const LoadingAnimation();
+        },
+      ),
+    );
   }
 
   Future<bool?> _showConfirmationDialog(

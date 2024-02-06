@@ -28,13 +28,16 @@ class LocalPreferences {
   }
 
   static bool getThemeMode(){
-    bool themeMode = true;
+    bool isLight = false;
     try {
-     themeMode = box.read('themeModel');
+      final savedThemeMode = box.read('themeMode');
+      print({"Theme Mode": savedThemeMode});
+
+      isLight = savedThemeMode != null ? box.read('themeMode') : false;
     } catch (e) {
       Logger().e(e);
     }
-    return themeMode;
+    return isLight;
   }
 
   static LocalLoginInformationModel getCurrentLoginInfo() {

@@ -10,6 +10,7 @@ class ExpansionProductTile extends StatelessWidget {
     required this.totalSaleTime,
     required this.totalEarning,
     required this.category,
+    required this.isActive,
     required this.onDetailsPressed
   }) : super(key: key);
 
@@ -20,6 +21,7 @@ class ExpansionProductTile extends StatelessWidget {
   final String totalSaleTime;
   final String totalEarning;
   final String category;
+  final bool isActive;
   final void Function()? onDetailsPressed;
 
   @override
@@ -146,6 +148,28 @@ class ExpansionProductTile extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Status',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  isActive ? 'Active' : 'Hold',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall?.copyWith(color: isActive ? null : Colors.red),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

@@ -214,12 +214,12 @@ class SellerProfileView extends GetView<SellerProfileController> {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          title: Text('Change theme', style: Theme.of(context).textTheme.labelMedium,),
+          title: Text('Dark Mode', style: Theme.of(context).textTheme.labelMedium,),
           leading: const Icon(Icons.style),
           trailing: Obx(
                 () => Switch(
-                  thumbIcon: MaterialStatePropertyAll(Get.find<ThemeController>().isDarkMode.value ? const Icon(Icons.nightlight_round) : const Icon(Icons.sunny)),
-                  value: Get.find<ThemeController>().isDarkMode.value,
+                  thumbIcon: MaterialStatePropertyAll(Get.find<ThemeController>().isLightMode.value ? const Icon(Icons.sunny) : const Icon(Icons.nightlight_round)),
+                  value: Get.find<ThemeController>().isLightMode.value,
                   onChanged: (value) => Get.find<ThemeController>().toggleTheme(),
                 ),
               ),

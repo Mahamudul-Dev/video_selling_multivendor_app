@@ -24,19 +24,8 @@ class Authentication {
           await http.post(Uri.parse(BASE_URL + REGISTER_API), body: bodyData);
       return response;
     } catch (e) {
-      if (e is DioError) {
-        if (e.response != null) {
-          Logger()
-              .e('Request failed with status code ${e.response!.statusCode}');
-          Logger().e('Response data: ${e.response!.data}');
-        } else {
-          Logger().e('Request failed with an error: $e');
-        }
-      } else {
-        Logger().e('An unexpected error occurred: $e');
-      }
-      rethrow;
-    }
+    throw Exception(e);
+  }
   }
 
   // call login api

@@ -12,29 +12,31 @@ import '../../../../routes/app_pages.dart';
 import '../../register/controllers/register_controller.dart';
 
 class LoginController extends GetxController {
-  final _googleSignIn = GoogleSignIn();
+  // final _googleSignIn = GoogleSignIn();
   final formKey = GlobalKey<FormState>();
   final checkInfoFormKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   RxBool obsecure = true.obs;
   RxBool isSeller = false.obs;
   RxBool isBuyer = false.obs;
+  final _auth = FirebaseAuth.instance;
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  Rx<GoogleSignInAccount?> googleAccount = Rx<GoogleSignInAccount?>(null);
+  Rx<UserCredential?> googleAccount = Rx<UserCredential?>(null);
 
   // function for google signin
   Future<void> signInWithGoogle() async {
     try {
-      googleAccount.value = await _googleSignIn.signIn();
-      Logger().i({"logged in account": googleAccount.value?.displayName});
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      googleAccount.value = await _auth.signInWithProvider(googleAuthProvider);
+      Logger().i({"logged in account": googleAccount.value?.user?.email});
 
       if (googleAccount.value != null) {
-        // at first try to login with facebook credential
+        // at first try to login with google credential
         final response = await Authentication.loginConnection(
-            email: googleAccount.value!.email,
-            password: googleAccount.value!.id);
+            email: googleAccount.value!.user!.email!,
+            password: googleAccount.value!.user!.uid);
 
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
@@ -55,12 +57,12 @@ class LoginController extends GetxController {
         } else if (response.statusCode == 400) {
           // user not registerd with our server, so let's register it
           isLoading.value = false;
-          RegisterController.emailController.text = googleAccount.value!.email;
+          RegisterController.emailController.text = googleAccount.value!.user!.email!;
           RegisterController.nameController.text =
-              googleAccount.value!.displayName ?? '';
-          RegisterController.passwordController.text = googleAccount.value!.id;
+              googleAccount.value?.user?.displayName ?? '';
+          RegisterController.passwordController.text = googleAccount.value!.user!.uid;
           RegisterController.confirmPasswordController.text =
-              googleAccount.value!.id;
+              googleAccount.value!.user!.uid;
 
           Get.toNamed(Routes.REGISTER, arguments: {
             'title': 'One More Step!',

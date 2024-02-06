@@ -4,22 +4,24 @@ import 'package:video_selling_multivendor_app/themes/app_themes.dart';
 
 class ThemeController extends GetxController {
   
-  RxBool isDarkMode = true.obs;
+  RxBool isLightMode = false.obs;
 
   @override
   void onInit() {
-    isDarkMode.value = LocalPreferences.getThemeMode();
+    isLightMode.value = LocalPreferences.getThemeMode();
     super.onInit();
   }
 
     void toggleTheme() {
-    isDarkMode.toggle();
+    isLightMode.toggle();
     Get.changeTheme(
-      isDarkMode.value
-          ? darkTheme
-          : lightTheme,
+      isLightMode.value
+          ? AppTheme(Get.context!).getLightTheme
+          : AppTheme(Get.context!).getDarkTheme,
     );
-
-    LocalPreferences.saveThemeMode(isDarkMode.value);
+    LocalPreferences.saveThemeMode(isLightMode.value);
+    print({
+      "Theme Changed To": LocalPreferences.getThemeMode()
+    });
   }
 }

@@ -42,7 +42,7 @@ class BuyerProductsView extends GetView<BuyerProductsController> {
                           initialRating: snapshot.data?[index].ratings ?? 0,
                           onItemPressed: () => Get.toNamed(
                               Routes.BUYER_PRODUCT_DETAILS,
-                              arguments: {'product': snapshot.data![index]}),
+                              parameters: {'productId': snapshot.data![index].id!}),
                           onAuthorPressed: () {},
                         );
                       },

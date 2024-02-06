@@ -62,36 +62,36 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
             body: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 320,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: GraphMonitor(
-                            monitorTitle: 'Sales in 7 days',
-                            monitorSubTitle: 'Top Sale',
-                            salesData: controller.weeklySalesData,
-                            xAxisLabels: controller.yourXAxisLabels,
-                            yAxisDataType: 'dollar',
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: GraphMonitor(
-                            monitorTitle: 'Clicks in 7 days',
-                            monitorSubTitle: 'Top Click',
-                            salesData: controller.weeklyClicksData,
-                            xAxisLabels: controller.yourXAxisLabels,
-                            yAxisDataType: '',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // SliverToBoxAdapter(
+                //   child: SizedBox(
+                //     height: 320,
+                //     child: ListView(
+                //       scrollDirection: Axis.horizontal,
+                //       children: [
+                //         SizedBox(
+                //           width: MediaQuery.of(context).size.width * 0.9,
+                //           child: GraphMonitor(
+                //             monitorTitle: 'Sales in 7 days',
+                //             monitorSubTitle: 'Top Sale',
+                //             salesData: controller.weeklySalesData,
+                //             xAxisLabels: controller.yourXAxisLabels,
+                //             yAxisDataType: 'dollar',
+                //           ),
+                //         ),
+                //         SizedBox(
+                //           width: MediaQuery.of(context).size.width * 0.9,
+                //           child: GraphMonitor(
+                //             monitorTitle: 'Clicks in 7 days',
+                //             monitorSubTitle: 'Top Click',
+                //             salesData: controller.weeklyClicksData,
+                //             xAxisLabels: controller.yourXAxisLabels,
+                //             yAxisDataType: '',
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -99,7 +99,7 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
                     child: Row(
                       children: [
                         Text(
-                          'Content',
+                          'Your Content',
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge,
@@ -126,6 +126,7 @@ class SellerDashboardView extends GetView<SellerDashboardController> {
                                     snapshot.data?[index].totalSales ?? 0),
                                 totalEarning: controller.formatNumber(82173618),
                                 category: snapshot.data?[index].category ?? '',
+                                isActive: snapshot.data?[index].videoStatus == 'active' ? true : false,
                                 onDetailsPressed: ()=> Get.toNamed(Routes.PRODUCT_DETAILS, arguments: {'id':snapshot.data?[index].id}),  
                               );
                           },

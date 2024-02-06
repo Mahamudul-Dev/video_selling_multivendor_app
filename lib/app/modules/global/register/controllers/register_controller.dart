@@ -58,7 +58,6 @@ class RegisterController extends GetxController {
   Future<void> registerNewAccount() async {
     isLoading.value = true;
     if (isSeller.value || isBuyer.value) {
-      isLoading.value = true;
       final response = await Authentication.regsterConnection(
           name: nameController.text,
           userName:
@@ -66,7 +65,7 @@ class RegisterController extends GetxController {
           email: emailController.text,
           password: passwordController.text,
           accountType: isSeller.value ? 'Seller' : 'Buyer');
-
+    Logger().i(response.body);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         // account created go to next routes
@@ -91,10 +90,13 @@ class RegisterController extends GetxController {
         if (isBuyer.value) {
           Get.offAllNamed(Routes.HOME_BUYER);
         }
+      } else {
+        isLoading.value = false;
+        Get.snackbar('Opps!', response.body);
       }
     } else {
       isLoading.value = false;
-      Get.snackbar('Sorry', 'You must select a account type');
+      Get.snackbar('Sorry', 'You must select a account type!');
     }
   }
 

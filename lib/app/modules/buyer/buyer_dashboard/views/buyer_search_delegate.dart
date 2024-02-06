@@ -190,9 +190,9 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                     .toString(),
                                 onItemPressed: () => Get.toNamed(
                                     Routes.BUYER_PRODUCT_DETAILS,
-                                    arguments: {
-                                      'product':
-                                          controller.filteredResult.value[index]
+                                    parameters: {
+                                      'productId':
+                                          controller.filteredResult.value[index].id!
                                     }),
                                 onAuthorPressed: () => Get.toNamed(
                                     Routes.AUTHOR_PROFILE,
@@ -298,8 +298,8 @@ class BuyerSearchDelegate extends SearchDelegate<String> {
                                     onItemPressed: () => Get.toNamed(
                                         Routes.BUYER_PRODUCT_DETAILS,
                                         arguments: {
-                                          'product':
-                                              controller.searchResult[index]
+                                          'productId':
+                                              controller.searchResult[index].id
                                         }),
                                     onAuthorPressed: () => Get.toNamed(
                                         Routes.AUTHOR_PROFILE,

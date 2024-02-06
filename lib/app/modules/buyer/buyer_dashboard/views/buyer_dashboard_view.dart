@@ -179,7 +179,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                         price: snapshot.data![index].price.toString(),
                         onItemPressed: () {
                           Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
-                              arguments: {'product': snapshot.data![index]});
+                              parameters: {'productId': snapshot.data![index].id!});
                         },
                         onAuthorPressed: () =>
                             Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
@@ -245,7 +245,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                         price: snapshot.data![index].price.toString(),
                         onItemPressed: () {
                           Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
-                              arguments: {'product': snapshot.data![index]});
+                              parameters: {'productId': snapshot.data![index].id!});
                         },
                         onAuthorPressed: () =>
                             Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
@@ -313,7 +313,7 @@ class BuyerDashboardView extends GetView<BuyerDashboardController> {
                     },
                     onItemPressed: () {
                       Get.toNamed(Routes.BUYER_PRODUCT_DETAILS,
-                          arguments: {'product': snapshot.data![index]});
+                          parameters: {'productId': snapshot.data![index].id!});
                     },
                     onAuthorPressed: () => Get.toNamed(Routes.AUTHOR_PROFILE,
                         arguments: {'id': snapshot.data![index].author!.authorId}),

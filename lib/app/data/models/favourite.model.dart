@@ -56,7 +56,7 @@ class FavouriteItem {
   factory FavouriteItem.fromJson(Map<String, dynamic> json) => FavouriteItem(
         productId: json["productId"],
         title: json["title"],
-        price: json["price"],
+        price: json["price"]?.toDouble(),
         thumbnail: json["thumbnail"],
         duration: json["duration"],
         author: json["author"] == null ? null : Author.fromJson(json["author"]),

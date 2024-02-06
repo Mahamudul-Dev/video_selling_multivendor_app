@@ -74,7 +74,6 @@ class BuyerProfileController extends GetxController {
       
     final response = await ProfileConnection.updateUserProfileConnection(
         id: LocalPreferences.getCurrentLoginInfo().id!, bodyData: profileData);
-
     if (response.statusCode == 200) {
       // profile updated
       isUpdating.value = false;

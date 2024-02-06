@@ -53,6 +53,7 @@ class VideoCardShort extends StatelessWidget {
                 padding: const EdgeInsets.all(6),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     InkWell(
                       onTap: onItemPressed,
@@ -61,6 +62,7 @@ class VideoCardShort extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleSmall,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.start,
                       ),
                     ),
                     const SizedBox(

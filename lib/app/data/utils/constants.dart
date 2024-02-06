@@ -13,7 +13,8 @@ const TAWK_LIVE_CHAT_URL =
 
 
 
-const String BASE_URL = 'http://203.161.62.117:5656';
+const String BASE_URL = 'https://api.mycellvids.com';
+const String SHARE_BASE_URL = 'https://mahamudul.codejet.dev';
 const String SOCKET_URL = 'http://203.161.62.117:3434';
 
 // Authentication endpoints
@@ -28,10 +29,12 @@ const String UPDATE_PROFILE_API = "/api/v1/user/update/";
 const String SEARCH_PRODUCTS = '/api/v1/product/search?searchItem=';
 const String PRODUCTS = '/api/v1/product/';
 const String FILTER_PRODUCT = '/api/v1/product/allProducts?filter=';
+const String DELETE_PRODUCT = '/api/v1/product/';
 
 // Cart Endpoints
 const String CART = '/api/v1/cart/';
 const String ADD_CART = '/api/v1/cart/addItemToCart';
+const String CHECKOUT = '/api/v1/product/purchase';
 
 // Favourite Endpoints
 const String ADD_FAVOURITE_API =

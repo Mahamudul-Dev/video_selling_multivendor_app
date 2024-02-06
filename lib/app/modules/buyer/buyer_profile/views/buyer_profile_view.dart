@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../themes/theme_controller.dart';
 import '../../../../data/models/profile.model.dart';
@@ -24,8 +25,8 @@ class BuyerProfileView extends GetView<BuyerProfileController> {
         actions: [
           Obx(
                 () => Switch(
-                  thumbIcon: MaterialStatePropertyAll(Get.find<ThemeController>().isDarkMode.value ? const Icon(Icons.nightlight_round) : const Icon(Icons.sunny)),
-                  value: Get.find<ThemeController>().isDarkMode.value,
+                  thumbIcon: MaterialStatePropertyAll(Get.find<ThemeController>().isLightMode.value ? const Icon(Icons.sunny) : const Icon(Icons.nightlight_round)),
+                  value: Get.find<ThemeController>().isLightMode.value,
                   onChanged: (value) => Get.find<ThemeController>().toggleTheme(),
                 ),
               ),
@@ -34,6 +35,31 @@ class BuyerProfileView extends GetView<BuyerProfileController> {
       body: FutureBuilder<ProfileModel?>(
           future: controller.getProfile(),
           builder: (context, snapshot) {
+            if(snapshot.hasError){
+              print(snapshot.error);
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  LottieBuilder.asset(
+                    ERROR_ANIM,
+                    repeat: false,
+                    height: MediaQuery.of(context).size.width * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 10),
+                    child: Text(
+                      'There was an error\nwe are fixing this issus as soon as possible. Please try again latter',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.error),
+                    ),
+                  )
+                ],
+              );
+            }
             if (snapshot.hasData) {
               return ListView(
                 children: [
@@ -167,8 +193,8 @@ class BuyerProfileView extends GetView<BuyerProfileController> {
       children: [
         _menuTile('Favorite List', FontAwesomeIcons.heartCircleCheck, 20, () => Get.toNamed(Routes.FAVORITE_LIST), context),
         _menuTile('Wishlist', Icons.label_rounded, null, () => Get.toNamed(Routes.WISH_LIST), context),
-        _menuTile('Subscribed Creators', Icons.thumb_up_alt_rounded, null, () => Get.toNamed(Routes.SUBSCRIBED_CREATOR_LIST), context),
-        _menuTile('Change Methods', Icons.payment_rounded, null, () {}, context),
+        // _menuTile('Subscribed Creators', Icons.thumb_up_alt_rounded, null, () => Get.toNamed(Routes.SUBSCRIBED_CREATOR_LIST), context),
+
         _menuTile('Contact Support', Icons.support_agent, null, () => Get.toNamed(Routes.SUPPORT_CHAT), context),
         _menuTile('Privacy Policy', Icons.security_rounded, null, () {}, context),
       ],

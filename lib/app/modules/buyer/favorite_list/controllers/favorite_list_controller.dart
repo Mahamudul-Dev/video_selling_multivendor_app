@@ -15,7 +15,7 @@ class FavoriteListController extends GetxController {
   String? favoriteId;
 
   Future<List<FavouriteItem>> getFavoriteProducts() async {
-    favouriteProducts.value.clear();
+    favouriteProducts.clear();
     final response = await FavouriteConnection.viewFavouriteItem();
 
     if (response.statusCode == 200) {
@@ -28,7 +28,7 @@ class FavoriteListController extends GetxController {
       }
     }
 
-    return favouriteProducts.value;
+    return favouriteProducts;
   }
 
 

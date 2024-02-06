@@ -5,10 +5,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pod_player/pod_player.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:video_selling_multivendor_app/app/components/loading_animation.dart';
 
-import '../../../../data/models/product.model.dart';
 import '../../../../data/utils/asset_maneger.dart';
 import '../../../../data/utils/constants.dart';
 import '../../../../routes/app_pages.dart';
@@ -17,14 +19,22 @@ import '../controllers/buyer_product_details_controller.dart';
 
 class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
   BuyerProductDetailsView({Key? key}) : super(key: key);
-  final ProductModel product = Get.arguments['product'];
+  final String productId = Get.parameters['productId']!;
 
   @override
   Widget build(BuildContext context) {
-    Logger().i({'productDetailes': product.toJson()});
+    Logger().i({'productId': productId});
     return Scaffold(
       appBar: AppBar(
         actions: [
+          IconButton(
+              onPressed: () {
+                Share.share('This product is awesome! Checkout the best deal! \n Link: $SHARE_BASE_URL${Routes.BUYER_PRODUCT_DETAILS}?productId=$productId');
+              },
+              icon: const Icon(
+                Icons.share_rounded,
+              )),
+
           Stack(
             children: [
               IconButton(
@@ -41,23 +51,21 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                      child: Obx(() =>
-                          Get.find<BuyerCartController>().cartItems.isNotEmpty
-                              ? Text(
-                                  Get.find<BuyerCartController>()
-                                      .cartItems
-                                      .length
-                                      .toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall,
-                                )
-                              : Text(
-                                  '0',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall,
-                                ))),
+                    child: Obx(
+                      () => Get.find<BuyerCartController>().cartItems.isNotEmpty
+                          ? Text(
+                              Get.find<BuyerCartController>()
+                                  .cartItems
+                                  .length
+                                  .toString(),
+                              style: Theme.of(context).textTheme.bodySmall,
+                            )
+                          : Text(
+                              '0',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                    ),
+                  ),
                 ),
               )
             ],
@@ -67,51 +75,46 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          // product image & preveiw
-
-          FutureBuilder<PodPlayerController>(
-              future: controller.getPlayerController(
-                  product.previewUrl!, product.id!),
-              builder: (context, playerSnapshot) {
-                if (playerSnapshot.data != null) {
-                  return PodVideoPlayer(
-                    controller: playerSnapshot.data!,
-                    videoThumbnail: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        product.thumbnail != '' || product.thumbnail != null ? BASE_URL+product.thumbnail! : PLACEHOLDER_THUMBNAIL,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                } else {
-                  return SizedBox(
-                    height: 360,
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Text(
-                        'Error while loading video',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  );
-                }
-              }),
-
-          Expanded(
-              child: SingleChildScrollView(
+      body: FutureBuilder(future: controller.getProduct(productId), builder: (context, snapshot){
+        if(snapshot.hasData){
+          return SingleChildScrollView(
             child: Column(
               children: [
+                // product image & preveiw
+                FutureBuilder<PodPlayerController>(
+                  future: controller.getPlayerController(snapshot.data!.previewUrl!),
+                  builder: (context, playerSnapshot) {
+                    if (playerSnapshot.data != null) {
+                      return Obx(
+                            () => PodVideoPlayer(
+                          controller: playerSnapshot.data!,
+                          matchFrameAspectRatioToVideo: true,
+                          videoAspectRatio: controller.videoRatio.value == 'P'
+                              ? 9.0 / 16.0
+                              : controller.videoRatio.value == 'L'
+                              ? 16.0 / 9.0
+                              : 1.1 / 1.1,
+                        ),
+                      );
+                    } else {
+                      return const AspectRatio(
+                        aspectRatio: 16.0 / 9.0,
+                        child: LoadingAnimation(),
+                      );
+                    }
+                  },
+                ),
+
+
                 // product title
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   child: Row(
                     children: [
                       Flexible(
                         child: Text(
-                          product.title ?? 'No Title',
+                          snapshot.data?.title ?? 'No Title',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.titleLarge,
@@ -122,51 +125,52 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                 ),
                 // author details
                 ListTile(
-                  onTap: () => Get.toNamed(Routes.AUTHOR_PROFILE, arguments: {
-                    'id': product.author!.authorId
-                  }), // TO:DO: navigate to cretor profile
+                  onTap: () => Get.toNamed(Routes.AUTHOR_PROFILE,
+                      arguments: {'id': snapshot.data?.author?.authorId}),
+                  // TO:DO: navigate to cretor profile
                   leading: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
-                        product.author?.profilePic == 'N/A'
+                        snapshot.data?.author?.profilePic == 'N/A'
                             ? PLACEHOLDER_PHOTO
-                            : product.author?.profilePic ?? PLACEHOLDER_PHOTO),
+                            : snapshot.data?.author?.profilePic ?? PLACEHOLDER_PHOTO),
                   ),
                   title: Text(
-                    product.author?.name ?? '',
+                    snapshot.data?.author?.name ?? '',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        product.author?.country ?? '',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall,
+                        snapshot.data?.author?.country ?? '',
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
-                        'Total videos: ${product.author?.totalVideos}',
+                        'Total videos: ${snapshot.data?.author?.totalVideos}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.w900,
-                            ),
+                          fontWeight: FontWeight.w900,
+                        ),
                       )
                     ],
                   ),
                   trailing: ElevatedButton.icon(
-                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.surfaceVariant)),
-                      onPressed:
-                          () => Get.toNamed(Routes.MESSAGE, arguments: {'userId': product.author?.authorId}),
-                      icon: Icon(
-                        CupertinoIcons.mail,
-                        size: 20,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                      label: Text(
-                        'Contact Me',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
-                      )),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.surfaceVariant)),
+                    onPressed: () => Get.toNamed(Routes.MESSAGE,
+                        arguments: {'userId': snapshot.data?.author?.authorId}),
+                    icon: Icon(
+                      CupertinoIcons.mail,
+                      size: 20,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    label: Text(
+                      'Contact Me',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color:
+                          Theme.of(context).colorScheme.onSurfaceVariant),
+                    ),
+                  ),
                 ),
 
                 Row(
@@ -178,24 +182,21 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                       children: [
                         Obx(() => controller.wishlistLoading.value
                             ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                ))
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator())
                             : IconButton(
-                                onPressed: () => controller.addWishlist(
-                                    product.id!, context),
-                                icon: Obx(() => Icon(
-                                      controller.isWishlist.value
-                                          ? Icons.label_rounded
-                                          : Icons.label_outline_rounded,
-                                      size: 25,
-                                    )))),
+                            onPressed: () => controller.addWishlist(
+                                snapshot.data!.id!, context),
+                            icon: Obx(() => Icon(
+                              controller.isWishlist.value
+                                  ? Icons.label_rounded
+                                  : Icons.label_outline_rounded,
+                              size: 25,
+                            )))),
                         Text(
                           'Wishlist',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall,
+                          style: Theme.of(context).textTheme.labelSmall,
                         )
                       ],
                     ),
@@ -210,24 +211,21 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                       children: [
                         Obx(() => controller.favLoading.value
                             ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                ))
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator())
                             : IconButton(
-                                onPressed: () => controller.addFavorite(
-                                    product.id!, context),
-                                icon: Obx(() => Icon(
-                                      controller.isFavourite.value
-                                          ? FontAwesomeIcons.heartCircleCheck
-                                          : FontAwesomeIcons.heart,
-                                      size: 20,
-                                    )))),
+                            onPressed: () => controller.addFavorite(
+                                snapshot.data!.id!, context),
+                            icon: Obx(() => Icon(
+                              controller.isFavourite.value
+                                  ? FontAwesomeIcons.heartCircleCheck
+                                  : FontAwesomeIcons.heart,
+                              size: 20,
+                            )))),
                         Text(
                           'Favorite',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall,
+                          style: Theme.of(context).textTheme.labelSmall,
                         )
                       ],
                     )
@@ -237,7 +235,7 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                 // product description
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   child: Row(
                     children: [
                       Flexible(
@@ -258,11 +256,9 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                     children: [
                       Flexible(
                         child: Text(
-                          product.description ?? '',
+                          snapshot.data?.description ?? '',
                           textAlign: TextAlign.justify,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     ],
@@ -276,7 +272,7 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                 // rating bar section
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -294,14 +290,14 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                 Row(
                   children: [
                     RatingBar.builder(
-                        initialRating: product.ratings?.toDouble() ?? 0.0,
+                        initialRating: snapshot.data?.ratings?.toDouble() ?? 0.0,
                         unratedColor: Colors.grey,
                         allowHalfRating: true,
                         itemCount: 5,
                         itemSize: 30,
                         ignoreGestures: true,
                         itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                        const EdgeInsets.symmetric(horizontal: 5.0),
                         itemBuilder: (context, index) {
                           return const Icon(
                             Icons.star,
@@ -313,57 +309,85 @@ class BuyerProductDetailsView extends GetView<BuyerProductDetailsController> {
                       width: 10,
                     ),
                     Text(
-                      '${product.ratings ?? 0 / product.reviews!.length}',
+                      '${snapshot.data?.ratings ?? 0 / snapshot.data!.reviews!.length}',
                       style: Theme.of(context).textTheme.labelLarge,
                     )
                   ],
                 ),
+
+                ListTile(
+                  title: Text('Video Price',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  subtitle: Text(
+                    '\$${snapshot.data?.price}',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  trailing: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.secondaryContainer)),
+                      onPressed: () {
+                        if (controller.isCartAdded.value) {
+                          Get.snackbar('Opps!', 'Product already in cart');
+                        } else {
+                          Get.find<BuyerCartController>().addToCart(snapshot.data);
+                        }
+                      },
+                      icon: Icon(
+                        CupertinoIcons.cart_fill_badge_plus,
+                        size: 25,
+                        color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      ),
+                      label: Obx(() => Get.find<BuyerCartController>()
+                          .cartLoading
+                          .value
+                          ? LoadingAnimationWidget.horizontalRotatingDots(
+                          color:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
+                          size: 20)
+                          : Obx(() => Text(
+                          controller.isCartAdded.value
+                              ? 'Already Added'
+                              : 'Add to cart',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium
+                              ?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer))))),
+                ),
               ],
             ),
-          )),
-
-          ListTile(
-            title: Text('Video Price',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium),
-            subtitle: Text(
-              '\$${product.price}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge,
-            ),
-            trailing: ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondaryContainer)
+          );
+        } else if(snapshot.hasError){
+          Logger().e(snapshot.error);
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LottieBuilder.asset(
+                ERROR_ANIM,
+                repeat: false,
+                height: MediaQuery.of(context).size.width * 0.3,
+                width: MediaQuery.of(context).size.width * 0.3,
               ),
-                onPressed: () {
-                  if (controller.isCartAdded.value) {
-                    Get.snackbar('Opps!', 'Product already in cart');
-                  } else {
-                    Get.find<BuyerCartController>().addToCart(product);
-                  }
-                },
-                icon: Icon(
-                  CupertinoIcons.cart_fill_badge_plus,
-                  size: 25,
-                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 25, vertical: 10),
+                child: Text(
+                  'There was an error\nwe are fixing this issus as soon as possible. Please try again latter',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.error),
                 ),
-                label: Obx(() =>
-                    Get.find<BuyerCartController>().cartLoading.value
-                        ? LoadingAnimationWidget.horizontalRotatingDots(
-                            color: Theme.of(context).colorScheme.onSecondaryContainer, size: 20)
-                        : Obx(() => Text(
-                              controller.isCartAdded.value
-                                  ? 'Already Added'
-                                  : 'Add to cart',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium?.copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer)
-                            )))),
-          ),
-        ],
-      ),
+              )
+            ],
+          );
+        } else{
+          return const LoadingAnimation();
+        }
+      })
     );
   }
 }

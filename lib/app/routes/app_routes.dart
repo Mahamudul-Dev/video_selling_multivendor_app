@@ -29,6 +29,8 @@ abstract class Routes {
   static const FAVORITE_LIST = _Paths.FAVORITE_LIST;
   static const WISH_LIST = _Paths.WISH_LIST;
   static const SUBSCRIBED_CREATOR_LIST = _Paths.SUBSCRIBED_CREATOR_LIST;
+  static const PURCHASE_LIST = _Paths.PURCHASE_LIST;
+  static const VIDEO_PLAYER = _Paths.VIDEO_PLAYER;
 }
 
 abstract class _Paths {
@@ -63,4 +65,6 @@ abstract class _Paths {
   static const FAVORITE_LIST = '/favorite-list';
   static const WISH_LIST = '/wish-list';
   static const SUBSCRIBED_CREATOR_LIST = '/subscribed-creator-list';
+  static const PURCHASE_LIST = '/purchase-list';
+  static const VIDEO_PLAYER = '/video-player';
 }
