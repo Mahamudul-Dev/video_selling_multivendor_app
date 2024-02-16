@@ -40,47 +40,47 @@ Mobile app link: https://drive.google.com/file/d/1DJvih6vgKmVPfZWPM-DM_dpLJV3uuI
 
 User can login with there buyer / seller account credentials.
 
-**Signup: ![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.002.jpeg)**
+**Signup: ![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.002.jpeg)**
 
 User can create account with there  information like name, email, password  & account type. 
 
-**Buyer Dashboard:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.003.jpeg)**
+**Buyer Dashboard:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.003.jpeg)**
 
 Buyer can explore top rated, top sale & regular uploads.
 
-**Buyer Video Search: ![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.004.jpeg)**
+**Buyer Video Search: ![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.004.jpeg)**
 
 Buyer can search videos with there  interested keywords. 
 
-**Buyer Video Details:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.005.jpeg)**
+**Buyer Video Details:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.005.jpeg)**
 
 Buyer can splay trailer video before purchase.
 
-**Buyer Cart: ![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.006.jpeg)**
+**Buyer Cart: ![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.006.jpeg)**
 
 Buyer can add any video in her cart. 
 
-**Buyer Chat:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.007.jpeg)**
+**Buyer Chat:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.007.jpeg)**
 
 Buyer can discuss with seller about her publishing.
 
-**Seller Dashboard:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.008.jpeg)**
+**Seller Dashboard:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.008.jpeg)**
 
 Seller can see her own uploads & manage her uploaded videos
 
-**Seller Account Overview: ![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.009.jpeg)**
+**Seller Account Overview: ![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.009.jpeg)**
 
 Seller can withdraw there earnings 
 
-**Seller Chats:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.010.jpeg)**
+**Seller Chats:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.010.jpeg)**
 
 Seller can receive message from the buyer & discuss about her product.
 
-**Seller Video Upload:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.011.jpeg)**
+**Seller Video Upload:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.011.jpeg)**
 
 Seller can upload videos from her panel. Also can add title, category, set price & add video description. Video is divided in two part. 1st one is trailer & 2nd one is main video. After publish trailer he will prompted to upload main video.
 
-**Seller Editing Panel: ![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.012.jpeg)![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.013.jpeg)**
+**Seller Editing Panel: ![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.012.jpeg)![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.013.jpeg)**
 
 Seller can edit, delete & share her  video with dynamic links. 
 
