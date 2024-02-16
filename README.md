@@ -36,7 +36,7 @@ Mobile app link: https://drive.google.com/file/d/1DJvih6vgKmVPfZWPM-DM_dpLJV3uuI
 
 **Current App Overview:**
 
-**Login:![](Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.001.jpeg)**
+**Login:![](screenshots/Aspose.Words.64505ed9-aa33-46fd-a690-d430b711bc12.001.jpeg)**
 
 User can login with there buyer / seller account credentials.
 
