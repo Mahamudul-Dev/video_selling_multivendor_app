@@ -32,7 +32,7 @@ class CartView extends GetView<BuyerCartController> {
                                   'N/A'
                               ? '$BASE_URL${controller.cartItems[index].thumbnail}'
                               : PLACEHOLDER_THUMBNAIL,
-                          price: controller.cartItems[index].price.toString(),
+                          price: controller.cartItems[index].price?.toStringAsFixed(2) ?? '0.0',
                           author: controller.cartItems[index].author!,
                           onProductPress: () => controller.viewProduct(index),
                           onRemovePress: () {

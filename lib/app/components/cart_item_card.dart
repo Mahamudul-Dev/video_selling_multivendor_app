@@ -113,7 +113,7 @@ class CartItemCard extends StatelessWidget {
                       children: [
                         Flexible(
                             child: Text(
-                          price,
+                          '\$$price',
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium?.copyWith(color: Theme.of(context).colorScheme.onTertiaryContainer),

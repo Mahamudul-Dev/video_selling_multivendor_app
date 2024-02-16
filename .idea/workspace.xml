@@ -10,71 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a027c25-da57-45b8-8515-150a95de9f90" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/app/components/rating_card.component.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/data/assetlinks.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/data/models/checkout_request.model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/buyer/purchase_list/bindings/purchase_list_binding.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/buyer/purchase_list/controllers/purchase_list_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/buyer/purchase_list/views/purchase_list_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/global/video_player/bindings/video_player_binding.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/global/video_player/controllers/global_video_player_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/app/modules/global/video_player/views/video_player_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/connections/purchaselist.connection.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/auth_checker.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/deeplink_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/themes/app_text_theme.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/components/cart_item_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/components/cart_item_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/components/expansion_product_tile.component.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/components/expansion_product_tile.component.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/components/video_card_short.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/components/video_card_short.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/models/favourite.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/models/favourite.model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/models/profile.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/models/profile.model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/models/wishlist.model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/models/wishlist.model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/preferences/local_preferences.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/preferences/local_preferences.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/data/utils/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/data/utils/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_cart/controllers/buyer_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_cart/controllers/buyer_cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_dashboard/views/buyer_dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_dashboard/views/buyer_dashboard_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_dashboard/views/buyer_search_delegate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_dashboard/views/buyer_search_delegate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/bindings/buyer_product_details_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/bindings/buyer_product_details_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/controllers/buyer_product_details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/controllers/buyer_product_details_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/views/buyer_product_details_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_product_details/views/buyer_product_details_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_products/views/buyer_products_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_products/views/buyer_products_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_profile/controllers/buyer_profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_profile/controllers/buyer_profile_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_profile/views/buyer_profile_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_profile/views/buyer_profile_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/favorite_list/controllers/favorite_list_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/favorite_list/controllers/favorite_list_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/favorite_list/views/favorite_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/favorite_list/views/favorite_list_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/home/bindings/buyer_home_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/home/bindings/buyer_home_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/home/controllers/buyer_home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/home/controllers/buyer_home_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/home/views/buyer_home_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/home/views/buyer_home_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/wish_list/views/wish_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/wish_list/views/wish_list_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/global/login/controllers/login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/global/login/controllers/login_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/global/register/controllers/register_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/global/register/controllers/register_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/create_product/controllers/create_product_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/create_product/controllers/create_product_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/create_product/views/create_product_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/create_product/views/create_product_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_cart/views/buyer_cart_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/buyer/buyer_cart/views/buyer_cart_view.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/product_details/controllers/product_details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/product_details/controllers/product_details_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/product_details/views/product_details_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/product_details/views/product_details_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/seller_dashboard/controllers/seller_dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/seller_dashboard/controllers/seller_dashboard_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/seller_dashboard/views/seller_dashboard_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/seller_dashboard/views/seller_dashboard_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/seller_home/bindings/seller_home_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/seller_home/bindings/seller_home_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/modules/seller/seller_profile/views/seller_profile_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/modules/seller/seller_profile/views/seller_profile_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/routes/app_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/connections/authentication.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/authentication.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/connections/products.connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/products.connection.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/connections/profile.connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/connections/profile.connection.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/themes/app_text_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/themes/app_text_theme.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/themes/app_themes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/themes/app_themes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/themes/theme_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/themes/theme_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_selling_multivendor_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/video_selling_multivendor_app.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
